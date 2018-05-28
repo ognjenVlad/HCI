@@ -1,0 +1,71 @@
+<div class="container">
+    <h1>Ucionice form</h1>
+    <form #ucioniceForm="ngForm">
+      <div class="form-group">
+        <label for="oznaka">Oznaka ucionice</label>
+        <input type="text" [(ngModel)]="ucionica.id" class="form-control" id="oznaka" name="oznaka" #oznaka="ngModel" required >
+      </div>
+      <div [hidden]="oznaka.valid || oznaka.pristine"
+     	class="alert alert-danger">
+  		Popunite polje oznaka
+	  </div>	
+      <div class="form-group">
+        <label for="opis">Opis ucionice</label>
+        <input type="text" [(ngModel)]="ucionica.opis" class="form-control" id="opis" name="opis" #opis="ngModel" required>
+      </div>
+      <div [hidden]="opis.valid || opis.pristine"
+     	class="alert alert-danger">
+  		Popunite polje opis ucionice
+	  </div>
+      <div class="form-group">
+        <label for="mesta">Broj radnih mesta</label>
+        <input type="text" [(ngModel)]="ucionica.mesta" class="form-control" id="mesta" name="mesta" #mesta="ngModel" required>
+      </div>
+      <div [hidden]="mesta.valid || mesta.pristine"
+     	class="alert alert-danger">
+  		Popunite polje broj radnih mesta
+	  </div>
+      <div class="form-group">
+        <label for="projektor">Projektor</label>
+        <input type="text" [(ngModel)]="ucionica.projektor" class="form-control" id="projektor" name="projektor" #projektor="ngModel" required>
+      </div>
+      <div [hidden]="projektor.valid || projektor.pristine"
+     	class="alert alert-danger">
+  		Popunite polje projektor
+	  </div>
+      <div class="form-group">
+        <label for="table">Tabla</label>
+        <input type="text" [(ngModel)]="ucionica.tabla" class="form-control" id="table" name="table" #tabla="ngModel" required>
+      </div>
+      <div [hidden]="tabla.valid || tabla.pristine"
+     	class="alert alert-danger">
+  		Popunite polje tabla
+	  </div>
+      <div class="form-group">
+        <label for="smart">Pametna tabla</label>
+        <input type="text" [(ngModel)]="ucionica.smart" class="form-control" id="smart" name="smart" #smart="ngModel" required>
+      </div>
+      <div [hidden]="smart.valid || smart.pristine"
+     	class="alert alert-danger">
+  		Popunite polje pametna tabla
+	  </div>
+      <div class="form-group">
+        <label for="os">Operativni sistem</label>
+        <input type="text" [(ngModel)]="ucionica.os" class="form-control" id="os" name="os" #os="ngModel" required>
+      </div>
+ 	  <div [hidden]="os.valid || os.pristine"
+     	class="alert alert-danger">
+  		Popunite polje operativni sistem
+	  </div>
+      <div class="form-group">
+        <label for="software">Instalirani softver</label>
+        <input type="text" [(ngModel)]="ucionica.softver" class="form-control" id="software" name="software" #softver="ngModel">
+      </div>
+ 	  <div [hidden]="softver.valid || softver.pristine"
+     	class="alert alert-danger">
+  		Popunite polje instalirani softver
+	  </div>
+      <button type="submit" class="btn btn-success">Submit</button>
+ 
+    </form>
+</div>
