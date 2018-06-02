@@ -1,0 +1,17 @@
+c:\users\damir\documents\visual studio 2015\Projects\RasporedRC\RasporedRC\bin\Debug\RasporedRC.exe.config
+c:\users\damir\documents\visual studio 2015\Projects\RasporedRC\RasporedRC\bin\Debug\RasporedRC.exe
+c:\users\damir\documents\visual studio 2015\Projects\RasporedRC\RasporedRC\bin\Debug\RasporedRC.pdb
+c:\users\damir\documents\visual studio 2015\Projects\RasporedRC\RasporedRC\obj\Debug\RasporedRC.csprojResolveAssemblyReference.cache
+c:\users\damir\documents\visual studio 2015\Projects\RasporedRC\RasporedRC\obj\Debug\MainWindow.g.cs
+c:\users\damir\documents\visual studio 2015\Projects\RasporedRC\RasporedRC\obj\Debug\App.g.cs
+c:\users\damir\documents\visual studio 2015\Projects\RasporedRC\RasporedRC\obj\Debug\RasporedRC_MarkupCompile.cache
+c:\users\damir\documents\visual studio 2015\Projects\RasporedRC\RasporedRC\obj\Debug\RasporedRC_MarkupCompile.lref
+c:\users\damir\documents\visual studio 2015\Projects\RasporedRC\RasporedRC\obj\Debug\MainWindow.baml
+c:\users\damir\documents\visual studio 2015\Projects\RasporedRC\RasporedRC\obj\Debug\RasporedRC.g.resources
+c:\users\damir\documents\visual studio 2015\Projects\RasporedRC\RasporedRC\obj\Debug\RasporedRC.Properties.Resources.resources
+c:\users\damir\documents\visual studio 2015\Projects\RasporedRC\RasporedRC\obj\Debug\RasporedRC.csproj.GenerateResource.Cache
+c:\users\damir\documents\visual studio 2015\Projects\RasporedRC\RasporedRC\obj\Debug\RasporedRC.exe
+c:\users\damir\documents\visual studio 2015\Projects\RasporedRC\RasporedRC\obj\Debug\RasporedRC.pdb
+C:\Users\Damir\git\HCI\RasporedRC\RasporedRC\bin\Debug\RasporedRC.exe.config
+C:\Users\Damir\git\HCI\RasporedRC\RasporedRC\obj\Debug\RasporedRC.exe
+C:\Users\Damir\git\HCI\RasporedRC\RasporedRC\obj\Debug\RasporedRC.pdb
