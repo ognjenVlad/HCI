@@ -13,25 +13,33 @@
                     <DockPanel HorizontalAlignment="Center"></DockPanel>
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="Dodaj" HorizontalAlignment="Center">
-                <MenuItem Header="Predmet" ></MenuItem>
-                <MenuItem Header="Smer"></MenuItem>
-                <MenuItem Header="Ucionicu"></MenuItem>
+            <MenuItem Header="Dodaj" HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
+                <MenuItem Header="Predmet"  FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
+                <MenuItem Header="Smer"  FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
+                <MenuItem Header="Ucionicu"  FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Pregled"  HorizontalAlignment="Center">
-                <MenuItem Header="Predmeta" ></MenuItem>
-                <MenuItem Header="Smerova"></MenuItem>
-                <MenuItem Header="Ucionica"></MenuItem>
+            <MenuItem Header="Pregled"  HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
+                <MenuItem Header="Predmeta"  FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
+                <MenuItem Header="Smerova" FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
+                <MenuItem Header="Ucionica" FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Demo mod"  HorizontalAlignment="Center">
-            </MenuItem>
-            <MenuItem Header="Upravljaj"  HorizontalAlignment="Center">
+            <MenuItem Header="Demo mod"  HorizontalAlignment="Center" FontSize="16" FontFamily="Arial" FontWeight="Bold"/>
+            <MenuItem Header="Upravljaj"  HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
                 <MenuItem Header="Sacuvaj" ></MenuItem>
                 <MenuItem Header="Otvori"></MenuItem>
             </MenuItem>
         </Menu>
         <Grid>
-        
-    </Grid>
+        <Grid Canvas.ZIndex="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Rectangle  Name="rect" Width="5" MouseEnter="Expand_Window" MouseLeave="Shrink_Window" VerticalAlignment="Stretch" Fill="#99000000"/>
+        </Grid>
+        <Grid Canvas.ZIndex ="1">
+            <TextBox Text="SOME RANDOM TEXT" Width="Auto" HorizontalAlignment="Center"></TextBox>
+        </Grid>
+        </Grid>
     </DockPanel>
 </Window>

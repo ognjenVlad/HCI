@@ -24,5 +24,16 @@ namespace RasporedRC
         {
             InitializeComponent();
         }
+
+        private void Expand_Window(object sender, MouseEventArgs e)
+        {
+            rect.Width = 130;
+        }
+
+        private void Shrink_Window(object sender, MouseEventArgs e)
+        {
+            rect.Width = 5;
+        }
     }
+
 }
