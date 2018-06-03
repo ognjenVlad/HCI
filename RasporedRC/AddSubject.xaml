@@ -96,9 +96,7 @@
 
             <Label Grid.Row="3"></Label>
             <Label Grid.Row="4" Grid.Column="0">Naziv predmeta:</Label>
-            <TextBox x:Name="ime" TextWrapping="Wrap" 
-  AcceptsReturn="True"
-  VerticalScrollBarVisibility="Visible" Grid.Row="4" Grid.Column="1" Margin="5" MinWidth="15" MinHeight="50" MaxWidth="500" MaxHeight="50">
+            <TextBox x:Name="naziv" Grid.Row="0" Grid.Column="1" Margin="5">
                 <TextBox.Text>
                     <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
 
@@ -165,21 +163,22 @@
 
             <Label Grid.Row="15" Grid.Column="0">Potreban operativni sistem:</Label>
             <ComboBox x:Name="os" Grid.Row="15"  Grid.Column="1" ItemsSource="{Binding Path=OS}" SelectedItem = "{Binding SelectedOS}"></ComboBox>
-
-            <Label Grid.Row="16" Grid.Column="0">Smer predmeta:</Label>
-            <ComboBox x:Name="course" Grid.Row="16"  Grid.Column="1" ItemsSource="{Binding Path=Courses}" SelectedItem = "{Binding SelectedCourse}"></ComboBox>
-
-
-            <Label Grid.Row="17" Grid.Column="0"></Label>
-            <Label Grid.Row="18" Grid.Column="0">Software:</Label>
-            <ComboBox Grid.Row="18" Grid.Column="1" ItemsSource="{Binding Path=Software}" SelectedItem = "{Binding SelectedSoftware}"></ComboBox>
-
-            <Button Grid.Row="18" Grid.Column="2" x:Name="Add_Software" Click="AddSoftware" Content="Dodaj" Height="26"/>
-            <Label Grid.Row="19" Grid.Column="0"></Label>
+            
+            <Label Margin="5" Grid.Row="16"></Label>
+            <Label Grid.Row="17" Grid.Column="0">Smer predmeta:</Label>
+            <ComboBox  x:Name="course" Grid.Row="17"  Grid.Column="1" ItemsSource="{Binding Path=Courses}" SelectedItem = "{Binding SelectedCourse}"></ComboBox>
 
 
-            <Label Grid.Row="20" Grid.Column="0">Dodat software:</Label>
-            <ListView  Grid.Row="21" Grid.Column="0" Margin="10"  x:Name ="listView1">
+            <Label Margin="5" Grid.Row="18"></Label>
+            <Label Grid.Row="19" Grid.Column="0">Software:</Label>
+            <ComboBox Grid.Row="19" Grid.Column="1" ItemsSource="{Binding Path=Software}" SelectedItem = "{Binding SelectedSoftware}"></ComboBox>
+
+            <Button Grid.Row="19" Grid.Column="2" x:Name="Add_Software" Click="AddSoftware" Content="Dodaj" Height="26"/>
+            <Label Grid.Row="20" ></Label>
+
+
+            <Label Grid.Row="21" Grid.Column="0">Dodat software:</Label>
+            <ListView  Grid.Row="22" Grid.Column="0" Margin="10"  x:Name ="listView1">
                 <ListView.ItemsSource>
                     <Binding Path="SelectedSoftwares" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -190,11 +189,12 @@
                 <ListView.View>
 
                     <GridView>
-                        <GridViewColumn Header="Oznaka"
-                            DisplayMemberBinding="{Binding label}"/>
+                        <GridViewColumn Header="     Oznaka     "
+                            DisplayMemberBinding="{Binding label}">
+                            </GridViewColumn>
 
-                        <GridViewColumn Header="Naziv" DisplayMemberBinding="{Binding name}" ></GridViewColumn>
-                        <GridViewColumn Header="Opis" DisplayMemberBinding="{Binding description}" />
+
+                            <GridViewColumn Header="         Naziv            " DisplayMemberBinding="{Binding name}" ></GridViewColumn>
 
 
                     </GridView>
@@ -203,7 +203,7 @@
 
             <Button Grid.Row="22" Grid.Column="1" x:Name="Delete_classroom" Click="deleteSoftware" Content="Izbrisi oznacene" Height="25"/>
 
-            <Button Grid.Row="23" Grid.Column="1" x:Name="add" Click="AddItem" Content="Dodaj predmet" Height="25">
+            <Button Grid.Row="23" Margin="10"  x:Name="add" Click="AddItem" Content="Dodaj predmet" Height="25">
 
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
@@ -212,7 +212,7 @@
 
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding ElementName=ime, Path=(Validation.HasError)}" Value="false" />
+                                    <Condition Binding="{Binding ElementName=naziv, Path=(Validation.HasError)}" Value="false" />
                                     <Condition Binding="{Binding ElementName=opis, Path=(Validation.HasError)}" Value="false" />
                                     <Condition Binding="{Binding ElementName=predmet, Path=(Validation.HasError)}" Value="false" />
                                     <Condition Binding="{Binding ElementName=termini, Path=(Validation.HasError)}" Value="false" />
@@ -220,7 +220,7 @@
                                     <Condition Binding="{Binding ElementName=duzina, Path=(Validation.HasError)}" Value="false" />
                                     <Condition Binding="{Binding ElementName=listView1 ,Path=Items.Count  , Converter={StaticResource ListViewConverter}}" Value="false" />
 
-                                    <Condition Binding="{Binding ElementName=ime, Path=Text.Length, Converter={StaticResource EnableButtonConverter}}" Value="false" />
+                                    <Condition Binding="{Binding ElementName=naziv, Path=Text.Length, Converter={StaticResource EnableButtonConverter}}" Value="false" />
                                     <Condition Binding="{Binding ElementName=opis, Path=Text.Length, Converter={StaticResource EnableButtonConverter}}" Value="false" />
                                     <Condition Binding="{Binding ElementName=predmet, Path=Text.Length, Converter={StaticResource EnableButtonConverter}}" Value="false" />
                                     <Condition Binding="{Binding ElementName=duzina, Path=Text.Length, Converter={StaticResource EnableButtonConverter}}" Value="false" />

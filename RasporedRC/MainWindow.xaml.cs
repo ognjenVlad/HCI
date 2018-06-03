@@ -133,7 +133,7 @@ namespace RasporedRC
             s.description = "Opis";
             softwares.Add(s);
             Software s1 = new Software();
-            s.name = "Ime";
+            s.name = "Imeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
             s.price = 100;
             s.manofacturer = "Man";
             s1.label = "Labedasl";

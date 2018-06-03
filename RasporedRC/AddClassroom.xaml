@@ -132,20 +132,18 @@
                 <ListView.View>
 
                     <GridView>
-                        <GridViewColumn Header="Oznaka"
+                        <GridViewColumn Header="     Oznaka     "
                             DisplayMemberBinding="{Binding label}"/>
 
-                        <GridViewColumn Header="Naziv" DisplayMemberBinding="{Binding name}" ></GridViewColumn>
-                        <GridViewColumn Header="Opis" DisplayMemberBinding="{Binding description}" />
-
-
+                        <GridViewColumn Header="         Naziv            " DisplayMemberBinding="{Binding name}" ></GridViewColumn>
+                        
                     </GridView>
                 </ListView.View>
             </ListView>
 
             <Button Grid.Row="13" Grid.Column="1" x:Name="Delete_classroom" Click="deleteSoftware" Content="Izbrisi oznacene" Height="25"/>
 
-            <Button Grid.Row="15" Grid.Column="1" x:Name="add" Click="AddItem" Content="Dodaj ucionicu" Height="25">
+            <Button Grid.Row="15" Margin="10" x:Name="add" Click="AddItem" Content="Dodaj ucionicu" Height="25">
 
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">

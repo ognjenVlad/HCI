@@ -155,7 +155,7 @@
             <Label Grid.Row="14" Grid.Column="0">Operativni sistem:</Label>
             <ComboBox x:Name="os" Grid.Row="14"  Grid.Column="1" ItemsSource="{Binding Path=operatingSys}" SelectedItem = "{Binding OS}"></ComboBox>
             <Label Grid.Row="15"></Label>
-            <Button Grid.Row="16" Grid.Column="1" x:Name="add" Click="AddItem" Content="Dodaj softver" Margin ="10" Height="25">
+            <Button Grid.Row="16" x:Name="add" Click="AddItem" Content="Dodaj softver" Margin ="10" Height="25">
 
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">

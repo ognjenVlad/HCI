@@ -100,7 +100,7 @@
                 </TextBox.Text>
             </TextBox>
             <Label Grid.Row="7"></Label>
-            <Button Margin ="10" Grid.Row="8" Grid.Column="1" x:Name="add" Click="AddItem" Content="Dodaj smer" Height="25">
+            <Button Margin ="10" Grid.Row="8" x:Name="add" Click="AddItem" Content="Dodaj smer" Height="25">
 
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">

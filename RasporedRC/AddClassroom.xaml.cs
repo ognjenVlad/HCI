@@ -124,7 +124,7 @@ namespace RasporedRC
             foreach(Software s in sof)
             {
                 this.SelectedSoftwares.Remove(s);
-                    
+                this.Software.Add(s.label);
                 
             }
         }
@@ -134,6 +134,7 @@ namespace RasporedRC
         {
             
             this.SelectedSoftwares.Add(findSoftware(this.SelectedSoftware));
+            this.Software.Remove(this.SelectedSoftware);
         }
 
         public Software findSoftware(String s)
