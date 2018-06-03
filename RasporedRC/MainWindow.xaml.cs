@@ -24,7 +24,13 @@ namespace RasporedRC
     {
         Point startPoint;
 
-        public ObservableCollection<TestOutput> ListData
+        public ObservableCollection<TestOutput> MainList
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<TestOutput> SideList
         {
             get;
             set;
@@ -48,8 +54,22 @@ namespace RasporedRC
                     ListBoxItem.DropEvent,
                     new DragEventHandler(MainWindow_Drop)));
 
-            LbSchedule.ItemContainerStyle = styleSchedule;
 
+            Style styleSide = new Style(typeof(ListBoxItem));
+            styleSide.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
+
+            styleSide.Setters.Add(
+                new EventSetter(
+                    ListBoxItem.PreviewMouseLeftButtonDownEvent,
+                    new MouseButtonEventHandler(MainWindow_PreviewMouseLeftButtonDown)));
+
+            styleSide.Setters.Add(
+                new EventSetter(
+                    ListBoxItem.DropEvent,
+                    new DragEventHandler(SideWindowElem_Drop)));
+
+            LbSide.ItemContainerStyle = styleSide;
+            LbSchedule.ItemContainerStyle = styleSchedule;
 
             List<TestOutput> Tests = new List<TestOutput>();
             Tests.Add(new TestOutput("Predmet1", 60));
@@ -67,7 +87,20 @@ namespace RasporedRC
             Tests.Add(new TestOutput("Predmet4", 60));
             Tests.Add(new TestOutput("Predmet3", 60));
 
-            ListData = new ObservableCollection<TestOutput>(Tests);
+            List<TestOutput> Tests2 = new List<TestOutput>();
+            Tests2.Add(new TestOutput("Predmet1", 60));
+            Tests2.Add(new TestOutput("Predmet2", 60));
+            Tests2.Add(new TestOutput("Predmet4", 60));
+            Tests2.Add(new TestOutput("Predmet3", 60));
+            Tests2.Add(new TestOutput("Predmet6", 60));
+            Tests2.Add(new TestOutput("Predmet1", 60));
+            Tests2.Add(new TestOutput("Predmet2", 60));
+            Tests2.Add(new TestOutput("Predmet4", 60));
+            Tests2.Add(new TestOutput("Predmet3", 60));
+
+            SideList = new ObservableCollection<TestOutput>(Tests2);
+
+            MainList = new ObservableCollection<TestOutput>(Tests);
         }
 
         private void MainWindow_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -77,6 +110,7 @@ namespace RasporedRC
 
         private void MainWindow_MouseMove(object sender, MouseEventArgs e)
         {
+            
             Point mousePos = e.GetPosition(null);
             Vector diff = startPoint - mousePos;
 
@@ -88,6 +122,11 @@ namespace RasporedRC
                 ListBox listView = sender as ListBox;
                 ListBoxItem listViewItem =
                     FindAncestor<ListBoxItem>((DependencyObject)e.OriginalSource);
+
+                if(listViewItem == null)
+                {
+                    return;
+                }
 
                 DragDrop.DoDragDrop(listViewItem, listViewItem.DataContext, DragDropEffects.Move);
             }
@@ -119,51 +158,92 @@ namespace RasporedRC
         {
             if (sender is ListBoxItem)
             {
-                TestOutput student = e.Data.GetData(typeof(TestOutput)) as TestOutput;
+                TestOutput source = e.Data.GetData(typeof(TestOutput)) as TestOutput;
                 TestOutput target = ((ListBoxItem)sender).DataContext as TestOutput;
 
-                int sourceIndex = ListData.IndexOf(student);
-                int targetIndex = ListData.IndexOf(target);
+                int sourceIndex = MainList.IndexOf(source);
+                int targetIndex = MainList.IndexOf(target);
 
-                if (sourceIndex != -1 && targetIndex != -1)
+                if (sourceIndex != -1)
                 {
-                    if (sourceIndex < targetIndex)
-                        Swap(sourceIndex, targetIndex);
-                    else
-                        Swap(targetIndex, sourceIndex);
+                    MainList.RemoveAt(sourceIndex);
+                    MainList.Insert(targetIndex, source);
+                } else
+                {
+                    sourceIndex = SideList.IndexOf(source);
+
+                    if (MainList.ElementAt(targetIndex).Text == "" && MainList[targetIndex + 1].Text == "" && MainList[targetIndex+1].Text == "")
+                    {
+                        MainList.RemoveAt(targetIndex);
+                        MainList.RemoveAt(targetIndex);
+                        MainList.RemoveAt(targetIndex);
+                        MainList.Insert(targetIndex, source);
+                        SideList.RemoveAt(sourceIndex);
+                    }
+                    {
+
+                    }
                 }
             }
         }
 
-        private void Swap(int firstIndex,int secondIndex)
+        private void SideWindowElem_Drop(object sender, DragEventArgs e)
         {
-            TestOutput first = ListData[firstIndex];
-            TestOutput second = ListData[secondIndex];
+            if (sender is ListBoxItem)
+            {
+                TestOutput source = e.Data.GetData(typeof(TestOutput)) as TestOutput;
+                TestOutput target = ((ListBoxItem)sender).DataContext as TestOutput;
 
-            ListData.RemoveAt(secondIndex);
-            ListData.RemoveAt(firstIndex);
-            ListData.Insert(firstIndex, second);
-            ListData.Insert(secondIndex, first);
+                int sourceIndex = SideList.IndexOf(source);
+                int targetIndex = SideList.IndexOf(target);
+
+                if(sourceIndex != -1)
+                {
+                    SideList.RemoveAt(sourceIndex);
+                    SideList.Insert(targetIndex, source);
+                }else
+                {
+                    sourceIndex = MainList.IndexOf(source);
+                    MainList.RemoveAt(sourceIndex);
+                    MainList.Insert(sourceIndex, new Model.TestOutput("", 20));
+                    MainList.Insert(sourceIndex, new Model.TestOutput("", 20));
+                    MainList.Insert(sourceIndex, new Model.TestOutput("", 20));
+                    SideList.Insert(targetIndex, source);
+                }
+            }
+        }
+
+        private void SideWindow_Drop(object sender, DragEventArgs e)
+        {
+            if (sender is ListBoxItem)
+            {
+                TestOutput student = e.Data.GetData(typeof(TestOutput)) as TestOutput;
+                TestOutput target = ((ListBoxItem)sender).DataContext as TestOutput;
+
+                int sourceIndex = MainList.IndexOf(student);
+                int targetIndex = MainList.IndexOf(target);
+
+            }
         }
 
         private void Expand_Window(object sender, MouseEventArgs e)
         {
-            rect.Width = 130;
+            LbSide.Width = 130;
         }
 
         private void Shrink_Window(object sender, MouseEventArgs e)
         {
-            rect.Width = 5;
+            LbSide.Width = 5;
         }
 
-        private void rect_DragEnter(object sender, DragEventArgs e)
+        private void LbSide_DragEnter(object sender, DragEventArgs e)
         {
-            rect.Width = 130;
+            LbSide.Width = 130;
         }
 
-        private void rect_DragLeave(object sender, DragEventArgs e)
+        private void LbSide_DragLeave(object sender, DragEventArgs e)
         {
-            rect.Width = 5;
+            LbSide.Width = 5;
         }
 
     }

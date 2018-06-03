@@ -27,7 +27,7 @@ namespace RasporedRC.Model
                 bgColor = new SolidColorBrush(Colors.Gray);
             }else
             {
-                bgColor = new SolidColorBrush(Colors.LightGoldenrodYellow);
+                bgColor = new SolidColorBrush(Colors.White);
             }
         }
 

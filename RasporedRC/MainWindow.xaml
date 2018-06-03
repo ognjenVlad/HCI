@@ -19,6 +19,17 @@
                 </DockPanel>
             </Border>
         </DataTemplate>
+        <DataTemplate  x:Key="TermSideBar">
+            <Border BorderBrush="Black" BorderThickness="0.5,0.5,0.5,0.5" Margin="0,1.5,0,1.5"
+                        CornerRadius="5,5,5,5" Padding="0,0,0,0"
+                        >
+                <DockPanel ToolTip="{Binding ToolTipText}" Background="White" Height="20" Width="128" HorizontalAlignment="Stretch">
+                    <TextBlock Text="{Binding Path=Text, StringFormat=N2}" FontSize="14" FontWeight="DemiBold"
+                                   DockPanel.Dock="Bottom" TextAlignment="Center" 
+                                   VerticalAlignment="Top"/>
+                </DockPanel>
+            </Border>
+        </DataTemplate>
     </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock ="Top" Height="30">
@@ -49,14 +60,33 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Rectangle  Name="rect" Width="8" MouseEnter="Expand_Window" MouseLeave="Shrink_Window" VerticalAlignment="Stretch" HorizontalAlignment="Left" Fill="#99000000" DragEnter="rect_DragEnter" DragLeave="rect_DragLeave"/>
+                <ListBox BorderThickness="1" BorderBrush="Black"
+                    Padding="6,2,2,0"
+                    Width="8"
+                    ItemTemplate="{StaticResource TermSideBar}"
+                    Name="LbSide"
+                    ItemsSource="{Binding SideList}" HorizontalAlignment="Left" VerticalContentAlignment="Center"
+                    MouseMove="MainWindow_MouseMove"
+                    MouseEnter="Expand_Window"
+                    MouseLeave="Shrink_Window"
+                    VerticalAlignment="Stretch"
+                    PreviewDragEnter="LbSide_DragEnter"
+                    PreviewDragLeave="LbSide_DragLeave"
+                         AllowDrop="True"
+                         >
+                    <ListBox.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                    </ListBox.Resources>
+                </ListBox>
             </Grid>
             <Grid Canvas.ZIndex ="1">
                 <ListBox BorderThickness="0"
                     ItemTemplate="{StaticResource TermItem}"
                     Width="Auto" Name="LbSchedule"
                     HorizontalContentAlignment="Stretch"
-                    ItemsSource="{Binding ListData}" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"
+                    ItemsSource="{Binding MainList}" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"
                     MouseMove="MainWindow_MouseMove"
                     DragEnter="MainWindow_DragEnter"
                          >
