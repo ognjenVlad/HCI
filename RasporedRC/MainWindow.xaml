@@ -54,30 +54,24 @@
                 <MenuItem Header="Otvori"></MenuItem>
             </MenuItem>
         </Menu>
-        <ListBox DockPanel.Dock="Top" Width="Auto" Height="30" Padding="45,0,0,0">
+        <ListBox DockPanel.Dock="Top" Width="Auto" Height="30" Padding="55,0,0,0">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
 
-            <ListBoxItem Width="100" HorizontalContentAlignment="Center">Monday</ListBoxItem>
-            <ListBoxItem Width="100" HorizontalContentAlignment="Center">T</ListBoxItem>
-            <ListBoxItem Width="100" HorizontalContentAlignment="Center">W</ListBoxItem>
-            <ListBoxItem Width="100" HorizontalContentAlignment="Center">T</ListBoxItem>
-            <ListBoxItem Width="100" HorizontalContentAlignment="Center">F</ListBoxItem>
-            <ListBoxItem Width="100" HorizontalContentAlignment="Center">S</ListBoxItem>
-        
-        </ListBox>
-        <ListBox Height="700" Width="40" DockPanel.Dock="Left" FontSize="22">
-            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-            <ListBoxItem Height="40" VerticalContentAlignment="Top">
-                7:
-            </ListBoxItem>
-            </Border>
-            <ListBoxItem Height="40" VerticalContentAlignment="Top">
-                8:
-            </ListBoxItem>
+            <ListBoxItem Width="106" HorizontalContentAlignment="Center">Ponedeljak</ListBoxItem>
+            <ListBoxItem Width="105" HorizontalContentAlignment="Center">Utorak</ListBoxItem>
+            <ListBoxItem Width="106" HorizontalContentAlignment="Center">Sreda</ListBoxItem>
+            <ListBoxItem Width="105" HorizontalContentAlignment="Center">Cetvrtak</ListBoxItem>
+            <ListBoxItem Width="105" HorizontalContentAlignment="Center">Petak</ListBoxItem>
+            <ListBoxItem Width="106" HorizontalContentAlignment="Center">Subota</ListBoxItem>
+            <ListBox.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+            </ListBox.Resources>
         </ListBox>
         <Grid>
             <Grid Canvas.ZIndex="2" HorizontalAlignment="Right">
@@ -108,17 +102,69 @@
             </Grid>
             
             <Grid Canvas.ZIndex ="1">
-                <ListBox >
+                <ListBox Margin="0,0,15,0">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                     <ListBoxItem>
-                    <ListBox BorderThickness="0"
+                        <ListBox Height="Auto" Width="50" FontSize="22">
+                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">7:</ListBoxItem>
+                            </Border>
+                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">8:</ListBoxItem>
+                            </Border>
+                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">8:</ListBoxItem>
+                            </Border>
+                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">10:</ListBoxItem>
+                            </Border>
+                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">11:</ListBoxItem>
+                            </Border>
+                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">12:</ListBoxItem>
+                            </Border>
+                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">13:</ListBoxItem>
+                            </Border>
+                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">14:</ListBoxItem>
+                            </Border>
+                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">15:</ListBoxItem>
+                            </Border>
+                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">16:</ListBoxItem>
+                            </Border>
+                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">17:</ListBoxItem>
+                            </Border>
+                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">18:</ListBoxItem>
+                            </Border>
+                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">19:</ListBoxItem>
+                            </Border>
+                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">20:</ListBoxItem>
+                            </Border>
+                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">21:</ListBoxItem>
+                            </Border>
+                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">22:</ListBoxItem>
+                            </Border>
+                        </ListBox>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <ListBox BorderThickness="0"
                         ItemTemplate="{StaticResource TermItem}"
-                        Width="Auto" Name="LbSchedule"
-                        ItemsSource="{Binding MainList}"
+                        Width="Auto" Name="LbSchedulePon"
+                        ItemsSource="{Binding MainListPon}"
                         MouseMove="MainWindow_MouseMove"
                         DragEnter="MainWindow_DragEnter"                         
                              >
@@ -132,8 +178,8 @@
                     <ListBoxItem>
                     <ListBox BorderThickness="0"
                         ItemTemplate="{StaticResource TermItem}"
-                        Width="Auto" Name="LbSchedule2"
-                        ItemsSource="{Binding MainList}"
+                        Width="Auto" Name="LbScheduleUto"
+                        ItemsSource="{Binding MainListUto}"
                         MouseMove="MainWindow_MouseMove"
                         DragEnter="MainWindow_DragEnter"
                              >
@@ -147,8 +193,8 @@
                     <ListBoxItem>
                     <ListBox BorderThickness="0"
                         ItemTemplate="{StaticResource TermItem}"
-                        Width="Auto" Name="LbSchedule1"
-                        ItemsSource="{Binding MainList}"
+                        Width="Auto" Name="LbScheduleSre"
+                        ItemsSource="{Binding MainListSre}"
                         MouseMove="MainWindow_MouseMove"
                         DragEnter="MainWindow_DragEnter"
                          
@@ -163,8 +209,8 @@
                     <ListBoxItem>
                         <ListBox BorderThickness="0"
                         ItemTemplate="{StaticResource TermItem}"
-                        Width="Auto" Name="LbSchedule3"
-                        ItemsSource="{Binding MainList}"
+                        Width="Auto" Name="LbScheduleCet"
+                        ItemsSource="{Binding MainListCet}"
                         MouseMove="MainWindow_MouseMove"
                         DragEnter="MainWindow_DragEnter"                         
                              >
@@ -178,8 +224,8 @@
                     <ListBoxItem>
                         <ListBox BorderThickness="0"
                         ItemTemplate="{StaticResource TermItem}"
-                        Width="Auto" Name="LbSchedule4"
-                        ItemsSource="{Binding MainList}"
+                        Width="Auto" Name="LbSchedulePet"
+                        ItemsSource="{Binding MainListPet}"
                         MouseMove="MainWindow_MouseMove"
                         DragEnter="MainWindow_DragEnter"                         
                              >
@@ -193,8 +239,8 @@
                     <ListBoxItem>
                         <ListBox BorderThickness="0"
                         ItemTemplate="{StaticResource TermItem}"
-                        Width="Auto" Name="LbSchedule5"
-                        ItemsSource="{Binding MainList}"
+                        Width="Auto" Name="LbScheduleSub"
+                        ItemsSource="{Binding MainListSub}"
                         MouseMove="MainWindow_MouseMove"
                         DragEnter="MainWindow_DragEnter"                         
                              >
