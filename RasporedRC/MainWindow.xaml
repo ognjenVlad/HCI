@@ -6,6 +6,20 @@
         xmlns:local="clr-namespace:RasporedRC"
         mc:Ignorable="d"
         Title="RC Raspored" Height="750" Width="430" ResizeMode="NoResize">
+
+    <Window.Resources>
+        <DataTemplate  x:Key="TermItem">
+            <Border BorderBrush="Black" BorderThickness="0.5,0.5,0.5,0.5" Margin="0,1.5,0,1.5"
+                        CornerRadius="5,5,5,5" Padding="0,0,0,0"
+                        >
+                <DockPanel ToolTip="{Binding ToolTipText}" Background="{Binding BgColor}" Height="{Binding Path=HeightOfElem}" Width="Auto">
+                    <TextBlock Text="{Binding Path=Text, StringFormat=N2}" FontSize="14" FontWeight="DemiBold"
+                                   DockPanel.Dock="Bottom" TextAlignment="Center" 
+                                   VerticalAlignment="Top"/>
+                </DockPanel>
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock ="Top" Height="30">
             <Menu.ItemsPanel>
@@ -30,16 +44,29 @@
             </MenuItem>
         </Menu>
         <Grid>
-        <Grid Canvas.ZIndex="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Rectangle  Name="rect" Width="5" MouseEnter="Expand_Window" MouseLeave="Shrink_Window" VerticalAlignment="Stretch" Fill="#99000000"/>
-        </Grid>
-        <Grid Canvas.ZIndex ="1">
-            <TextBox Text="SOME RANDOM TEXT" Width="Auto" HorizontalAlignment="Center"></TextBox>
-        </Grid>
+            <Grid Canvas.ZIndex="2" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Rectangle  Name="rect" Width="8" MouseEnter="Expand_Window" MouseLeave="Shrink_Window" VerticalAlignment="Stretch" HorizontalAlignment="Left" Fill="#99000000" DragEnter="rect_DragEnter" DragLeave="rect_DragLeave"/>
+            </Grid>
+            <Grid Canvas.ZIndex ="1">
+                <ListBox BorderThickness="0"
+                    ItemTemplate="{StaticResource TermItem}"
+                    Width="Auto" Name="LbSchedule"
+                    HorizontalContentAlignment="Stretch"
+                    ItemsSource="{Binding ListData}" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"
+                    MouseMove="MainWindow_MouseMove"
+                    DragEnter="MainWindow_DragEnter"
+                         >
+                    <ListBox.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                    </ListBox.Resources>
+                </ListBox>
+            </Grid>
         </Grid>
     </DockPanel>
 </Window>
