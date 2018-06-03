@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RasporedRC"
         mc:Ignorable="d"
-        Title="RC Raspored" Height="750" Width="430" ResizeMode="NoResize">
+        Title="RC Raspored" Height="430" Width="750" ResizeMode="NoResize">
 
     <Window.Resources>
         <DataTemplate  x:Key="TermItem">
-            <Border BorderBrush="Black" BorderThickness="0.5,0.5,0.5,0.5" Margin="0,1.5,0,1.5"
+            <Border BorderBrush="Black" BorderThickness="0,0,0,1" Margin="0,0,0,0"
                         CornerRadius="5,5,5,5" Padding="0,0,0,0"
                         >
-                <DockPanel ToolTip="{Binding ToolTipText}" Background="{Binding BgColor}" Height="{Binding Path=HeightOfElem}" Width="Auto">
+                <DockPanel ToolTip="{Binding ToolTipText}" Background="{Binding BgColor}" Height="{Binding Path=HeightOfElem}" Width="100">
                     <TextBlock Text="{Binding Path=Text, StringFormat=N2}" FontSize="14" FontWeight="DemiBold"
                                    DockPanel.Dock="Bottom" TextAlignment="Center" 
                                    VerticalAlignment="Top"/>
@@ -54,8 +54,33 @@
                 <MenuItem Header="Otvori"></MenuItem>
             </MenuItem>
         </Menu>
+        <ListBox DockPanel.Dock="Top" Width="Auto" Height="30" Padding="45,0,0,0">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBoxItem Width="100" HorizontalContentAlignment="Center">Monday</ListBoxItem>
+            <ListBoxItem Width="100" HorizontalContentAlignment="Center">T</ListBoxItem>
+            <ListBoxItem Width="100" HorizontalContentAlignment="Center">W</ListBoxItem>
+            <ListBoxItem Width="100" HorizontalContentAlignment="Center">T</ListBoxItem>
+            <ListBoxItem Width="100" HorizontalContentAlignment="Center">F</ListBoxItem>
+            <ListBoxItem Width="100" HorizontalContentAlignment="Center">S</ListBoxItem>
+        
+        </ListBox>
+        <ListBox Height="700" Width="40" DockPanel.Dock="Left" FontSize="22">
+            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+            <ListBoxItem Height="40" VerticalContentAlignment="Top">
+                7:
+            </ListBoxItem>
+            </Border>
+            <ListBoxItem Height="40" VerticalContentAlignment="Top">
+                8:
+            </ListBoxItem>
+        </ListBox>
         <Grid>
-            <Grid Canvas.ZIndex="2" HorizontalAlignment="Left">
+            <Grid Canvas.ZIndex="2" HorizontalAlignment="Right">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition />
@@ -81,22 +106,109 @@
                     </ListBox.Resources>
                 </ListBox>
             </Grid>
+            
             <Grid Canvas.ZIndex ="1">
-                <ListBox BorderThickness="0"
-                    ItemTemplate="{StaticResource TermItem}"
-                    Width="Auto" Name="LbSchedule"
-                    HorizontalContentAlignment="Stretch"
-                    ItemsSource="{Binding MainList}" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"
-                    MouseMove="MainWindow_MouseMove"
-                    DragEnter="MainWindow_DragEnter"
-                         >
-                    <ListBox.Resources>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-                    </ListBox.Resources>
+                <ListBox >
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBoxItem>
+                    <ListBox BorderThickness="0"
+                        ItemTemplate="{StaticResource TermItem}"
+                        Width="Auto" Name="LbSchedule"
+                        ItemsSource="{Binding MainList}"
+                        MouseMove="MainWindow_MouseMove"
+                        DragEnter="MainWindow_DragEnter"                         
+                             >
+                        <ListBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                        </ListBox.Resources>
+                    </ListBox>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                    <ListBox BorderThickness="0"
+                        ItemTemplate="{StaticResource TermItem}"
+                        Width="Auto" Name="LbSchedule2"
+                        ItemsSource="{Binding MainList}"
+                        MouseMove="MainWindow_MouseMove"
+                        DragEnter="MainWindow_DragEnter"
+                             >
+                        <ListBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                        </ListBox.Resources>
+                    </ListBox>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                    <ListBox BorderThickness="0"
+                        ItemTemplate="{StaticResource TermItem}"
+                        Width="Auto" Name="LbSchedule1"
+                        ItemsSource="{Binding MainList}"
+                        MouseMove="MainWindow_MouseMove"
+                        DragEnter="MainWindow_DragEnter"
+                         
+                             >
+                        <ListBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                        </ListBox.Resources>
+                    </ListBox>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <ListBox BorderThickness="0"
+                        ItemTemplate="{StaticResource TermItem}"
+                        Width="Auto" Name="LbSchedule3"
+                        ItemsSource="{Binding MainList}"
+                        MouseMove="MainWindow_MouseMove"
+                        DragEnter="MainWindow_DragEnter"                         
+                             >
+                        <ListBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                        </ListBox.Resources>
+                    </ListBox>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <ListBox BorderThickness="0"
+                        ItemTemplate="{StaticResource TermItem}"
+                        Width="Auto" Name="LbSchedule4"
+                        ItemsSource="{Binding MainList}"
+                        MouseMove="MainWindow_MouseMove"
+                        DragEnter="MainWindow_DragEnter"                         
+                             >
+                            <ListBox.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                            </ListBox.Resources>
+                        </ListBox>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <ListBox BorderThickness="0"
+                        ItemTemplate="{StaticResource TermItem}"
+                        Width="Auto" Name="LbSchedule5"
+                        ItemsSource="{Binding MainList}"
+                        MouseMove="MainWindow_MouseMove"
+                        DragEnter="MainWindow_DragEnter"                         
+                             >
+                            <ListBox.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                            </ListBox.Resources>
+                        </ListBox>
+                    </ListBoxItem>
                 </ListBox>
             </Grid>
+
+
         </Grid>
     </DockPanel>
 </Window>

@@ -70,9 +70,10 @@ namespace RasporedRC
 
             LbSide.ItemContainerStyle = styleSide;
             LbSchedule.ItemContainerStyle = styleSchedule;
-
+            
             List<TestOutput> Tests = new List<TestOutput>();
-            Tests.Add(new TestOutput("Predmet1", 60));
+
+            /*Tests.Add(new TestOutput("Predmet1", 60));
             Tests.Add(new TestOutput("", 20));
             Tests.Add(new TestOutput("Predmet2", 60));
             Tests.Add(new TestOutput("", 20));
@@ -86,9 +87,14 @@ namespace RasporedRC
             Tests.Add(new TestOutput("", 20));
             Tests.Add(new TestOutput("Predmet4", 60));
             Tests.Add(new TestOutput("Predmet3", 60));
+            */
 
+            for(int i = 0; i < 60; i++)
+            {
+                Tests.Add(new TestOutput("", 10));
+            }
             List<TestOutput> Tests2 = new List<TestOutput>();
-            Tests2.Add(new TestOutput("Predmet1", 60));
+            Tests2.Add(new TestOutput("Predmet1", 30));
             Tests2.Add(new TestOutput("Predmet2", 60));
             Tests2.Add(new TestOutput("Predmet4", 60));
             Tests2.Add(new TestOutput("Predmet3", 60));
