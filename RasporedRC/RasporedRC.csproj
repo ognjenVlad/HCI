@@ -55,6 +55,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddClassroom.xaml.cs">
+      <DependentUpon>AddClassroom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddCourse.xaml.cs">
+      <DependentUpon>AddCourse.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddSoftware.xaml.cs">
+      <DependentUpon>AddSoftware.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddSubject.xaml.cs">
+      <DependentUpon>AddSubject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Class1.cs" />
+    <Compile Include="EmptyValidation.cs" />
+    <Compile Include="ValidateLabel.cs" />
+    <Compile Include="Validation.cs" />
+    <Page Include="AddClassroom.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AddCourse.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AddSoftware.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AddSubject.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,12 +95,19 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CollectionNotEmptyValidation.cs" />
+    <Compile Include="EnableButtonConverter.cs" />
+    <Compile Include="ListViewConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Classroom.cs" />
+    <Compile Include="Model\Course.cs" />
+    <Compile Include="Model\Software.cs" />
+    <Compile Include="Model\Subject.cs" />
     <Compile Include="Model\TestOutput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -95,6 +134,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

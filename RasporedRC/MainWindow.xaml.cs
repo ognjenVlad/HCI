@@ -23,7 +23,35 @@ namespace RasporedRC
     public partial class MainWindow : Window
     {
         Point startPoint;
+        public static List<Classroom> classrooms;
+        public static List<Course> courses;
+        public static List<Subject> subjects;
+        public static List<Software> softwares;
 
+        public void AddClassroom(object sender, RoutedEventArgs e)
+        {
+
+            var dialog = new AddClassroom();
+            dialog.Show();
+        }
+        public void AddCourse(object sender, RoutedEventArgs e)
+        {
+
+            var dialog = new AddCourse();
+            dialog.Show();
+        }
+        public void AddSoftware(object sender, RoutedEventArgs e)
+        {
+
+            var dialog = new AddSoftware();
+            dialog.Show();
+        }
+        public void AddSubject(object sender, RoutedEventArgs e)
+        {
+
+            var dialog = new AddSubject();
+            dialog.Show();
+        }
 
 
         public ObservableCollection<TestOutput> MainListPon
@@ -90,7 +118,45 @@ namespace RasporedRC
             SideList = new ObservableCollection<TestOutput>(list);
 
 
-        }
+        
+            softwares = new List<Software>();
+            classrooms = new List<Classroom>();
+            subjects = new List<Subject>();
+            courses = new List<Course>();
+
+            Software s = new Software();
+            s.name = "Ime";
+            s.price = 100;
+            s.manofacturer = "Man";
+            s.label = "Label";
+            s.os = "Windows";
+            s.description = "Opis";
+            softwares.Add(s);
+            Software s1 = new Software();
+            s.name = "Ime";
+            s.price = 100;
+            s.manofacturer = "Man";
+            s1.label = "Labedasl";
+            s.os = "Windows";
+            s.description = "Opis";
+            softwares.Add(s1);
+
+            Classroom c = new Classroom();
+            c.label = "ucionica1";
+            classrooms.Add(c);
+
+
+            Course cc = new Course();
+            cc.label = "smer1";
+            courses.Add(cc);
+
+            Course cc1 = new Course();
+            cc1.label = "smer2";
+            courses.Add(cc1);
+            InitializeComponent();
+        
+
+    }
 
         private void InitStyles()
         {

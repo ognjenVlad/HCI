@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Damir\git\HCI\RasporedRC\obj\Debug\
+C:\Users\Ogauzz\git\HCI\RasporedRC\obj\Debug\
 RasporedRC
 none
 false
 DEBUG;TRACE
-C:\Users\Damir\git\HCI\RasporedRC\App.xaml
-11151548125
+C:\Users\Ogauzz\git\HCI\RasporedRC\App.xaml
+5-1350779033
 
-10-1097946737
+25-415304141
 13738642453
-MainWindow.xaml;
+AddClassroom.xaml;AddCourse.xaml;AddSoftware.xaml;AddSubject.xaml;MainWindow.xaml;
 
 True
 

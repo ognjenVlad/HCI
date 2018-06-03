@@ -39,9 +39,11 @@
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
             <MenuItem Header="Dodaj" HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
-                <MenuItem Header="Predmet"  FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
-                <MenuItem Header="Smer"  FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
-                <MenuItem Header="Ucionicu"  FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
+                <MenuItem Header="Predmet"  FontFamily="Arial" FontSize="16" Click="AddSubject" FontWeight="Bold"></MenuItem>
+                <MenuItem Header="Smer"  FontFamily="Arial" FontSize="16" Click="AddCourse" FontWeight="Bold"></MenuItem>
+
+                <MenuItem Header="Softver"  FontFamily="Arial" FontSize="16" Click="AddSoftware" FontWeight="Bold"></MenuItem>
+                <MenuItem Header="Ucionicu"  FontFamily="Arial" FontSize="16" Click="AddClassroom" FontWeight="Bold"></MenuItem>
             </MenuItem>
             <MenuItem Header="Pregled"  HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
                 <MenuItem Header="Predmeta"  FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
