@@ -51,3 +51,12 @@ C:\Users\Ogauzz\git\HCI\RasporedRC\obj\Debug\AddClassroom.baml
 C:\Users\Ogauzz\git\HCI\RasporedRC\obj\Debug\AddCourse.baml
 C:\Users\Ogauzz\git\HCI\RasporedRC\obj\Debug\AddSoftware.baml
 C:\Users\Ogauzz\git\HCI\RasporedRC\obj\Debug\AddSubject.baml
+C:\Users\Damir\git\HCI\RasporedRC\obj\Debug\AddClassroom.g.cs
+C:\Users\Damir\git\HCI\RasporedRC\obj\Debug\AddCourse.g.cs
+C:\Users\Damir\git\HCI\RasporedRC\obj\Debug\AddSoftware.g.cs
+C:\Users\Damir\git\HCI\RasporedRC\obj\Debug\AddSubject.g.cs
+C:\Users\Damir\git\HCI\RasporedRC\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Damir\git\HCI\RasporedRC\obj\Debug\AddClassroom.baml
+C:\Users\Damir\git\HCI\RasporedRC\obj\Debug\AddCourse.baml
+C:\Users\Damir\git\HCI\RasporedRC\obj\Debug\AddSoftware.baml
+C:\Users\Damir\git\HCI\RasporedRC\obj\Debug\AddSubject.baml

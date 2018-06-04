@@ -91,7 +91,7 @@ namespace RasporedRC
             set;
         }
 
-        List<ObservableCollection<TestOutput>> currentClassroom;
+        private List<ObservableCollection<TestOutput>> weekDisplay = new List<ObservableCollection<TestOutput>>();
         Dictionary<string, List<ObservableCollection<TestOutput>>> classroomsWeek;
 
         public MainWindow()
@@ -105,6 +105,13 @@ namespace RasporedRC
 
             addClassroom("myclass");
             displayClassroom("myclass");
+
+            weekDisplay.Add(MainListPon);
+            weekDisplay.Add(MainListUto);
+            weekDisplay.Add(MainListSre);
+            weekDisplay.Add(MainListCet);
+            weekDisplay.Add(MainListPet);
+            weekDisplay.Add(MainListSub);
 
 
             List<TestOutput> list = new List<TestOutput>();
@@ -222,6 +229,7 @@ namespace RasporedRC
 
         private void MainWindow_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            MainListPon[0].BgColor = new SolidColorBrush(Colors.Green);
             startPoint = e.GetPosition(null);
         }
 
@@ -323,6 +331,7 @@ namespace RasporedRC
                     }
                 }
             }
+            resetColors();
         }
 
         private ObservableCollection<TestOutput> getParentOC(TestOutput to)
@@ -381,18 +390,49 @@ namespace RasporedRC
                     SideList.Insert(targetIndex, source);
                 }
             }
+            resetColors();
         }
 
         private void SideWindow_Drop(object sender, DragEventArgs e)
         {
-            if (sender is ListBoxItem)
+            if (sender is ListBox)
             {
                 TestOutput student = e.Data.GetData(typeof(TestOutput)) as TestOutput;
-                TestOutput target = ((ListBoxItem)sender).DataContext as TestOutput;
 
-                int sourceIndex = currentClassroom[0].IndexOf(student);
-                int targetIndex = currentClassroom[0].IndexOf(target);
+                SideList.Add(student);
+            }
+            resetColors();
+        }
 
+        private void resetColors()
+        {
+            foreach(var dayModel in weekDisplay)
+            {
+                foreach (TestOutput to in dayModel)
+                {
+                    if (to.Text.Equals(""))
+                    {
+                        to.BgColor = new SolidColorBrush(Colors.LightGray);
+                    }
+                    else
+                    {
+                        to.BgColor = new SolidColorBrush(Colors.White);
+                    }
+                }
+            }
+        }
+
+        private void colorTerms()
+        {
+            // uradi petlju za smer sve smerove po danima vektor od 64 elem
+
+            foreach(var dayModel in weekDisplay)
+            {
+                foreach(TestOutput to in dayModel)
+                {
+                    // to.IsAllowed( USLOV IZ PROVERE );
+                    continue;
+                }
             }
         }
 

@@ -16,7 +16,13 @@ namespace RasporedRC.Model
         private Brush bgColor;
 
         public event PropertyChangedEventHandler PropertyChanged;
-
+        protected void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
         public TestOutput(string text, int heightOfElem)
         {
             this.text = text;
@@ -24,7 +30,7 @@ namespace RasporedRC.Model
             this.ToolTipText = "Just a tooltip text";
             if (text.Equals(""))
             {
-                bgColor = new SolidColorBrush(Colors.Gray);
+                bgColor = new SolidColorBrush(Colors.LightGray);
             }else
             {
                 bgColor = new SolidColorBrush(Colors.White);
@@ -52,7 +58,7 @@ namespace RasporedRC.Model
         public Brush BgColor
         {
             get { return bgColor; }
-            set { bgColor = value; }
+            set { bgColor = value; OnPropertyChanged("BgColor"); }
         }
     }
 }
