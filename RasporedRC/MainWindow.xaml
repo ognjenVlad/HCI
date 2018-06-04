@@ -93,6 +93,7 @@
                     VerticalAlignment="Stretch"
                     PreviewDragEnter="LbSide_DragEnter"
                     PreviewDragLeave="LbSide_DragLeave"
+                    Drop="SideWindow_Drop"
                          AllowDrop="True"
                          >
                     <ListBox.Resources>

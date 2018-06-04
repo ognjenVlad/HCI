@@ -177,6 +177,11 @@ namespace RasporedRC
 
             styleSchedule.Setters.Add(
                 new EventSetter(
+                    ListBoxItem.PreviewMouseLeftButtonUpEvent,
+                    new MouseButtonEventHandler(MainWindow_PreviewMouseLeftButtonUp)));
+
+            styleSchedule.Setters.Add(
+                new EventSetter(
                     ListBoxItem.DropEvent,
                     new DragEventHandler(MainWindow_Drop)));
 
@@ -188,6 +193,11 @@ namespace RasporedRC
                 new EventSetter(
                     ListBoxItem.PreviewMouseLeftButtonDownEvent,
                     new MouseButtonEventHandler(MainWindow_PreviewMouseLeftButtonDown)));
+
+            styleSide.Setters.Add(
+                new EventSetter(
+                    ListBoxItem.PreviewMouseLeftButtonUpEvent,
+                    new MouseButtonEventHandler(MainWindow_PreviewMouseLeftButtonUp)));
 
             styleSide.Setters.Add(
                 new EventSetter(
@@ -229,8 +239,13 @@ namespace RasporedRC
 
         private void MainWindow_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            MainListPon[0].BgColor = new SolidColorBrush(Colors.Green);
             startPoint = e.GetPosition(null);
+            MainListPon[0].BgColor = new SolidColorBrush(Colors.Green);
+        }
+
+        private void MainWindow_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            resetColors();
         }
 
         private void MainWindow_MouseMove(object sender, MouseEventArgs e)
@@ -397,9 +412,24 @@ namespace RasporedRC
         {
             if (sender is ListBox)
             {
-                TestOutput student = e.Data.GetData(typeof(TestOutput)) as TestOutput;
+                TestOutput source = e.Data.GetData(typeof(TestOutput)) as TestOutput;
 
-                SideList.Add(student);
+                if(source.Text == "")
+                {
+                    e.Handled = true;
+                    resetColors();
+                    return;
+                }
+
+                var source_parent = getParentOC(source);
+
+                int sourceIndex = source_parent.IndexOf(source);
+
+                source_parent.RemoveAt(sourceIndex);
+                source_parent.Insert(sourceIndex, new Model.TestOutput("", 10));
+                source_parent.Insert(sourceIndex, new Model.TestOutput("", 10));
+                source_parent.Insert(sourceIndex, new Model.TestOutput("", 10));
+                SideList.Add(source);
             }
             resetColors();
         }
