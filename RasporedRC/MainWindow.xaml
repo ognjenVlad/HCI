@@ -13,9 +13,9 @@
                         CornerRadius="5,5,5,5" Padding="0,0,0,0"
                         >
                 <DockPanel ToolTip="{Binding ToolTipText}" Background="{Binding BgColor}" Height="{Binding Path=HeightOfElem}" Width="100">
-                    <TextBlock Text="{Binding Path=Text, StringFormat=N2}" FontSize="14" FontWeight="DemiBold"
-                                   DockPanel.Dock="Bottom" TextAlignment="Center" 
-                                   VerticalAlignment="Top"/>
+                    <TextBlock Text="{Binding Path=DisplayText, StringFormat=N2}" FontSize="14" FontWeight="DemiBold"
+                                   DockPanel.Dock="Bottom" TextWrapping="Wrap" TextAlignment="Center"
+                                   VerticalAlignment="Center"/>
                 </DockPanel>
             </Border>
         </DataTemplate>
@@ -23,10 +23,10 @@
             <Border BorderBrush="Black" BorderThickness="0.5,0.5,0.5,0.5" Margin="0,1.5,0,1.5"
                         CornerRadius="5,5,5,5" Padding="0,0,0,0"
                         >
-                <DockPanel ToolTip="{Binding ToolTipText}" Background="White" Height="20" Width="128" HorizontalAlignment="Stretch">
-                    <TextBlock Text="{Binding Path=Text, StringFormat=N2}" FontSize="14" FontWeight="DemiBold"
-                                   DockPanel.Dock="Bottom" TextAlignment="Center" 
-                                   VerticalAlignment="Top"/>
+                <DockPanel ToolTip="{Binding ToolTipText}" Background="White" Height="20" Width="168">
+                    <TextBlock Text="{Binding Path=DisplayText, StringFormat=N2}" FontSize="14" FontWeight="DemiBold"
+                                   DockPanel.Dock="Bottom" TextWrapping="WrapWithOverflow" TextAlignment="Center"
+                                   VerticalAlignment="Center" />
                 </DockPanel>
             </Border>
         </DataTemplate>
@@ -52,7 +52,7 @@
             </MenuItem>
             <MenuItem Header="Demo mod"  HorizontalAlignment="Center" FontSize="16" FontFamily="Arial" FontWeight="Bold"/>
             <MenuItem Header="Upravljaj"  HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
-                <MenuItem Header="Sacuvaj" ></MenuItem>
+                <MenuItem Header="Sacuvaj" Click="DodajUcionicu"></MenuItem>
                 <MenuItem Header="Otvori"></MenuItem>
             </MenuItem>
         </Menu>
@@ -62,7 +62,11 @@
                     <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
-
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Focusable" Value="false"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBoxItem Width="106" HorizontalContentAlignment="Center">Ponedeljak</ListBoxItem>
             <ListBoxItem Width="105" HorizontalContentAlignment="Center">Utorak</ListBoxItem>
             <ListBoxItem Width="106" HorizontalContentAlignment="Center">Sreda</ListBoxItem>
@@ -83,6 +87,7 @@
                 </Grid.ColumnDefinitions>
                 <ListBox BorderThickness="1" BorderBrush="Black"
                     Padding="6,2,2,0"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     Width="8"
                     ItemTemplate="{StaticResource TermSideBar}"
                     Name="LbSide"
@@ -111,6 +116,11 @@
                             <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Focusable" Value="False"></Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
                     <ListBoxItem>
                         <ListBox Height="Auto" Width="50" FontSize="22">
                             <Border BorderThickness="0,0,0,1" BorderBrush="Black">
@@ -120,7 +130,7 @@
                                 <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">8:</ListBoxItem>
                             </Border>
                             <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">8:</ListBoxItem>
+                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">9:</ListBoxItem>
                             </Border>
                             <Border BorderThickness="0,0,0,1" BorderBrush="Black">
                                 <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">10:</ListBoxItem>
@@ -169,7 +179,8 @@
                         Width="Auto" Name="LbSchedulePon"
                         ItemsSource="{Binding MainListPon}"
                         MouseMove="MainWindow_MouseMove"
-                        DragEnter="MainWindow_DragEnter"                         
+                        DragEnter="MainWindow_DragEnter"
+                        DragLeave="MainWindow_DragLeave"                         
                              >
                         <ListBox.Resources>
                             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
@@ -185,6 +196,7 @@
                         ItemsSource="{Binding MainListUto}"
                         MouseMove="MainWindow_MouseMove"
                         DragEnter="MainWindow_DragEnter"
+                        DragLeave="MainWindow_DragLeave"
                              >
                         <ListBox.Resources>
                             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
@@ -200,7 +212,7 @@
                         ItemsSource="{Binding MainListSre}"
                         MouseMove="MainWindow_MouseMove"
                         DragEnter="MainWindow_DragEnter"
-                         
+                        DragLeave="MainWindow_DragLeave"
                              >
                         <ListBox.Resources>
                             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
@@ -215,7 +227,8 @@
                         Width="Auto" Name="LbScheduleCet"
                         ItemsSource="{Binding MainListCet}"
                         MouseMove="MainWindow_MouseMove"
-                        DragEnter="MainWindow_DragEnter"                         
+                        DragEnter="MainWindow_DragEnter"
+                        DragLeave="MainWindow_DragLeave"
                              >
                         <ListBox.Resources>
                             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
@@ -230,7 +243,8 @@
                         Width="Auto" Name="LbSchedulePet"
                         ItemsSource="{Binding MainListPet}"
                         MouseMove="MainWindow_MouseMove"
-                        DragEnter="MainWindow_DragEnter"                         
+                        DragEnter="MainWindow_DragEnter"
+                        DragLeave="MainWindow_DragLeave"
                              >
                             <ListBox.Resources>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
@@ -245,7 +259,8 @@
                         Width="Auto" Name="LbScheduleSub"
                         ItemsSource="{Binding MainListSub}"
                         MouseMove="MainWindow_MouseMove"
-                        DragEnter="MainWindow_DragEnter"                         
+                        DragEnter="MainWindow_DragEnter"
+                        DragLeave="MainWindow_DragLeave"
                              >
                             <ListBox.Resources>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>

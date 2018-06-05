@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace RasporedRC.Model
 {
-    class Term : INotifyPropertyChanged
+    public class Term : INotifyPropertyChanged
     {
         private string subjectId;
         private int termId;
@@ -21,31 +21,36 @@ namespace RasporedRC.Model
         private Brush borderColor;
 
         public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
 
         public Term(string subjectId, int termId, string courseId)
         {
             this.subjectId = subjectId;
             this.termId = termId;
             this.courseId = courseId;
-            this.toolTipText = "Course: " + courseId + "\nSubject: " + subjectId;
             displayText = "";
 
-            if(subjectId.Length < 18)
-            {
-                displayText = subjectId.Substring(0, 16) + "..";
-            }else
-            {
-                displayText = subjectId;
-            }
+            updateDisplay();
 
             if (subjectId.Equals(""))
             {
-                bgColor = new SolidColorBrush(Colors.LightGray);
+                BgColor = new SolidColorBrush(Colors.LightGray);
+                ToolTipText = "15 minuta";
+                HeightOfElem = 10;
             }
             else
             {
-                bgColor = new SolidColorBrush(Colors.White);
+                BgColor = new SolidColorBrush(Colors.White);
+                this.toolTipText = "Smer: " + courseId + "\nPredmet: " + subjectId;
+                HeightOfElem = 32;
             }
+
         }
 
         public string SubjectId
@@ -66,7 +71,12 @@ namespace RasporedRC.Model
         public Brush BgColor
         {
             get { return bgColor; }
-            set { bgColor = value; }
+            set
+            {
+                bgColor = value;
+                OnPropertyChanged("BgColor");
+            }
+            
         }
         public bool IsAllowed
         {
@@ -74,31 +84,58 @@ namespace RasporedRC.Model
             set
             {
                 isAllowed = value;
+                OnPropertyChanged("IsAllowed");
                 if (isAllowed)
                     BorderColor = new SolidColorBrush(Colors.Green);
-                else
-                    BorderColor = new SolidColorBrush(Colors.Red);
             }
         }
         public Brush BorderColor
         {
             get { return borderColor; }
-            set { borderColor = value; }
+            set
+            {
+                borderColor = value;
+                OnPropertyChanged("BorderColor");
+            }
         }
         public int HeightOfElem
         {
             get { return heightOfElem; }
-            set { heightOfElem = value; }
+            set
+            {
+                heightOfElem = value;
+                OnPropertyChanged("HeightOfElem");
+            }
         }
         public string ToolTipText
         {
             get { return toolTipText; }
-            set { toolTipText = value; }
+            set
+            {
+                toolTipText = value;
+                OnPropertyChanged("ToolTipText");
+            }
         }
         public string DisplayText
         {
             get { return displayText; }
-            set { displayText = value; }
+            set
+            {
+                displayText = value;
+                OnPropertyChanged("DisplayText");
+            }
+        }
+
+        private void updateDisplay()
+        {
+            if (subjectId.Length > 24)
+            {
+                DisplayText = subjectId.Substring(0, 22) + "..";
+            }
+            else
+            {
+                DisplayText = subjectId;
+            }
         }
 
     }
