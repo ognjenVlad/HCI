@@ -46,7 +46,7 @@
                 <MenuItem Header="Ucionicu"  FontFamily="Arial" FontSize="16" Click="AddClassroom" FontWeight="Bold"></MenuItem>
             </MenuItem>
             <MenuItem Header="Pregled"  HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
-                <MenuItem Header="Brisanje"  Click ="DeleteSubject" FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
+                <MenuItem Header="Brisanje/Izmena"  Click ="DeleteSubject" FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
                 <MenuItem Header="Izmena" FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
                 <MenuItem Header="Pretraga" FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
             </MenuItem>

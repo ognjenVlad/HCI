@@ -147,8 +147,8 @@ namespace RasporedRC
             Software sub = button.DataContext as Software;
             if (findSoftware(sub))
             {
-                MessageBox.Show("Nije moguće izbrisati softver koji je u upotrebi!Molim Vas prvo " +
-                    "izbrišite učionicu/predmet koji ga koristi.", "Brisanje softvera", MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("Nije moguće izbrisati softver koji je u upotrebi! Molim Vas prvo " +
+                    "izbrišite/izmenite učionicu/predmet koji ga koristi.", "Brisanje softvera", MessageBoxButton.OK,MessageBoxImage.Error);
                 return;
 
             }
@@ -169,7 +169,7 @@ namespace RasporedRC
             if (findCourse(sub))
             {
                 MessageBox.Show("Nije moguće izbrisati smer koji je u upotrebi! Molim Vas prvo "+
-                    "izbrisite predmet koji ga koristi.", "Brisanje smera",MessageBoxButton.OK, MessageBoxImage.Error);
+                    "izbrišite/izmenite predmet koji ga koristi.", "Brisanje smera",MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
 
             }
