@@ -95,13 +95,11 @@ namespace RasporedRC
         }
         public AddClassroom()
         {
-            
-            OS = new ObservableCollection<string>();
+
+            OS = MainWindow.OS;
             this.Software = new ObservableCollection<string>();
             this.SelectedSoftwares = new BindingList<Model.Software>();
-            OS.Add("Windows");
-            OS.Add("Linux");
-            OS.Add("Windows/Linux");
+            
             foreach(Software s in MainWindow.softwares) {
 
                 this.Software.Add(s.label);
@@ -162,36 +160,9 @@ namespace RasporedRC
             {
                 return;
             }
-            Classroom classroom = new Classroom();
-            classroom.os = this.SelectedOS;
-            if (this.ProjectorCheckedT)
-            {
-                classroom.projector = true;
-            }
-            else
-            {
-                classroom.projector = false;
-            }
-            if (this.TableCheckedT)
-            {
-                classroom.tableExists = true;
-            }
-            else
-            {
-                classroom.tableExists = false;
-            }
-            if (this.SmartTableCheckedT)
-            {
-                classroom.smartTable = true;
-            }
-            else
-            {
-                classroom.smartTable = false;
-            }
-            classroom.label = this.Label;
-            classroom.description = this.Description;
-            classroom.slots = int.Parse(this.Slots);
-            classroom.software = new List<Model.Software>();
+            Classroom classroom = new Classroom(this.Label, this.Description, int.Parse(this.Slots), ProjectorCheckedT, TableCheckedT, SmartTableCheckedT,  this.SelectedOS);
+            
+            
 
             foreach (Software s in this.SelectedSoftwares)
             {
@@ -202,6 +173,7 @@ namespace RasporedRC
             Console.WriteLine(classroom.label);
             MainWindow.classrooms.Add(classroom);
 
+            MessageBox.Show("Učionica uspešno dodata!", "Dodavanje učionice", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
         }
         

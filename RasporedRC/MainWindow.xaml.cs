@@ -23,77 +23,89 @@ namespace RasporedRC
     public partial class MainWindow : Window
     {
         Point startPoint;
-        public static List<Classroom> classrooms;
-        public static List<Course> courses;
-        public static List<Subject> subjects;
-        public static List<Software> softwares;
-        private ListBoxItem draggedItem;
+        public static ObservableCollection<Classroom> classrooms;
+        public static ObservableCollection<Course> courses;
+        public static ObservableCollection<Subject> subjects;
+        public static ObservableCollection<Software> softwares;
+
+        public static ObservableCollection<string> OS;
+        public static Classroom classroomToUpdate;
+
+        public static Subject subjectToUpdate;
+        public static Course courseToUpdate;
+        public static Software softwareToUpdate;
 
         public void AddClassroom(object sender, RoutedEventArgs e)
         {
 
             var dialog = new AddClassroom();
-            dialog.Show();
+            dialog.ShowDialog();
         }
         public void AddCourse(object sender, RoutedEventArgs e)
         {
 
             var dialog = new AddCourse();
-            dialog.Show();
+            dialog.ShowDialog();
         }
         public void AddSoftware(object sender, RoutedEventArgs e)
         {
 
             var dialog = new AddSoftware();
-            dialog.Show();
+            dialog.ShowDialog();
         }
         public void AddSubject(object sender, RoutedEventArgs e)
         {
 
             var dialog = new AddSubject();
-            dialog.Show();
+            dialog.ShowDialog();
+        }
+        public void DeleteSubject(object sender, RoutedEventArgs e)
+        {
+
+            var dialog = new DeleteSubject();
+            dialog.ShowDialog();
         }
 
 
-        public ObservableCollection<Term> MainListPon
+        public ObservableCollection<TestOutput> MainListPon
         {
             get;
             set;
         }
-        public ObservableCollection<Term> MainListUto
+        public ObservableCollection<TestOutput> MainListUto
         {
             get;
             set;
         }
-        public ObservableCollection<Term> MainListSre
+        public ObservableCollection<TestOutput> MainListSre
         {
             get;
             set;
         }
-        public ObservableCollection<Term> MainListCet
+        public ObservableCollection<TestOutput> MainListCet
         {
             get;
             set;
         }
-        public ObservableCollection<Term> MainListPet
+        public ObservableCollection<TestOutput> MainListPet
         {
             get;
             set;
         }
-        public ObservableCollection<Term> MainListSub
-        {
-            get;
-            set;
-        }
-
-        public ObservableCollection<Term> SideList
+        public ObservableCollection<TestOutput> MainListSub
         {
             get;
             set;
         }
 
-        private List<ObservableCollection<Term>> weekDisplay = new List<ObservableCollection<Term>>();
-        Dictionary<string, List<ObservableCollection<Term>>> classroomsWeek;
+        public ObservableCollection<TestOutput> SideList
+        {
+            get;
+            set;
+        }
+
+        List<ObservableCollection<TestOutput>> currentClassroom;
+        Dictionary<string, List<ObservableCollection<TestOutput>>> classroomsWeek;
 
         public MainWindow()
         {
@@ -102,36 +114,34 @@ namespace RasporedRC
 
             InitStyles();
 
-            classroomsWeek = new Dictionary<string, List<ObservableCollection<Term>>>();
-
-            weekDisplay.Add(new ObservableCollection<Term>());
-            weekDisplay.Add(new ObservableCollection<Term>());
-            weekDisplay.Add(new ObservableCollection<Term>());
-            weekDisplay.Add(new ObservableCollection<Term>());
-            weekDisplay.Add(new ObservableCollection<Term>());
-            weekDisplay.Add(new ObservableCollection<Term>());
+            classroomsWeek = new Dictionary<string, List<ObservableCollection<TestOutput>>>();
 
             addClassroom("myclass");
             displayClassroom("myclass");
 
 
+            List<TestOutput> list = new List<TestOutput>();
+            list.Add(new TestOutput("Predmet1",32));
+            list.Add(new TestOutput("Predmet2", 32));
+            list.Add(new TestOutput("Predmet3", 32));
+            list.Add(new TestOutput("Predmet4", 32));
+            list.Add(new TestOutput("Predmet5", 32));
+            list.Add(new TestOutput("Predmet6", 32));
 
-            List<Term> list = new List<Term>();
-            list.Add(new Term("Ovo je jedan jako dobar predmet", 1, "SW"));
-            list.Add(new Term("Predmet2", 2, "SW"));
-            list.Add(new Term("Predmet3", 3, "SW"));
-            list.Add(new Term("Predmet4", 4, "SW"));
-            list.Add(new Term("Predmet5", 5, "SW"));
-            list.Add(new Term("Predmet6", 6, "SW"));
-
-            SideList = new ObservableCollection<Term>(list);
-
+            SideList = new ObservableCollection<TestOutput>(list);
 
 
-            softwares = new List<Software>();
-            classrooms = new List<Classroom>();
-            subjects = new List<Subject>();
-            courses = new List<Course>();
+        
+            softwares = new ObservableCollection<Software>();
+            classrooms = new ObservableCollection<Classroom>();
+            subjects = new ObservableCollection<Subject>();
+            courses = new ObservableCollection<Course>();
+            OS = new ObservableCollection<string>();
+
+            OS.Add("Windows");
+            OS.Add("Linux");
+            OS.Add("Windows/Linux");
+
 
             Software s = new Software();
             s.name = "Ime";
@@ -142,51 +152,73 @@ namespace RasporedRC
             s.description = "Opis";
             softwares.Add(s);
             Software s1 = new Software();
-            s.name = "Imeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-            s.price = 100;
-            s.manofacturer = "Man";
+            s1.name = "Imeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            s1.price = 100;
+            s1.manofacturer = "Man";
             s1.label = "Labedasl";
-            s.os = "Windows";
-            s.description = "Opis";
+            s1.os = "Windows";
+            s1.description = "Opis";
+
+            s1.website = "Opis";
+            s1.yearOfPublishing = "1999";
             softwares.Add(s1);
 
-            Classroom c = new Classroom();
+            Classroom c = new Classroom("ucionica1", "opis1", 12,true,true,true,"Windows");
             c.label = "ucionica1";
+            c.software.Add(s1);
+            c.software.Add(s);
             classrooms.Add(c);
 
 
             Course cc = new Course();
             cc.label = "smer1";
+            cc.name = "sw";
             courses.Add(cc);
 
             Course cc1 = new Course();
             cc1.label = "smer2";
+            cc.name = "sw1";
             courses.Add(cc1);
+
+            Subject sub = new Subject();
+            sub.course = cc1;
+
+            sub.os = "Windows";
+            sub.description = "opis";
+            sub.label = "aaaa";
+
+            Subject sub1 = new Subject();
+            sub1.course = cc1;
+            sub1.description = "l";
+            sub1.label = "labela";
+            sub1.os = "Windows";
+            sub1.software.Add(s1);
+            sub1.software.Add(s);
+
+            sub1.software.Add(s1);
+            sub1.software.Add(s);
+
+            sub1.software.Add(s1);
+            sub1.software.Add(s);
+
+            sub1.software.Add(s1);
+            sub1.software.Add(s);
+            subjects.Add(sub);
+            subjects.Add(sub1);
             InitializeComponent();
+        
 
-
-        }
-        public void DodajUcionicu(Object sender,RoutedEventArgs e)
-        {
-            addClassroom("UCIONICA2");
-            displayClassroom("UCIONICA2");
-        }
+    }
 
         private void InitStyles()
         {
             var styleSchedule = new Style(typeof(ListBoxItem));
             styleSchedule.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
-            styleSchedule.Setters.Add(new Setter(ListBoxItem.FocusableProperty, false));
 
             styleSchedule.Setters.Add(
                 new EventSetter(
                     ListBoxItem.PreviewMouseLeftButtonDownEvent,
                     new MouseButtonEventHandler(MainWindow_PreviewMouseLeftButtonDown)));
-
-            styleSchedule.Setters.Add(
-                new EventSetter(
-                    ListBoxItem.PreviewMouseLeftButtonUpEvent,
-                    new MouseButtonEventHandler(MainWindow_PreviewMouseLeftButtonUp)));
 
             styleSchedule.Setters.Add(
                 new EventSetter(
@@ -196,7 +228,6 @@ namespace RasporedRC
 
             Style styleSide = new Style(typeof(ListBoxItem));
             styleSide.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
-            styleSide.Setters.Add(new Setter(ListBoxItem.FocusableProperty, false));
 
             styleSide.Setters.Add(
                 new EventSetter(
@@ -205,14 +236,8 @@ namespace RasporedRC
 
             styleSide.Setters.Add(
                 new EventSetter(
-                    ListBoxItem.PreviewMouseLeftButtonUpEvent,
-                    new MouseButtonEventHandler(MainWindow_PreviewMouseLeftButtonUp)));
-
-            styleSide.Setters.Add(
-                new EventSetter(
                     ListBoxItem.DropEvent,
                     new DragEventHandler(SideWindowElem_Drop)));
-
 
             LbSide.ItemContainerStyle = styleSide;
             LbSchedulePon.ItemContainerStyle = styleSchedule;
@@ -231,32 +256,18 @@ namespace RasporedRC
             MainListCet = classroomsWeek[id][3];
             MainListPet = classroomsWeek[id][4];
             MainListSub = classroomsWeek[id][5];
-
-            LbSchedulePon.ItemsSource = MainListPon;
-            LbScheduleUto.ItemsSource = MainListUto;
-            LbScheduleSre.ItemsSource = MainListSre;
-            LbScheduleCet.ItemsSource = MainListCet;
-            LbSchedulePet.ItemsSource = MainListPet;
-            LbScheduleSub.ItemsSource = MainListSub;
-
-            weekDisplay[0] = classroomsWeek[id][0];
-            weekDisplay[1] = classroomsWeek[id][1];
-            weekDisplay[2] = classroomsWeek[id][2];
-            weekDisplay[3] = classroomsWeek[id][3];
-            weekDisplay[4] = classroomsWeek[id][4];
-            weekDisplay[5] = classroomsWeek[id][5];
         }
 
         private void addClassroom(string id)
         {
-            classroomsWeek.Add(id,new List<ObservableCollection<Term>>());
+            classroomsWeek.Add(id,new List<ObservableCollection<TestOutput>>());
             for(int i = 0; i < 6; i++)
             {
-                classroomsWeek[id].Add(new ObservableCollection<Term>());
+                classroomsWeek[id].Add(new ObservableCollection<TestOutput>());
 
                 for(int j = 0; j < 64; j++)
                 {
-                    classroomsWeek[id][i].Add(new Term("",0,""));
+                    classroomsWeek[id][i].Add(new TestOutput("", 10));
                 }
             }
         }
@@ -264,22 +275,7 @@ namespace RasporedRC
         private void MainWindow_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             startPoint = e.GetPosition(null);
-            ListBoxItem listBoxItem =
-                FindAncestor<ListBoxItem>((DependencyObject)e.OriginalSource);
-            colorGoodDrop(listBoxItem);
-            draggedItem = listBoxItem;
         }
-
-        private void MainWindow_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            resetColors();
-        }
-
-        private void ResetColor_MouseMove(object sender, MouseEventArgs e)
-        {
-            resetColors();
-        }
-
 
         private void MainWindow_MouseMove(object sender, MouseEventArgs e)
         {
@@ -321,27 +317,19 @@ namespace RasporedRC
 
         private void MainWindow_DragEnter(object sender, DragEventArgs e)
         {
-            if(draggedItem is ListBoxItem)
-                colorGoodDrop(draggedItem);
             if (!e.Data.GetDataPresent("myFormat") || sender == e.Source)
             {
                 e.Effects = DragDropEffects.None;
             }
         }
 
-        private void MainWindow_DragLeave(object sender, DragEventArgs e)
-        {
-            resetColors();
-        }
-
         private void MainWindow_Drop(object sender, DragEventArgs e)
         {
-            resetColors();
             if (sender is ListBoxItem)
             {
 
-                Term source = e.Data.GetData(typeof(Term)) as Term;
-                Term target = ((ListBoxItem)sender).DataContext as Term;
+                TestOutput source = e.Data.GetData(typeof(TestOutput)) as TestOutput;
+                TestOutput target = ((ListBoxItem)sender).DataContext as TestOutput;
                 var target_parent = getParentOC(target);
                 var source_parent = getParentOC(source);
 
@@ -356,7 +344,7 @@ namespace RasporedRC
                 {
                     sourceIndex = SideList.IndexOf(source);
 
-                    if (target_parent[targetIndex].SubjectId == "" && target_parent[targetIndex + 1].SubjectId == "" && target_parent[targetIndex+1].SubjectId == "")
+                    if (target_parent[targetIndex].Text == "" && target_parent[targetIndex + 1].Text == "" && target_parent[targetIndex+1].Text == "")
                     {
                         target_parent.RemoveAt(targetIndex);
                         target_parent.RemoveAt(targetIndex);
@@ -367,28 +355,29 @@ namespace RasporedRC
                 }
                 else
                 {
-                    if(source.SubjectId == "")
+                    if(source.Text == "")
                     {
                         Console.WriteLine("Only Subjcest are allowed to be draged inbetween days");
                     }else
                     {
-                        if (target_parent[targetIndex].SubjectId == "" && target_parent[targetIndex + 1].SubjectId == "" && target_parent[targetIndex + 1].SubjectId == "")
+                        if (target_parent[targetIndex].Text == "" && target_parent[targetIndex + 1].Text == "" && target_parent[targetIndex + 1].Text == "")
                         {
                             target_parent.RemoveAt(targetIndex);
                             target_parent.RemoveAt(targetIndex);
                             target_parent.RemoveAt(targetIndex);
                             target_parent.Insert(targetIndex, source);
                             source_parent.RemoveAt(sourceIndex);
-                            source_parent.Insert(sourceIndex, new Term("", 0, ""));
-                            source_parent.Insert(sourceIndex, new Term("", 0, ""));
-                            source_parent.Insert(sourceIndex, new Term("", 0, ""));
+                            source_parent.Insert(sourceIndex, new TestOutput("", 10));
+                            source_parent.Insert(sourceIndex, new TestOutput("", 10));
+                            source_parent.Insert(sourceIndex, new TestOutput("", 10));
                         }
+
                     }
                 }
             }
         }
 
-        private ObservableCollection<Term> getParentOC(Term to)
+        private ObservableCollection<TestOutput> getParentOC(TestOutput to)
         {
             if (MainListPon.Contains(to))
             {
@@ -419,11 +408,10 @@ namespace RasporedRC
 
         private void SideWindowElem_Drop(object sender, DragEventArgs e)
         {
-            resetColors();
             if (sender is ListBoxItem)
             {
-                Term source = e.Data.GetData(typeof(Term)) as Term;
-                Term target = ((ListBoxItem)sender).DataContext as Term;
+                TestOutput source = e.Data.GetData(typeof(TestOutput)) as TestOutput;
+                TestOutput target = ((ListBoxItem)sender).DataContext as TestOutput;
 
                 var source_parent = getParentOC(source);
                 var target_parent = getParentOC(target);
@@ -439,9 +427,9 @@ namespace RasporedRC
                 {
                     sourceIndex = source_parent.IndexOf(source);
                     source_parent.RemoveAt(sourceIndex);
-                    source_parent.Insert(sourceIndex, new Term("", 0, ""));
-                    source_parent.Insert(sourceIndex, new Term("", 0, ""));
-                    source_parent.Insert(sourceIndex, new Term("", 0, ""));
+                    source_parent.Insert(sourceIndex, new Model.TestOutput("", 10));
+                    source_parent.Insert(sourceIndex, new Model.TestOutput("", 10));
+                    source_parent.Insert(sourceIndex, new Model.TestOutput("", 10));
                     SideList.Insert(targetIndex, source);
                 }
             }
@@ -449,161 +437,35 @@ namespace RasporedRC
 
         private void SideWindow_Drop(object sender, DragEventArgs e)
         {
-            resetColors();
-            if (sender is ListBox)
+            if (sender is ListBoxItem)
             {
-                Term source = e.Data.GetData(typeof(Term)) as Term;
+                TestOutput student = e.Data.GetData(typeof(TestOutput)) as TestOutput;
+                TestOutput target = ((ListBoxItem)sender).DataContext as TestOutput;
 
-                if(source.SubjectId == "")
-                {
-                    e.Handled = true;
-                    resetColors();
-                    return;
-                }
+                int sourceIndex = currentClassroom[0].IndexOf(student);
+                int targetIndex = currentClassroom[0].IndexOf(target);
 
-                var source_parent = getParentOC(source);
-
-                if (source_parent.Equals(SideList))
-                {
-                    e.Handled = true;
-                    return;
-                }
-
-                int sourceIndex = source_parent.IndexOf(source);
-
-                source_parent.RemoveAt(sourceIndex);
-                source_parent.Insert(sourceIndex, new Term("", 0, ""));
-                source_parent.Insert(sourceIndex, new Term("", 0, ""));
-                source_parent.Insert(sourceIndex, new Term("", 0, ""));
-                SideList.Add(source);
-            }
-        }
-
-        private void resetColors()
-        {
-            foreach(var dayModel in weekDisplay)
-            {
-                foreach (Term to in dayModel)
-                {
-                    if (to.SubjectId.Equals(""))
-                    {
-                        to.BgColor = new SolidColorBrush(Colors.LightGray);
-                    }
-                    else
-                    {
-                        to.BgColor = new SolidColorBrush(Colors.White);
-                    }
-                }
-            }
-        }
-
-        private List<List<bool>> createAllowsPerDays(string courseId)
-        {
-            List<List<bool>> allowedPerDay = new List<List<bool>>();
-
-            for (int k = 0; k < 6; k++)
-            {
-                allowedPerDay.Add(new List<bool>());
-                for (int h = 0; h < 64; h++)
-                {
-                    allowedPerDay[k].Add(true);
-                }
-            }
-
-            int i, j;
-            bool term_matching;
-
-            foreach (var classroom in classroomsWeek)
-            {
-                foreach (var dayModel in classroom.Value)
-                {
-                    i = 0;
-                    foreach (var term in dayModel)
-                    {
-                        term_matching = term.CourseId == courseId;
-                        j = term.DisplayText.Equals("") ? 1 : 3;
-                        if (term_matching)
-                        {
-                            for (int k = 0; k < j; k++)
-                                allowedPerDay[classroom.Value.IndexOf(dayModel)][i + k] = false;
-                        }
-                        i += j;
-                    }
-                }
-            }
-            return allowedPerDay;
-        }
-
-        private void colorGoodDrop(ListBoxItem lvi)
-        {
-            var lvi_content = lvi.DataContext as Term;
-
-            if (lvi_content.CourseId.Equals(""))
-                return;
-
-            List<List<bool>> allowedPerDay = createAllowsPerDays(lvi_content.CourseId);
-
-            int k;
-
-            for(int i = 0; i < 6; i++)
-            {
-                k = 0;
-                for(int j = 0; j < weekDisplay[i].Count; j++)
-                {
-                    if (weekDisplay[i][j].DisplayText.Equals(""))
-                    {
-                        if (!allowedPerDay[i][k])
-                        {
-                            weekDisplay[i][j].BgColor = new SolidColorBrush(Colors.Red);
-                        }
-                        k += 1;
-                    }
-                    else
-                    {
-                        if (!allowedPerDay[i][k] || !allowedPerDay[i][k+1] || !allowedPerDay[i][k+2])
-                        {
-                            Console.WriteLine("BEEN HERE -> " + k);
-                            weekDisplay[i][j].BgColor = new SolidColorBrush(Colors.Red);
-                        }
-                        k += 3;
-                    }
-                }
-            }
-        }
-
-        private void colorTerms()
-        {
-            // uradi petlju za smer sve smerove po danima vektor od 64 elem
-
-            foreach(var dayModel in weekDisplay)
-            {
-                foreach(Term to in dayModel)
-                {
-                    // to.IsAllowed( USLOV IZ PROVERE );
-                    continue;
-                }
             }
         }
 
         private void Expand_Window(object sender, MouseEventArgs e)
         {
-            LbSide.Width = 194;
+            LbSide.Width = 130;
         }
 
         private void Shrink_Window(object sender, MouseEventArgs e)
         {
-            LbSide.Width = 8;
+            LbSide.Width = 5;
         }
 
         private void LbSide_DragEnter(object sender, DragEventArgs e)
         {
-            LbSide.Width = 194;
+            LbSide.Width = 130;
         }
 
         private void LbSide_DragLeave(object sender, DragEventArgs e)
         {
-            LbSide.Width = 8;
-            resetColors();
+            LbSide.Width = 5;
         }
 
     }

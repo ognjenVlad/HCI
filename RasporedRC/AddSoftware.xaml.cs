@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RasporedRC.Model;
+using System.Windows.Controls.Primitives;
 
 namespace RasporedRC
 {
@@ -66,7 +67,14 @@ namespace RasporedRC
             get;
             set;
         }
-
+        private void _DatePicker_CalendarOpened(object sender, RoutedEventArgs e)
+        {
+            // Finding the calendar that is child of stadart WPF DatePicker
+            DatePicker datepicker = (DatePicker)sender;
+            Popup popup = (Popup)datepicker.Template.FindName("PART_Popup", datepicker);
+            System.Windows.Controls.Calendar cal = (System.Windows.Controls.Calendar)popup.Child;
+            cal.DisplayMode = System.Windows.Controls.CalendarMode.Decade;
+        }
         public AddSoftware()
         {
             operatingSys = new ObservableCollection<string>(); 
@@ -85,9 +93,11 @@ namespace RasporedRC
             s.manofacturer = this.Manofacturer;
             s.name = this.Name;
             s.os = this.OS;
-            s.yearOfPublishing = this.Year;
+            s.yearOfPublishing = this.Year.Split(null)[0];
             s.website = this.Website;
             MainWindow.softwares.Add(s);
+
+            MessageBox.Show("Softver uspešno dodat!", "Dodavanje softvera", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
         }
     }

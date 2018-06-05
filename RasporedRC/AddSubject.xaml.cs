@@ -124,13 +124,11 @@ namespace RasporedRC
         }
         public AddSubject()
         {
-            OS = new ObservableCollection<string>();
+            OS = MainWindow.OS;
             this.Software = new ObservableCollection<string>();
             this.SelectedSoftwares = new BindingList<Model.Software>();
             this.Courses = new ObservableCollection<string>();
-            OS.Add("Windows");
-            OS.Add("Linux");
-            OS.Add("Windows/Linux");
+            
             foreach (Software s in MainWindow.softwares)
             {
 
@@ -210,33 +208,13 @@ namespace RasporedRC
             }
             Subject subject = new Subject();
             subject.os = this.SelectedOS;
-            if (this.ProjectorCheckedT)
-            {
-                subject.projector = true;
-            }
-            else
-            {
-                subject.projector = false;
-            }
-            if (this.TableCheckedT)
-            {
-                subject.tableExists = true;
-            }
-            else
-            {
-                subject.tableExists = false;
-            }
-            if (this.SmartTableCheckedT)
-            {
-                subject.smartTable = true;
-            }
-            else
-            {
-                subject.smartTable = false;
-            }
+            subject.tableExists = this.TableCheckedT;
+
+            subject.projector = this.ProjectorCheckedT;
+            subject.smartTable = this.SmartTableCheckedT;
             subject.label = this.Label;
             subject.description = this.Description;
-            subject.grupSize = int.Parse(this.GroupSize);
+            subject.groupSize = int.Parse(this.GroupSize);
             subject.software = new List<Model.Software>();
             subject.numberOfAppointment = int.Parse(this.NumberOfAppointment);
             subject.numberOfClasses = int.Parse(this.NumberOfClasses);
@@ -248,10 +226,9 @@ namespace RasporedRC
 
                 subject.software.Add(s);
             }
-            Console.WriteLine(subject.smartTable);
-            Console.WriteLine(subject.label);
             MainWindow.subjects.Add(subject);
 
+            MessageBox.Show("Predmet uspešno dodat!", "Dodavanje predmeta", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
 
         }

@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RasporedRC"
         mc:Ignorable="d"
-        Title="Dodavanje softvera" Height="430" Width="400" ResizeMode="NoResize">
-    
-        <Window.Resources>
+        Title="Dodavanje softvera" Height="430" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
         <local:EnableButtonConverter x:Key="EnableButtonConverter" />
         <local:ListViewConverter x:Key="ListViewConverter" />
-        
+
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
@@ -29,7 +29,7 @@
             </Setter>
 
         </Style>
-        </Window.Resources>
+    </Window.Resources>
     <ScrollViewer >
         <Grid>
             <Grid.RowDefinitions>
@@ -80,7 +80,7 @@
                     <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
 
                         <Binding.ValidationRules>
-                            <local:Class1/>
+                            <local:EmptyValidation/>
                         </Binding.ValidationRules>
 
                     </Binding>
@@ -88,19 +88,20 @@
             </TextBox>
             <Label Grid.Row="3"></Label>
 
-            <Label Grid.Row="4" Grid.Column="0">Godina izdavanja:</Label>
-            <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Year}" x:Name="godina"  Margin="5">
+            <Label Grid.Row="4" Grid.Column="0">Datum izdavanja:</Label>
+           
+            <DatePicker  x:Name="godina" CalendarOpened="_DatePicker_CalendarOpened"  Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Year}"  Margin="5">
 
             </DatePicker>
             <Label Grid.Row="5"></Label>
 
-            <Label Grid.Row="6" Grid.Column="0">Naziv softvera</Label>
+            <Label Grid.Row="6" Grid.Column="0">Naziv softvera:</Label>
             <TextBox x:Name="ime" Grid.Row="6" Grid.Column="1" Margin="5">
                 <TextBox.Text>
-                    <Binding Path="Namee" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
 
                         <Binding.ValidationRules>
-                            <local:Class1/>
+                            <local:EmptyValidation/>
                         </Binding.ValidationRules>
 
                     </Binding>
@@ -109,13 +110,13 @@
 
             <Label Grid.Row="7"></Label>
 
-            <Label Grid.Row="8" Grid.Column="0">Proizvodjac softvera:</Label>
+            <Label Grid.Row="8" Grid.Column="0">Proizvođač softvera:</Label>
             <TextBox x:Name="proizvodjac" Grid.Row="8" Grid.Column="1" Margin="5">
                 <TextBox.Text>
                     <Binding Path="Manofacturer" UpdateSourceTrigger="PropertyChanged">
 
                         <Binding.ValidationRules>
-                            <local:Class1/>
+                            <local:EmptyValidation/>
                         </Binding.ValidationRules>
 
                     </Binding>
@@ -123,13 +124,13 @@
             </TextBox>
             <Label Grid.Row="9"></Label>
 
-            <Label Grid.Row="10" Grid.Column="0">Sajt:</Label>
+            <Label Grid.Row="10" Grid.Column="0">Vebsajt:</Label>
             <TextBox x:Name="sajt" Grid.Row="10" Grid.Column="1" Margin="5">
                 <TextBox.Text>
                     <Binding Path="Website" UpdateSourceTrigger="PropertyChanged">
 
                         <Binding.ValidationRules>
-                            <local:Class1/>
+                            <local:EmptyValidation/>
                         </Binding.ValidationRules>
 
                     </Binding>
@@ -155,7 +156,7 @@
             <Label Grid.Row="14" Grid.Column="0">Operativni sistem:</Label>
             <ComboBox x:Name="os" Grid.Row="14"  Grid.Column="1" ItemsSource="{Binding Path=operatingSys}" SelectedItem = "{Binding OS}"></ComboBox>
             <Label Grid.Row="15"></Label>
-            <Button Grid.Row="16" x:Name="add" Click="AddItem" Content="Dodaj softver" Margin ="10" Height="25">
+            <Button Grid.Row="16" x:Name="add" Click="AddItem" Content="Dodaj softver" Margin ="10,10,-64,10" Height="25" Grid.ColumnSpan="3">
 
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">

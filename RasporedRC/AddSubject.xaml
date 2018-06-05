@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RasporedRC"
         mc:Ignorable="d"
-        Title="Dodavanje predmeta" Height="430" Width="400" ResizeMode="NoResize">
+        Title="Dodavanje predmeta" Height="430" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <local:EnableButtonConverter x:Key="EnableButtonConverter" />
         <local:ListViewConverter x:Key="ListViewConverter" />
@@ -96,7 +96,7 @@
 
             <Label Grid.Row="3"></Label>
             <Label Grid.Row="4" Grid.Column="0">Naziv predmeta:</Label>
-            <TextBox x:Name="naziv" Grid.Row="0" Grid.Column="1" Margin="5">
+            <TextBox x:Name="naziv" Grid.Row="4" Grid.Column="1" Margin="5">
                 <TextBox.Text>
                     <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
 
@@ -109,7 +109,7 @@
             </TextBox>
 
             <Label Grid.Row="5"></Label>
-            <Label Grid.Row="6" Grid.Column="0">Velicina grupe:</Label>
+            <Label Grid.Row="6" Grid.Column="0">Veličina grupe:</Label>
             <TextBox x:Name="size" Grid.Row="6" Grid.Column="1" Margin="5">
                 <TextBox.Text>
                     <Binding Path="GroupSize" UpdateSourceTrigger="PropertyChanged">
@@ -136,7 +136,7 @@
             </TextBox>
 
             <Label Grid.Row="9"></Label>
-            <Label Grid.Row="10" Grid.Column="0">Minimalna duzina termina:</Label>
+            <Label Grid.Row="10" Grid.Column="0">Broj časova po terminu:</Label>
             <TextBox x:Name="duzina" Grid.Row="10" Grid.Column="1" Margin="5">
                 <TextBox.Text>
                     <Binding Path="NumberOfClasses" UpdateSourceTrigger="PropertyChanged">
@@ -151,29 +151,41 @@
             <Label Grid.Row="11"></Label>
             <Label Grid.Row="12" Grid.Column="0">Prisustvo table:</Label>
             <RadioButton x:Name="tabla1" Grid.Row="12"  Grid.Column="1" GroupName="One" IsChecked="{Binding TableCheckedT}">Da</RadioButton>
-            <RadioButton x:Name="tabla2" Grid.Row="12" Grid.Column="2" GroupName="One" IsChecked="{Binding TableCheckedF}">Ne</RadioButton>
+            <RadioButton x:Name="tabla2" Grid.Row="12" Grid.Column="1" GroupName="One" IsChecked="{Binding TableCheckedF}" Grid.ColumnSpan="2" Margin="91,0,10,0">Ne</RadioButton>
 
             <Label Grid.Row="13" Grid.Column="0">Prisustvo pametne table:</Label>
             <RadioButton x:Name="pametna1" Grid.Row="13" Grid.Column="1"  GroupName="Two" IsChecked="{Binding SmartTableCheckedT}">Da</RadioButton>
-            <RadioButton x:Name="pametna2" Grid.Row="13"  Grid.Column="2" GroupName="Two" IsChecked="{Binding SmartTableCheckedF}">Ne</RadioButton>
+            <RadioButton x:Name="pametna2" Grid.Row="13"  Grid.Column="1" GroupName="Two" IsChecked="{Binding SmartTableCheckedF}" Grid.ColumnSpan="2" Margin="91,0,10,0">Ne</RadioButton>
 
             <Label Grid.Row="14" Grid.Column="0">Prisustvo projektora:</Label>
             <RadioButton x:Name="projektor1" Grid.Row="14" Grid.Column="1" GroupName="Three" IsChecked="{Binding ProjectorCheckedT}">Da</RadioButton>
-            <RadioButton x:Name="projektor2" Grid.Row="14" Grid.Column="2" GroupName="Three" IsChecked="{Binding ProjectorCheckedF}">Ne</RadioButton>
+            <RadioButton x:Name="projektor2" Grid.Row="14" Grid.Column="1" GroupName="Three" IsChecked="{Binding ProjectorCheckedF}" Grid.ColumnSpan="2" Margin="91,0,10,0">Ne</RadioButton>
 
             <Label Grid.Row="15" Grid.Column="0">Potreban operativni sistem:</Label>
             <ComboBox x:Name="os" Grid.Row="15"  Grid.Column="1" ItemsSource="{Binding Path=OS}" SelectedItem = "{Binding SelectedOS}"></ComboBox>
-            
+
             <Label Margin="5" Grid.Row="16"></Label>
             <Label Grid.Row="17" Grid.Column="0">Smer predmeta:</Label>
             <ComboBox  x:Name="course" Grid.Row="17"  Grid.Column="1" ItemsSource="{Binding Path=Courses}" SelectedItem = "{Binding SelectedCourse}"></ComboBox>
 
 
             <Label Margin="5" Grid.Row="18"></Label>
-            <Label Grid.Row="19" Grid.Column="0">Software:</Label>
+            <Label Grid.Row="19" Grid.Column="0">Sofver:</Label>
             <ComboBox Grid.Row="19" Grid.Column="1" ItemsSource="{Binding Path=Software}" SelectedItem = "{Binding SelectedSoftware}"></ComboBox>
 
-            <Button Grid.Row="19" Grid.Column="2" x:Name="Add_Software" Click="AddSoftware" Content="Dodaj" Height="26"/>
+            <Button Grid.Row="19" Grid.Column="2" x:Name="Add_Software" Click="AddSoftware" Content="Dodaj" Height="26" Margin="10,0,-10,0">
+                <Button.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Dodaj softver</TextBlock>
+                        <TextBlock>
+                        Dodaje softver potreban predmetu.
+                        <LineBreak />
+                        Dodat softver prikazan u tabeli.
+                        </TextBlock>
+                        <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />  
+                    </StackPanel>
+                </Button.ToolTip>
+            </Button>
             <Label Grid.Row="20" ></Label>
 
 
@@ -191,19 +203,30 @@
                     <GridView>
                         <GridViewColumn Header="     Oznaka     "
                             DisplayMemberBinding="{Binding label}">
-                            </GridViewColumn>
+                        </GridViewColumn>
 
 
-                            <GridViewColumn Header="         Naziv            " DisplayMemberBinding="{Binding name}" ></GridViewColumn>
+                        <GridViewColumn Header="         Naziv            " DisplayMemberBinding="{Binding name}" ></GridViewColumn>
 
 
                     </GridView>
                 </ListView.View>
             </ListView>
 
-            <Button Grid.Row="22" Grid.Column="1" x:Name="Delete_classroom" Click="deleteSoftware" Content="Izbrisi oznacene" Height="25"/>
-
-            <Button Grid.Row="23" Margin="10"  x:Name="add" Click="AddItem" Content="Dodaj predmet" Height="25">
+            <Button Grid.Row="22" Grid.Column="1" x:Name="Delete_classroom" Click="deleteSoftware" Content="Izbrisi oznacene" Height="25">
+                <Button.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Izbrisi softver</TextBlock>
+                        <TextBlock>
+                        Držati shift pre označavanja 
+                        <LineBreak />
+                        za brisanje vise redova odjednom.
+                        </TextBlock>
+                        <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                    </StackPanel>
+                </Button.ToolTip>
+            </Button>
+            <Button Grid.Row="23" Margin="10,10,-28,10"  x:Name="add" Click="AddItem" Content="Dodaj predmet" Height="25" Grid.ColumnSpan="3">
 
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">

@@ -5,31 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RasporedRC"
         mc:Ignorable="d"
-        Title="Dodavanje smera" Height="430" Width="400" ResizeMode="NoResize">
-    
-        <Window.Resources>
-            <local:EnableButtonConverter x:Key="EnableButtonConverter" />
-            <local:ListViewConverter x:Key="ListViewConverter" />
-            
-            <Style TargetType="{x:Type TextBox}">
-                <Setter Property="Validation.ErrorTemplate">
-                    <Setter.Value>
-                        <ControlTemplate>
+        Title="Dodavanje smera" Height="430" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <local:EnableButtonConverter x:Key="EnableButtonConverter" />
+        <local:ListViewConverter x:Key="ListViewConverter" />
+
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
 
 
-                            <StackPanel>
-                                <AdornedElementPlaceholder x:Name="textBox"/>
-                                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        <StackPanel>
+                            <AdornedElementPlaceholder x:Name="textBox"/>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
 
-                            </StackPanel>
+                        </StackPanel>
 
 
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
 
-            </Style>
-        </Window.Resources>
+        </Style>
+    </Window.Resources>
     <ScrollViewer >
         <Grid>
             <Grid.RowDefinitions>
@@ -49,7 +49,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0">Oznaka smera</Label>
+            <Label Grid.Row="0" Grid.Column="0">Oznaka smera:</Label>
             <TextBox x:Name="oznaka" Grid.Row="0" Grid.Column="1" Margin="5">
                 <TextBox.Text>
                     <Binding Path="Label" UpdateSourceTrigger="PropertyChanged">
@@ -79,15 +79,15 @@
             </TextBox>
             <Label Grid.Row="3"></Label>
 
-            <Label Grid.Row="4" Grid.Column="0">Datum uvodjenja smera:</Label>
-            <DatePicker  Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Year}" Name="year" Margin="5">
+            <Label Grid.Row="4" Grid.Column="0">Datum uvođenja smera:</Label>
+            <DatePicker CalendarOpened="_DatePicker_CalendarOpened" Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Year}" Name="year" Margin="5">
                 <DatePicker.BlackoutDates>
                     <CalendarDateRange Start="1/1/0001" End="12/31/1969"/>
                 </DatePicker.BlackoutDates>
             </DatePicker>
             <Label Grid.Row="5"></Label>
 
-            <Label Grid.Row="6" Grid.Column="0">Ime smera</Label>
+            <Label Grid.Row="6" Grid.Column="0">Ime smera:</Label>
             <TextBox x:Name="ime" Grid.Row="6" Grid.Column="1" Margin="5">
                 <TextBox.Text>
                     <Binding Path="CourseName" UpdateSourceTrigger="PropertyChanged">
@@ -100,7 +100,7 @@
                 </TextBox.Text>
             </TextBox>
             <Label Grid.Row="7"></Label>
-            <Button Margin ="10" Grid.Row="8" x:Name="add" Click="AddItem" Content="Dodaj smer" Height="25">
+            <Button Margin ="10,10,-64,10" Grid.Row="8" x:Name="add" Click="AddItem" Content="Dodaj smer" Height="25" Grid.ColumnSpan="3">
 
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">

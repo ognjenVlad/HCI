@@ -67,11 +67,26 @@
     <Compile Include="AddSubject.xaml.cs">
       <DependentUpon>AddSubject.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
-    <Compile Include="EmptyValidation.cs" />
-    <Compile Include="Model\Term.cs" />
-    <Compile Include="ValidateLabel.cs" />
-    <Compile Include="Validation.cs" />
+    <Compile Include="DeleteSubject.xaml.cs">
+      <DependentUpon>DeleteSubject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\EmptyValidation.cs" />
+    <Compile Include="Helpers\ListToStringConverter.cs" />
+    <Compile Include="Helpers\ObsevableCollection.cs" />
+    <Compile Include="UpdateClassroom.xaml.cs">
+      <DependentUpon>UpdateClassroom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ValidateLabel.cs" />
+    <Compile Include="Helpers\Validation.cs" />
+    <Compile Include="UpdateCourse.xaml.cs">
+      <DependentUpon>UpdateCourse.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateSoftware.xaml.cs">
+      <DependentUpon>UpdateSoftware.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateSubject.xaml.cs">
+      <DependentUpon>UpdateSubject.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddClassroom.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -88,6 +103,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="DeleteSubject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -96,13 +115,29 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CollectionNotEmptyValidation.cs" />
-    <Compile Include="EnableButtonConverter.cs" />
-    <Compile Include="ListViewConverter.cs" />
+    <Compile Include="Helpers\CollectionNotEmptyValidation.cs" />
+    <Compile Include="Helpers\EnableButtonConverter.cs" />
+    <Compile Include="Helpers\ListViewConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UpdateClassroom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateCourse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateSoftware.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateSubject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Classroom.cs" />
@@ -136,9 +171,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Domain\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

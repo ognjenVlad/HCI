@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RasporedRC.Model;
+using System.Windows.Controls.Primitives;
 
 namespace RasporedRC
 {
@@ -46,16 +47,25 @@ namespace RasporedRC
             this.DataContext = this;
             InitializeComponent();
         }
+        private void _DatePicker_CalendarOpened(object sender, RoutedEventArgs e)
+        {
+            // Finding the calendar that is child of stadart WPF DatePicker
+            DatePicker datepicker = (DatePicker)sender;
+            Popup popup = (Popup)datepicker.Template.FindName("PART_Popup", datepicker);
+            System.Windows.Controls.Calendar cal = (System.Windows.Controls.Calendar)popup.Child;
+            cal.DisplayMode = System.Windows.Controls.CalendarMode.Decade;
+        }
         public void AddItem(object sender, RoutedEventArgs e)
         {
             Console.WriteLine(this.Year);
             Course c = new Course();
             c.label = this.Label;
             c.name = this.CourseName;
-            c.startingYear = this.Year;
+            c.startingYear = this.Year.Split(null)[0];
             c.description = this.Description;
             MainWindow.courses.Add(c);
 
+            MessageBox.Show("Smer uspešno dodat!", "Dodavanje smera", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
         }
     }
