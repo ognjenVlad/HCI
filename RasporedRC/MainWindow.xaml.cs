@@ -67,45 +67,45 @@ namespace RasporedRC
         }
 
 
-        public ObservableCollection<TestOutput> MainListPon
+        public ObservableCollection<Term> MainListPon
         {
             get;
             set;
         }
-        public ObservableCollection<TestOutput> MainListUto
+        public ObservableCollection<Term> MainListUto
         {
             get;
             set;
         }
-        public ObservableCollection<TestOutput> MainListSre
+        public ObservableCollection<Term> MainListSre
         {
             get;
             set;
         }
-        public ObservableCollection<TestOutput> MainListCet
+        public ObservableCollection<Term> MainListCet
         {
             get;
             set;
         }
-        public ObservableCollection<TestOutput> MainListPet
+        public ObservableCollection<Term> MainListPet
         {
             get;
             set;
         }
-        public ObservableCollection<TestOutput> MainListSub
-        {
-            get;
-            set;
-        }
-
-        public ObservableCollection<TestOutput> SideList
+        public ObservableCollection<Term> MainListSub
         {
             get;
             set;
         }
 
-        List<ObservableCollection<TestOutput>> currentClassroom;
-        Dictionary<string, List<ObservableCollection<TestOutput>>> classroomsWeek;
+        public ObservableCollection<Term> SideList
+        {
+            get;
+            set;
+        }
+
+        private List<ObservableCollection<Term>> weekDisplay = new List<ObservableCollection<Term>>();
+        Dictionary<string, List<ObservableCollection<Term>>> classroomsWeek;
 
         public MainWindow()
         {
@@ -114,21 +114,27 @@ namespace RasporedRC
 
             InitStyles();
 
-            classroomsWeek = new Dictionary<string, List<ObservableCollection<TestOutput>>>();
+            classroomsWeek = new Dictionary<string, List<ObservableCollection<Term>>>();
+            weekDisplay.Add(new ObservableCollection<Term>());
+            weekDisplay.Add(new ObservableCollection<Term>());
+            weekDisplay.Add(new ObservableCollection<Term>());
+            weekDisplay.Add(new ObservableCollection<Term>());
+            weekDisplay.Add(new ObservableCollection<Term>());
+            weekDisplay.Add(new ObservableCollection<Term>());
 
             addClassroom("myclass");
             displayClassroom("myclass");
 
 
-            List<TestOutput> list = new List<TestOutput>();
-            list.Add(new TestOutput("Predmet1",32));
-            list.Add(new TestOutput("Predmet2", 32));
-            list.Add(new TestOutput("Predmet3", 32));
-            list.Add(new TestOutput("Predmet4", 32));
-            list.Add(new TestOutput("Predmet5", 32));
-            list.Add(new TestOutput("Predmet6", 32));
+            List<Term> list = new List<Term>();
+            list.Add(new Term("Ovo je jedan jako dobar predmet", 1, "SW"));
+            list.Add(new Term("Predmet2", 2, "SW"));
+            list.Add(new Term("Predmet3", 3, "SW"));
+            list.Add(new Term("Predmet4", 4, "SW"));
+            list.Add(new Term("Predmet5", 5, "SW"));
+            list.Add(new Term("Predmet6", 6, "SW"));
 
-            SideList = new ObservableCollection<TestOutput>(list);
+            SideList = new ObservableCollection<Term>(list);
 
 
         
@@ -214,6 +220,7 @@ namespace RasporedRC
         {
             var styleSchedule = new Style(typeof(ListBoxItem));
             styleSchedule.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
+            styleSchedule.Setters.Add(new Setter(ListBoxItem.FocusableProperty, false));
 
             styleSchedule.Setters.Add(
                 new EventSetter(
@@ -228,6 +235,7 @@ namespace RasporedRC
 
             Style styleSide = new Style(typeof(ListBoxItem));
             styleSide.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
+            styleSide.Setters.Add(new Setter(ListBoxItem.FocusableProperty, false));
 
             styleSide.Setters.Add(
                 new EventSetter(
@@ -248,6 +256,12 @@ namespace RasporedRC
             LbScheduleSub.ItemContainerStyle = styleSchedule;
         }
 
+        public void DodajUcionicu(Object sender, RoutedEventArgs e)
+        {
+            addClassroom("UCIONICA2");
+            displayClassroom("UCIONICA2");
+        }
+
         private void displayClassroom(string id)
         {
             MainListPon = classroomsWeek[id][0];
@@ -256,18 +270,32 @@ namespace RasporedRC
             MainListCet = classroomsWeek[id][3];
             MainListPet = classroomsWeek[id][4];
             MainListSub = classroomsWeek[id][5];
+
+            LbSchedulePon.ItemsSource = MainListPon;
+            LbScheduleUto.ItemsSource = MainListUto;
+            LbScheduleSre.ItemsSource = MainListSre;
+            LbScheduleCet.ItemsSource = MainListCet;
+            LbSchedulePet.ItemsSource = MainListPet;
+            LbScheduleSub.ItemsSource = MainListSub;
+
+            weekDisplay[0] = classroomsWeek[id][0];
+            weekDisplay[1] = classroomsWeek[id][1];
+            weekDisplay[2] = classroomsWeek[id][2];
+            weekDisplay[3] = classroomsWeek[id][3];
+            weekDisplay[4] = classroomsWeek[id][4];
+            weekDisplay[5] = classroomsWeek[id][5];
         }
 
         private void addClassroom(string id)
         {
-            classroomsWeek.Add(id,new List<ObservableCollection<TestOutput>>());
+            classroomsWeek.Add(id,new List<ObservableCollection<Term>>());
             for(int i = 0; i < 6; i++)
             {
-                classroomsWeek[id].Add(new ObservableCollection<TestOutput>());
+                classroomsWeek[id].Add(new ObservableCollection<Term>());
 
                 for(int j = 0; j < 64; j++)
                 {
-                    classroomsWeek[id][i].Add(new TestOutput("", 10));
+                    classroomsWeek[id][i].Add(new Term("", 10, ""));
                 }
             }
         }
@@ -328,8 +356,8 @@ namespace RasporedRC
             if (sender is ListBoxItem)
             {
 
-                TestOutput source = e.Data.GetData(typeof(TestOutput)) as TestOutput;
-                TestOutput target = ((ListBoxItem)sender).DataContext as TestOutput;
+                Term source = e.Data.GetData(typeof(Term)) as Term;
+                Term target = ((ListBoxItem)sender).DataContext as Term;
                 var target_parent = getParentOC(target);
                 var source_parent = getParentOC(source);
 
@@ -344,7 +372,7 @@ namespace RasporedRC
                 {
                     sourceIndex = SideList.IndexOf(source);
 
-                    if (target_parent[targetIndex].Text == "" && target_parent[targetIndex + 1].Text == "" && target_parent[targetIndex+1].Text == "")
+                    if (target_parent[targetIndex].SubjectId == "" && target_parent[targetIndex + 1].SubjectId == "" && target_parent[targetIndex + 1].SubjectId == "")
                     {
                         target_parent.RemoveAt(targetIndex);
                         target_parent.RemoveAt(targetIndex);
@@ -355,21 +383,21 @@ namespace RasporedRC
                 }
                 else
                 {
-                    if(source.Text == "")
+                    if(source.SubjectId == "")
                     {
                         Console.WriteLine("Only Subjcest are allowed to be draged inbetween days");
                     }else
                     {
-                        if (target_parent[targetIndex].Text == "" && target_parent[targetIndex + 1].Text == "" && target_parent[targetIndex + 1].Text == "")
+                        if (target_parent[targetIndex].SubjectId == "" && target_parent[targetIndex + 1].SubjectId == "" && target_parent[targetIndex + 1].SubjectId == "")
                         {
                             target_parent.RemoveAt(targetIndex);
                             target_parent.RemoveAt(targetIndex);
                             target_parent.RemoveAt(targetIndex);
                             target_parent.Insert(targetIndex, source);
                             source_parent.RemoveAt(sourceIndex);
-                            source_parent.Insert(sourceIndex, new TestOutput("", 10));
-                            source_parent.Insert(sourceIndex, new TestOutput("", 10));
-                            source_parent.Insert(sourceIndex, new TestOutput("", 10));
+                            source_parent.Insert(sourceIndex, new Term("", 10,""));
+                            source_parent.Insert(sourceIndex, new Term("", 10, ""));
+                            source_parent.Insert(sourceIndex, new Term("", 10, ""));
                         }
 
                     }
@@ -377,7 +405,7 @@ namespace RasporedRC
             }
         }
 
-        private ObservableCollection<TestOutput> getParentOC(TestOutput to)
+        private ObservableCollection<Term> getParentOC(Term to)
         {
             if (MainListPon.Contains(to))
             {
@@ -410,8 +438,8 @@ namespace RasporedRC
         {
             if (sender is ListBoxItem)
             {
-                TestOutput source = e.Data.GetData(typeof(TestOutput)) as TestOutput;
-                TestOutput target = ((ListBoxItem)sender).DataContext as TestOutput;
+                Term source = e.Data.GetData(typeof(Term)) as Term;
+                Term target = ((ListBoxItem)sender).DataContext as Term;
 
                 var source_parent = getParentOC(source);
                 var target_parent = getParentOC(target);
@@ -419,17 +447,18 @@ namespace RasporedRC
                 int sourceIndex = SideList.IndexOf(source);
                 int targetIndex = SideList.IndexOf(target);
 
-                if(source_parent.Equals(target_parent))
+                if (source_parent.Equals(target_parent))
                 {
                     SideList.RemoveAt(sourceIndex);
                     SideList.Insert(targetIndex, source);
-                }else
+                }
+                else
                 {
                     sourceIndex = source_parent.IndexOf(source);
                     source_parent.RemoveAt(sourceIndex);
-                    source_parent.Insert(sourceIndex, new Model.TestOutput("", 10));
-                    source_parent.Insert(sourceIndex, new Model.TestOutput("", 10));
-                    source_parent.Insert(sourceIndex, new Model.TestOutput("", 10));
+                    source_parent.Insert(sourceIndex, new Term("", 0, ""));
+                    source_parent.Insert(sourceIndex, new Term("", 0, ""));
+                    source_parent.Insert(sourceIndex, new Term("", 0, ""));
                     SideList.Insert(targetIndex, source);
                 }
             }
@@ -437,14 +466,30 @@ namespace RasporedRC
 
         private void SideWindow_Drop(object sender, DragEventArgs e)
         {
-            if (sender is ListBoxItem)
+            if (sender is ListBox)
             {
-                TestOutput student = e.Data.GetData(typeof(TestOutput)) as TestOutput;
-                TestOutput target = ((ListBoxItem)sender).DataContext as TestOutput;
+                Term source = e.Data.GetData(typeof(Term)) as Term;
 
-                int sourceIndex = currentClassroom[0].IndexOf(student);
-                int targetIndex = currentClassroom[0].IndexOf(target);
+                if (source.SubjectId == "")
+                {
+                    e.Handled = true;
+                    return;
+                }
+                var source_parent = getParentOC(source);
 
+                if (source_parent.Equals(SideList))
+                {
+                    e.Handled = true;
+                    return;
+                }
+
+                int sourceIndex = source_parent.IndexOf(source);
+
+                source_parent.RemoveAt(sourceIndex);
+                source_parent.Insert(sourceIndex, new Term("", 0, ""));
+                source_parent.Insert(sourceIndex, new Term("", 0, ""));
+                source_parent.Insert(sourceIndex, new Term("", 0, ""));
+                SideList.Add(source);
             }
         }
 

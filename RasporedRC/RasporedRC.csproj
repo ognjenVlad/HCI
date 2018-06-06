@@ -73,6 +73,7 @@
     <Compile Include="Helpers\EmptyValidation.cs" />
     <Compile Include="Helpers\ListToStringConverter.cs" />
     <Compile Include="Helpers\ObsevableCollection.cs" />
+    <Compile Include="Model\Term.cs" />
     <Compile Include="UpdateClassroom.xaml.cs">
       <DependentUpon>UpdateClassroom.xaml</DependentUpon>
     </Compile>
