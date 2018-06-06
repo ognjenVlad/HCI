@@ -128,13 +128,26 @@ namespace RasporedRC.Model
 
         private void updateDisplay()
         {
-            if (subjectId.Length > 24)
+            if(courseId == "")
             {
-                DisplayText = subjectId.Substring(0, 22) + "..";
+                DisplayText = "";
+                return;
+            }
+            if (courseId.Length > 14)
+            {
+                DisplayText = "S: " + courseId.Substring(0, 12) + "..\n";
             }
             else
             {
-                DisplayText = subjectId;
+                DisplayText += "S: " + courseId + "\n";
+            }
+            if (subjectId.Length > 14)
+            {
+                DisplayText += "P: " + SubjectId.Substring(0, 12) + "..";
+            }
+            else
+            {
+                DisplayText += "P: " + SubjectId;
             }
         }
 

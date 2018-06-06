@@ -13,7 +13,7 @@
                         CornerRadius="5,5,5,5" Padding="0,0,0,0"
                         >
                 <DockPanel ToolTip="{Binding ToolTipText}" Background="{Binding BgColor}" Height="{Binding Path=HeightOfElem}" Width="100">
-                    <TextBlock Text="{Binding Path=DisplayText, StringFormat=N2}" FontSize="14" FontWeight="DemiBold" 
+                    <TextBlock Text="{Binding Path=DisplayText, StringFormat=N2}" FontSize="12" FontWeight="DemiBold" 
                                    DockPanel.Dock="Bottom" TextWrapping="Wrap" TextAlignment="Center" 
                                    VerticalAlignment="Center"/>
                 </DockPanel>
@@ -23,9 +23,9 @@
             <Border BorderBrush="Black" BorderThickness="0.5,0.5,0.5,0.5" Margin="0,1.5,0,1.5"
                         CornerRadius="5,5,5,5" Padding="0,0,0,0"
                         >
-                <DockPanel ToolTip="{Binding ToolTipText}" Background="White" Height="20" Width="168">
-                    <TextBlock Text="{Binding Path=DisplayText, StringFormat=N2}" FontSize="14" FontWeight="DemiBold" 
-                                   DockPanel.Dock="Bottom" TextWrapping="WrapWithOverflow" TextAlignment="Center" 
+                <DockPanel ToolTip="{Binding ToolTipText}" Background="White" Height="30" Width="168">
+                    <TextBlock Text="{Binding Path=DisplayText, StringFormat=N2}" FontSize="12" FontWeight="DemiBold" 
+                                   DockPanel.Dock="Bottom" TextWrapping="Wrap" TextAlignment="Center" 
                                    VerticalAlignment="Center" />
                 </DockPanel>
             </Border>

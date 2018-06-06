@@ -104,6 +104,7 @@ namespace RasporedRC
             set;
         }
 
+        private List<Term> unassignedTerms = new List<Term>();
         private List<ObservableCollection<Term>> weekDisplay = new List<ObservableCollection<Term>>();
         Dictionary<string, List<ObservableCollection<Term>>> classroomsWeek;
 
@@ -122,22 +123,21 @@ namespace RasporedRC
             weekDisplay.Add(new ObservableCollection<Term>());
             weekDisplay.Add(new ObservableCollection<Term>());
 
+
+
+            unassignedTerms.Add(new Term("Ovo je jedan jako dobar predmet", 1, "SW"));
+            unassignedTerms.Add(new Term("Predmet2", 2, "SW"));
+            unassignedTerms.Add(new Term("Predmet3", 3, "SW"));
+            unassignedTerms.Add(new Term("Predmet4", 4, "SW"));
+            unassignedTerms.Add(new Term("Predmet5", 5, "SW"));
+            unassignedTerms.Add(new Term("Predmet6", 6, "SW"));
+
+            SideList = new ObservableCollection<Term>(unassignedTerms);
+
             addClassroom("myclass");
             displayClassroom("myclass");
 
 
-            List<Term> list = new List<Term>();
-            list.Add(new Term("Ovo je jedan jako dobar predmet", 1, "SW"));
-            list.Add(new Term("Predmet2", 2, "SW"));
-            list.Add(new Term("Predmet3", 3, "SW"));
-            list.Add(new Term("Predmet4", 4, "SW"));
-            list.Add(new Term("Predmet5", 5, "SW"));
-            list.Add(new Term("Predmet6", 6, "SW"));
-
-            SideList = new ObservableCollection<Term>(list);
-
-
-        
             softwares = new ObservableCollection<Software>();
             classrooms = new ObservableCollection<Classroom>();
             subjects = new ObservableCollection<Subject>();
@@ -212,8 +212,6 @@ namespace RasporedRC
             subjects.Add(sub);
             subjects.Add(sub1);
             InitializeComponent();
-        
-
     }
 
         private void InitStyles()
@@ -284,6 +282,25 @@ namespace RasporedRC
             weekDisplay[3] = classroomsWeek[id][3];
             weekDisplay[4] = classroomsWeek[id][4];
             weekDisplay[5] = classroomsWeek[id][5];
+
+            fillSideList(id);
+        }
+
+        private void fillSideList(string classroomId)
+        {
+            SideList.Clear();
+            foreach(var term in unassignedTerms)
+            {
+                if (checkTermClassroom(term, classroomId))
+                {
+                    SideList.Add(term);
+                }
+            }
+        }
+
+        private bool checkTermClassroom(Term term,string classroomId)
+        {
+            return true;
         }
 
         private void addClassroom(string id)
@@ -378,6 +395,7 @@ namespace RasporedRC
                         target_parent.RemoveAt(targetIndex);
                         target_parent.RemoveAt(targetIndex);
                         target_parent.Insert(targetIndex, source);
+                        unassignedTerms.RemoveAt(unassignedTerms.IndexOf(source));
                         SideList.RemoveAt(sourceIndex);
                     }
                 }
@@ -460,6 +478,7 @@ namespace RasporedRC
                     source_parent.Insert(sourceIndex, new Term("", 0, ""));
                     source_parent.Insert(sourceIndex, new Term("", 0, ""));
                     SideList.Insert(targetIndex, source);
+                    unassignedTerms.Add(source);
                 }
             }
         }
@@ -490,27 +509,28 @@ namespace RasporedRC
                 source_parent.Insert(sourceIndex, new Term("", 0, ""));
                 source_parent.Insert(sourceIndex, new Term("", 0, ""));
                 SideList.Add(source);
+                unassignedTerms.Add(source);
             }
         }
 
         private void Expand_Window(object sender, MouseEventArgs e)
         {
-            LbSide.Width = 130;
+            LbSide.Width = 194;
         }
 
         private void Shrink_Window(object sender, MouseEventArgs e)
         {
-            LbSide.Width = 5;
+            LbSide.Width = 8;
         }
 
         private void LbSide_DragEnter(object sender, DragEventArgs e)
         {
-            LbSide.Width = 130;
+            LbSide.Width = 194;
         }
 
         private void LbSide_DragLeave(object sender, DragEventArgs e)
         {
-            LbSide.Width = 5;
+            LbSide.Width = 8;
         }
 
     }
