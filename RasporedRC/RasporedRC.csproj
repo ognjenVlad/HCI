@@ -74,6 +74,9 @@
     <Compile Include="Helpers\ListToStringConverter.cs" />
     <Compile Include="Helpers\ObsevableCollection.cs" />
     <Compile Include="Model\Term.cs" />
+    <Compile Include="Tables.xaml.cs">
+      <DependentUpon>Tables.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UpdateClassroom.xaml.cs">
       <DependentUpon>UpdateClassroom.xaml</DependentUpon>
     </Compile>
@@ -123,6 +126,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Tables.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UpdateClassroom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

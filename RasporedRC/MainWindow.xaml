@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RasporedRC"
         mc:Ignorable="d"
-        Title="RC Raspored" Height="430" Width="750" ResizeMode="NoResize">
+        Title="RC Raspored" Height="430" Width="750" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <DataTemplate  x:Key="TermItem">
@@ -47,7 +47,7 @@
             </MenuItem>
             <MenuItem Header="Pregled"  HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
                 <MenuItem Header="Brisanje/Izmena"  Click ="DeleteSubject" FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
-                <MenuItem Header="Izmena" FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
+                <MenuItem Header="Tabelarni prikaz" Click ="Tables" FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
                 <MenuItem Header="Pretraga" FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
             </MenuItem>
             <MenuItem Header="Demo mod"  HorizontalAlignment="Center" FontSize="16" FontFamily="Arial" FontWeight="Bold"/>

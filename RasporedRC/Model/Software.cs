@@ -36,6 +36,20 @@ namespace RasporedRC.Model
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
+        public Software() { }
+
+        public Software(string label, string name, string descr, string manofacturer, string website, string year, 
+            string os, double price)
+        {
+            this.label = label;
+            this.name = name;
+            this.description = descr;
+            this.manofacturer = manofacturer;
+            this.website = website;
+            this.yearOfPublishing = year;
+            this.os = os;
+            this.price = price;
+        }
 
     }
 }

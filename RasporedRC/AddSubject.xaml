@@ -190,7 +190,7 @@
 
 
             <Label Grid.Row="21" Grid.Column="0">Dodat software:</Label>
-            <ListView  Grid.Row="22" Grid.Column="0" Margin="10"  x:Name ="listView1">
+            <ListView MaxWidth="180" Grid.Row="22" Grid.Column="0" Margin="10,10,54,10"  x:Name ="listView1">
                 <ListView.ItemsSource>
                     <Binding Path="SelectedSoftwares" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -201,13 +201,16 @@
                 <ListView.View>
 
                     <GridView>
-                        <GridViewColumn Header="     Oznaka     "
+                        <GridViewColumn Width="70" Header="Oznaka"
                             DisplayMemberBinding="{Binding label}">
                         </GridViewColumn>
-
-
-                        <GridViewColumn Header="         Naziv            " DisplayMemberBinding="{Binding name}" ></GridViewColumn>
-
+                        <GridViewColumn Width="100" Header="Naziv">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextWrapping="Wrap" Text="{Binding name}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
                     </GridView>
                 </ListView.View>

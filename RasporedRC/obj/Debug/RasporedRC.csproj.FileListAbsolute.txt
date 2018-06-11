@@ -114,3 +114,5 @@ C:\Users\Damir\git\HCI\RasporedRC\obj\Debug\UpdateClassroom.baml
 C:\Users\Damir\git\HCI\RasporedRC\obj\Debug\UpdateCourse.baml
 C:\Users\Damir\git\HCI\RasporedRC\obj\Debug\UpdateSoftware.baml
 C:\Users\Damir\git\HCI\RasporedRC\obj\Debug\UpdateSubject.baml
+C:\Users\Ogauzz\git\HCI\RasporedRC\obj\Debug\Tables.g.cs
+C:\Users\Ogauzz\git\HCI\RasporedRC\obj\Debug\Tables.baml

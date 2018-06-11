@@ -65,7 +65,12 @@ namespace RasporedRC
             var dialog = new DeleteSubject();
             dialog.ShowDialog();
         }
+        public void Tables(object sender, RoutedEventArgs e)
+        {
 
+            var dialog = new Tables();
+            dialog.ShowDialog();
+        }
 
         public ObservableCollection<Term> MainListPon
         {
@@ -169,10 +174,17 @@ namespace RasporedRC
             s1.yearOfPublishing = "1999";
             softwares.Add(s1);
 
-            Classroom c = new Classroom("ucionica1", "opis1", 12,true,true,true,"Windows");
-            c.label = "ucionica1";
+            Classroom c = new Classroom("ucionica1", "opisdadsadsadasdasdsadsadsopissssssssssssssssssssssssssssssssssssadasdsadsadasdasdasdasdadsadsdsadasds1", 12,true,true,true,"Windows");
             c.software.Add(s1);
             c.software.Add(s);
+
+
+            Classroom c1 = new Classroom("ucionicadsa1", "opis", 12, true, true, true, "Windows");
+            c1.software.Add(s1);
+            c1.software.Add(s);
+
+            classrooms.Add(c1);
+
             classrooms.Add(c);
 
 

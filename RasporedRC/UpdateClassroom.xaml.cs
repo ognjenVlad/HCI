@@ -139,7 +139,10 @@ namespace RasporedRC
         //Koristi se za tabelu
         public void AddSoftware(object sender, RoutedEventArgs e)
         {
-
+            if(this.SelectedSoftware == null)
+            {
+                return;
+            }
             this.SelectedSoftwares.Add(findSoftware(this.SelectedSoftware));
             this.Software.Remove(this.SelectedSoftware);
         }

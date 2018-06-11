@@ -22,7 +22,9 @@ namespace RasporedRC
             {
                 labels.Add(soft.label);
             }
-            return String.Join(", ", (labels.ToArray()));
+            String text = String.Join(", ", (labels.ToArray()));
+            text = text.Replace(",", "," + System.Environment.NewLine);
+            return text;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
