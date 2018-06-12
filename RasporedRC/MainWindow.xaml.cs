@@ -161,6 +161,7 @@ namespace RasporedRC
             s.label = "Label";
             s.os = "Windows";
             s.description = "Opis";
+            s.yearOfPublishing = "2000";
             softwares.Add(s);
             Software s1 = new Software();
             s1.name = "Imeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";

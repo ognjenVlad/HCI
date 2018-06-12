@@ -235,7 +235,7 @@
                         <ComboBox Grid.Row="0" Grid.Column="1" Name="filterCoursesType" ItemsSource="{Binding Path=coursesChoice}"></ComboBox>
                         <TextBox Grid.Row="0" Grid.Column="2"  Text="" Name="filterCourses" TextChanged="coursesFilter"></TextBox>
 
-                        <DataGrid Name="smerovi"  IsReadOnly="True" ItemsSource="{Binding courses}" CanUserResizeColumns="False" 
+                        <DataGrid Name="smerovi" Grid.Row="1" Grid.ColumnSpan="3" IsReadOnly="True" ItemsSource="{Binding courses}" CanUserResizeColumns="False" 
           CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False">
 
                             <DataGrid.Columns>

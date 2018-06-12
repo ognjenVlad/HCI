@@ -87,21 +87,20 @@ namespace RasporedRC
             classroomsChoice.Add("Po operativnom sistemu");
             classroomsChoice.Add("Po oznaci prisutnog softvera");
 
-            this.subjectsChoice = this.classroomsChoice;
-
-            subjectsChoice.Add("Po imenu");
+            this.subjectsChoice = new ObservableCollection<string>(this.classroomsChoice);
+            this.subjectsChoice.Remove("Po broju mesta");
+            subjectsChoice.Add("Po nazivu");
             subjectsChoice.Add("Po smeru");
 
             this.coursesChoice = new ObservableCollection<String>();
             coursesChoice.Add("Po oznaci");
-            coursesChoice.Add("Po imenu");
+            coursesChoice.Add("Po nazivu");
             coursesChoice.Add("Po godini uvođenja");
 
             this.softwaresChoice = new ObservableCollection<String>();
 
-            softwaresChoice.Add("Po оznaci");
-            softwaresChoice.Add("Po imenu");
-            softwaresChoice.Add("Po opisu");
+            softwaresChoice.Add("Po oznaci");
+            softwaresChoice.Add("Po nazivu");
             softwaresChoice.Add("Po proivođaču");
             softwaresChoice.Add("Po godini izdavanja");
             softwaresChoice.Add("Po operativnom sistemu");
@@ -219,10 +218,9 @@ namespace RasporedRC
 
                         return (p.label.ToUpper().Contains(filter.ToUpper()));
                     }
-                    else if (filterType.Equals("Po imenu"))
+                    else if (filterType.Equals("Po nazivu"))
                     {
-
-                        return (p.name.Equals(int.Parse(filter)));
+                        return (p.name.ToUpper().Contains(filter.ToUpper()));
 
                     }
                     else if (filterType.Equals("Prisutvo projektora(da/ne)"))
@@ -302,95 +300,46 @@ namespace RasporedRC
         }
         private void softwareFilter(object sender, TextChangedEventArgs e)
         {
+            
             TextBox t = (TextBox)sender;
             string filter = t.Text;
-            string filterType = filterSubjectsType.Text;
-            ICollectionView cv = CollectionViewSource.GetDefaultView(predmeti.ItemsSource);
+            string filterType = filterSoftwareType.Text;
+            ICollectionView cv = CollectionViewSource.GetDefaultView(softver.ItemsSource);
             if (filter == "")
                 cv.Filter = null;
             else
             {
                 cv.Filter = o =>
                 {
-                    Subject p = o as Subject;
+                    Software p = o as Software;
                     if (filterType.Equals("Po oznaci"))
                     {
-
                         return (p.label.ToUpper().Contains(filter.ToUpper()));
                     }
-                    else if (filterType.Equals("Po imenu"))
+                    else if (filterType.Equals("Po nazivu"))
                     {
-
-                        return (p.name.Equals(int.Parse(filter)));
-
+                        return (p.name.ToUpper().Contains(filter.ToUpper()));
                     }
-                    else if (filterType.Equals("Prisutvo projektora(da/ne)"))
+                    else if (filterType.Equals("Po proivođaču"))
                     {
-                        if (filter.ToUpper().Equals("DA"))
-                        {
-
-                            return (p.projector.Equals(true));
-                        }
-                        else if (filter.ToUpper().Equals("NE"))
-                        {
-                            return (p.projector.Equals(false));
-                        }
-                        return false;
-
+                        return (p.manofacturer.ToUpper().Contains(filter.ToUpper()));
                     }
-                    else if (filterType.Equals("Prisutvo table(da/ne)"))
+                    else if (filterType.Equals("Po godini izdavanja"))
                     {
-                        if (filter.ToUpper().Equals("DA"))
-                        {
-
-                            return (p.tableExists.Equals(true));
-                        }
-                        else if (filter.ToUpper().Equals("NE"))
-                        {
-                            return (p.tableExists.Equals(false));
-                        }
-                        return false;
-
+                        return (p.yearOfPublishing.Equals(filter));
                     }
-                    else if (filterType.Equals("Prisutvo pametne table(da/ne)"))
+                    else if (filterType.Equals("Po ceni"))
                     {
-                        if (filter.ToUpper().Equals("DA"))
-                        {
-
-                            return (p.smartTable.Equals(true));
-                        }
-                        else if (filter.ToUpper().Equals("NE"))
-                        {
-                            return (p.smartTable.Equals(false));
-                        }
-                        return false;
-
+                        double x;
+                        Double.TryParse(filter, out x);
+                        return (p.price.Equals(x));
                     }
                     else if (filterType.Equals("Po operativnom sistemu"))
                     {
-
                         return (p.os.ToUpper().Contains(filter.ToUpper()));
 
                     }
-                    else if (filterType.Equals("Po oznaci prisutnog softvera"))
-                    {
-                        foreach (Software s in p.software)
-                        {
-                            if (s.label.ToUpper().Contains(filter.ToUpper()))
-                            {
-                                return true;
-                            }
-
-                        }
-                        return false;
-
-                    }
-                    else if (filterType.Equals("Po smeru"))
-                    {
-
-                        return (p.course.label.ToUpper().Contains(filter.ToUpper()));
-
-                    }
+                   
                     return true;
 
 
@@ -402,92 +351,29 @@ namespace RasporedRC
         {
             TextBox t = (TextBox)sender;
             string filter = t.Text;
-            string filterType = filterSubjectsType.Text;
-            ICollectionView cv = CollectionViewSource.GetDefaultView(predmeti.ItemsSource);
+            string filterType = filterCoursesType.Text;
+            ICollectionView cv = CollectionViewSource.GetDefaultView(smerovi.ItemsSource);
             if (filter == "")
                 cv.Filter = null;
             else
             {
                 cv.Filter = o =>
                 {
-                    Subject p = o as Subject;
+                    Course p = o as Course;
                     if (filterType.Equals("Po oznaci"))
                     {
 
                         return (p.label.ToUpper().Contains(filter.ToUpper()));
                     }
-                    else if (filterType.Equals("Po imenu"))
+                    else if (filterType.Equals("Po nazivu"))
                     {
 
-                        return (p.name.Equals(int.Parse(filter)));
+                        return (p.name.ToUpper().Contains(filter.ToUpper()));
 
                     }
-                    else if (filterType.Equals("Prisutvo projektora(da/ne)"))
+                    else if (filterType.Equals("Po godini uvođenja"))
                     {
-                        if (filter.ToUpper().Equals("DA"))
-                        {
-
-                            return (p.projector.Equals(true));
-                        }
-                        else if (filter.ToUpper().Equals("NE"))
-                        {
-                            return (p.projector.Equals(false));
-                        }
-                        return false;
-
-                    }
-                    else if (filterType.Equals("Prisutvo table(da/ne)"))
-                    {
-                        if (filter.ToUpper().Equals("DA"))
-                        {
-
-                            return (p.tableExists.Equals(true));
-                        }
-                        else if (filter.ToUpper().Equals("NE"))
-                        {
-                            return (p.tableExists.Equals(false));
-                        }
-                        return false;
-
-                    }
-                    else if (filterType.Equals("Prisutvo pametne table(da/ne)"))
-                    {
-                        if (filter.ToUpper().Equals("DA"))
-                        {
-
-                            return (p.smartTable.Equals(true));
-                        }
-                        else if (filter.ToUpper().Equals("NE"))
-                        {
-                            return (p.smartTable.Equals(false));
-                        }
-                        return false;
-
-                    }
-                    else if (filterType.Equals("Po operativnom sistemu"))
-                    {
-
-                        return (p.os.ToUpper().Contains(filter.ToUpper()));
-
-                    }
-                    else if (filterType.Equals("Po oznaci prisutnog softvera"))
-                    {
-                        foreach (Software s in p.software)
-                        {
-                            if (s.label.ToUpper().Contains(filter.ToUpper()))
-                            {
-                                return true;
-                            }
-
-                        }
-                        return false;
-
-                    }
-                    else if (filterType.Equals("Po smeru"))
-                    {
-
-                        return (p.course.label.ToUpper().Contains(filter.ToUpper()));
-
+                        return (p.startingYear.Equals(filter));
                     }
                     return true;
 
