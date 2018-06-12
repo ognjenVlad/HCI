@@ -59,6 +59,11 @@ namespace RasporedRC
             get;
             set;
         }
+        public ObservableCollection<String> os
+        {
+            get;
+            set;
+        }
         public ObservableCollection<String> coursesChoice
         {
             get;
@@ -73,6 +78,7 @@ namespace RasporedRC
             this.software = MainWindow.softwares;
             this.courses = MainWindow.courses;
             this.subjects = MainWindow.subjects;
+            this.os = MainWindow.OS;
             this.DataContext = this;
             InitializeComponent();
         }
@@ -300,7 +306,7 @@ namespace RasporedRC
         }
         private void softwareFilter(object sender, TextChangedEventArgs e)
         {
-            
+
             TextBox t = (TextBox)sender;
             string filter = t.Text;
             string filterType = filterSoftwareType.Text;
@@ -339,7 +345,7 @@ namespace RasporedRC
                         return (p.os.ToUpper().Contains(filter.ToUpper()));
 
                     }
-                   
+
                     return true;
 
 
@@ -383,7 +389,116 @@ namespace RasporedRC
 
 
         }
+        private void deleteClassroomsFilter(object sender, RoutedEventArgs e)
+        {
+            ucionice.ItemsSource = MainWindow.classrooms;
+        }
+        private void deleteSoftwaresFilter(object sender, RoutedEventArgs e)
+        {
+            softver.ItemsSource = MainWindow.softwares;
+        }
+        private void deleteSubjectsFilter(object sender, RoutedEventArgs e)
+        {
+            predmeti.ItemsSource = MainWindow.subjects;
+        }
+        private void returnSubjects(object sender, RoutedEventArgs e)
+        {
+            ObservableCollection<Subject> newList = new ObservableCollection<Subject>();
+            foreach (Subject c in subjects)
+            {
+                if (c.projector.Equals(projektorPredmet.IsChecked) && c.tableExists.Equals(tablaPredmet.IsChecked) &&
+                    c.smartTable.Equals(pametnaTablaPredmet.IsChecked) && c.os.Contains(osPredmet.Text))
+                {
+                    if (mestaUcionica.Text.Equals(""))
+                    {
+                        newList.Add(c);
+                    }
+                    else
+                    {
+                        if (c.course.Equals(smerPredmet.Text))
+                        {
+                            newList.Add(c);
+                        }
+                    }
+                }
+            }
+            predmeti.ItemsSource = newList;
+        }
+    
+        private void returnSoftwares(object sender, RoutedEventArgs e)
+        {
+            ObservableCollection<Software> newList = new ObservableCollection<Software>();
+            if(cenaMin.Text.Equals("") && cenaMax.Text.Equals("") && osSoftver.Text.Equals(""))
+            {
+                return;
+            }
+            foreach (Software c in software)
+            {
+                if (c.os.Contains(osSoftver.Text))
+                {
+                    if (!cenaMin.Text.Equals("") && !cenaMax.Text.Equals(""))
+                    {
+                        Double x;
+                        Double.TryParse(cenaMax.Text, out x);
+                        Double y;
+                        Double.TryParse(cenaMin.Text, out y);
+                        if (c.price>=y && c.price <=x )
+                        {
+                            newList.Add(c);
+                        }
+                    }else if (!cenaMin.Text.Equals(""))
+                    {
+                        Double y;
+                        Double.TryParse(cenaMin.Text, out y);
+                        if (c.price >= y)
+                        {
+                            newList.Add(c);
+                        }
 
-    }
+                    }
+                    else if (!cenaMax.Text.Equals(""))
+                    {
+                        Double y;
+                        Double.TryParse(cenaMax.Text, out y);
+                        if (c.price <= y)
+                        {
+                            newList.Add(c);
+                        }
+                    }else
+                    {
+                        newList.Add(c);
+                    }
+
+                }
+            }
+            softver.ItemsSource = newList;
+        }
+        private void returnClassrooms(object sender, RoutedEventArgs e)
+        {
+            ObservableCollection<Classroom> newList = new ObservableCollection<Classroom>();
+            foreach (Classroom c in classrooms)
+            {
+                if(c.projector.Equals(projektorUcionica.IsChecked) && c.tableExists.Equals(tablaUcionica.IsChecked) &&
+                    c.smartTable.Equals(pametnaTablaUcionica.IsChecked) && c.os.Contains(osUcionica.Text))
+                {
+                    if (mestaUcionica.Text.Equals(""))
+                    {
+                        newList.Add(c);
+                    }
+                    else
+                    {
+
+                        int x;
+                        Int32.TryParse(mestaUcionica.Text, out x);
+                        if (c.slots >= x)
+                        {
+                            newList.Add(c);
+                        }
+                    }
+                }
+            }
+            ucionice.ItemsSource = newList;
+            }
+        }
+
 }
-

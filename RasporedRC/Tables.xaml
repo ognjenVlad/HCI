@@ -8,263 +8,384 @@
         Title="Tabelarni prikaz" Height="400" Width="750" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <local:ListToStringConverter x:Key="ListToStringConverter" />
-        
+
     </Window.Resources>
     <Grid>
         <DockPanel>
             <TabControl Name="tab_control">
 
                 <TabItem Header="Učionice">
-                   
+                    <ScrollViewer Margin="0,1,0,-1" >
                         <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="350" />
-                        </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="250" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="300" />
+                            </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0">Odaberite kriterijum za filtriranje: </Label>
-                        <ComboBox Grid.Row="0" Grid.Column="1" Name="filterClassroomsType" ItemsSource="{Binding Path=classroomsChoice}"></ComboBox>
-                        <TextBox Grid.Row="0" Grid.Column="2"  Text="" Name="filterClassrooms" TextChanged="classroomFilter"></TextBox>
-                        <DataGrid Grid.Row="1" Grid.ColumnSpan="3" Name="ucionice" IsReadOnly="True" ItemsSource="{Binding classrooms}" CanUserResizeColumns="False" 
-          CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False">
-                        
-                        <DataGrid.Columns>
+                            <Label Grid.Row="0" Grid.Column="0">Odaberite polje za pretragu:</Label>
+                            <ComboBox Grid.Row="0" Name="filterClassroomsType" ItemsSource="{Binding Path=classroomsChoice}" Margin="186,0,49,0" Grid.ColumnSpan="2"/>
+                            <TextBox Text="" Grid.Row="0" Grid.Column="2" Name="filterClassrooms" TextChanged="classroomFilter" Margin="0,0,39,0">
 
-                            <DataGridTextColumn Width ="100" Header="Oznaka" Binding="{Binding label}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style>
-                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Width="150" Header="Opis" Binding="{Binding description}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style>
-                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Broj&#x0a;mesta" Binding="{Binding slots}"/>
+                            </TextBox>
+                            <Separator Margin="0,10,0,10" Grid.Row="1" Grid.ColumnSpan="3"/>
+                            <Grid Grid.Row="2" Grid.ColumnSpan="3" Margin="0,1,0,10" Grid.RowSpan="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="150" />
+                                </Grid.ColumnDefinitions>
 
-                            <DataGridTextColumn Header="Projekotor" Binding="{Binding projector}"/>
+                                <Label Grid.Row="0" Grid.Column="0">Ima tablu</Label>
+                                <RadioButton Grid.Row="0" GroupName="1" Name="tablaUcionica" Margin="63,5,65,0" RenderTransformOrigin="-1.273,0.545"/>
 
-                            <DataGridTextColumn Header="Tabla" Binding="{Binding tableExists}"/>
+                                <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="55,0,95,0">Ima pametnu tablu</Label>
+                                <RadioButton Grid.Row="0" Grid.Column="2" GroupName="2" Name="pametnaTablaUcionica" Margin="22,5,95,5"></RadioButton>
 
-                            <DataGridTextColumn Header="Pametna&#x0a;tabla" Binding="{Binding smartTable}"/>
+                                <Label Grid.Row="0" Grid.Column="3">Ima projektor</Label>
+                                <RadioButton Grid.Row="0" Grid.Column="3" GroupName="3" Name="projektorUcionica" Margin="88,5,37,0"/>
 
-                            <DataGridTextColumn Header="Operativni&#x0a;sistem" Binding="{Binding os}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style>
-                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
+                                <Label Grid.Row="1" Grid.Column="0">Broj mesta:</Label>
+                                <TextBox Grid.Row="1" Name="mestaUcionica" Grid.ColumnSpan="2" Margin="74,0,76,0"/>
 
-                            <DataGridTextColumn Width="50*" Header="Softver" Binding="{Binding Converter={StaticResource ListToStringConverter}, Path=software}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    </Grid>
+                                <Label Grid.Row="1" Grid.Column="2" Margin="41,0,0,0">Operativni sistem:</Label>
+                                <ComboBox Grid.Row="1" Grid.Column="3" Name="osUcionica" ItemsSource="{Binding Path=os}"></ComboBox>
+                                <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Click="returnClassrooms" Content="Filtriraj" Margin="10,5,0,-5"></Button>
+                                <Button Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Click="deleteClassroomsFilter" Content="Poništi filter" Margin="111,5,39,-5"></Button>
+                            </Grid>
+                            <Label Grid.Row="2"></Label>
+                            <DataGrid Grid.Row="4" Grid.ColumnSpan="3" Name="ucionice" IsReadOnly="True" ItemsSource="{Binding classrooms}" CanUserResizeColumns="False" 
+          CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False" Margin="0,0,29,0">
+
+                                <DataGrid.Columns>
+
+                                    <DataGridTextColumn Width ="100" Header="Oznaka" Binding="{Binding label}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="150" Header="Opis" Binding="{Binding description}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Broj&#x0a;mesta" Binding="{Binding slots}"/>
+
+                                    <DataGridTextColumn Header="Projekotor" Binding="{Binding projector}"/>
+
+                                    <DataGridTextColumn Header="Tabla" Binding="{Binding tableExists}"/>
+
+                                    <DataGridTextColumn Header="Pametna&#x0a;tabla" Binding="{Binding smartTable}"/>
+
+                                    <DataGridTextColumn Header="Operativni&#x0a;sistem" Binding="{Binding os}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+
+                                    <DataGridTextColumn Width="50*" Header="Softver" Binding="{Binding Converter={StaticResource ListToStringConverter}, Path=software}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </ScrollViewer >
                 </TabItem>
 
                 <TabItem Header="Softver">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="350" />
-                        </Grid.ColumnDefinitions>
+                    <ScrollViewer Margin="0,1,0,-1" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0">Odaberite kriterijum za filtriranje:</Label>
-                        <ComboBox Grid.Row="0" Grid.Column="1" Name="filterSoftwareType" ItemsSource="{Binding Path=softwaresChoice}"></ComboBox>
-                        <TextBox Grid.Row="0" Grid.Column="2"  Text="" Name="filterSoftwares" TextChanged="softwareFilter"></TextBox>
+                                <ColumnDefinition Width="145"/>
+                                <ColumnDefinition Width="105"/>
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="300" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,86,0">Odaberite polje za pretragu:</Label>
+                            <ComboBox Grid.Row="0" Name="filterSoftwareType" ItemsSource="{Binding Path=softwaresChoice}" Margin="54,0,34,0" Grid.ColumnSpan="2" Grid.Column="1"/>
+                            <TextBox Text="" Grid.Row="0" Grid.Column="3" Name="filterSoftwares" TextChanged="softwareFilter" Margin="0,0,39,0"/>
 
-                        <DataGrid  Name="softver" Grid.Row="1" Grid.ColumnSpan="3" IsReadOnly="True" ItemsSource="{Binding software}" CanUserResizeColumns="False" 
-          CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False">
+                            <Separator Margin="0,10,0,10" Grid.Row="1" Grid.ColumnSpan="4"/>
+                            <Grid Grid.Row="2" Grid.ColumnSpan="4" Margin="0,1,0,10" Grid.RowSpan="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="150" />
+                                </Grid.ColumnDefinitions>
 
-                        <DataGrid.Columns>
 
-                            <DataGridTextColumn  Width ="100" Header="Oznaka" Binding="{Binding label}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style>
-                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Width ="150" Header="Naziv" Binding="{Binding name}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style>
-                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Width ="100" Header="Opis" Binding="{Binding description}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style>
-                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Proizvodjač" Binding="{Binding manofacturer}">
-                            <DataGridTextColumn.ElementStyle>
-                                <Style>
-                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Width ="100" Header="Website" Binding="{Binding website}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style>
-                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
+                                <Label Grid.Row="0" Grid.Column="0">Cena min:</Label>
+                                <TextBox Grid.Row="0" Name="cenaMin" Grid.ColumnSpan="2" Margin="67,0,83,0"/>
+                                <Label Grid.Column="1" Grid.ColumnSpan="2" Margin="104,1,46,0">Cena max:</Label>
+                                <TextBox Name="cenaMax" Grid.Column="2" Grid.ColumnSpan="2" Margin="22,1,128,0"/>
 
-                            <DataGridTextColumn Header="Godina&#x0a;izdavanja" Binding="{Binding yearOfPublishing}"/>
+                                <Label Grid.Column="3" Grid.ColumnSpan="2" Margin="37,0,113,2" >Operativni sistem:</Label>
+                                <ComboBox Grid.Column="4" Name="osSoftver" ItemsSource="{Binding Path=os}" Margin="0,1,40,0" Grid.RowSpan="3"/>
+                                <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Click="returnSoftwares" Content="Filtriraj" Margin="10,5,0,-5"></Button>
+                                <Button Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Click="deleteSoftwaresFilter" Content="Poništi filter" Margin="111,5,39,-5"></Button>
+                            </Grid>
+                            <DataGrid  Name="softver" Grid.Row="4" Grid.ColumnSpan="4" IsReadOnly="True" ItemsSource="{Binding software}" CanUserResizeColumns="False" 
+          CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False" Margin="10,11,29,-87">
 
-                            <DataGridTextColumn Header="Operativni&#x0a;sistem" Binding="{Binding os}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style>
-                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
+                                <DataGrid.Columns>
 
-                            <DataGridTextColumn Width="50*" Header="Cena" Binding="{Binding price}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    </Grid>
+                                    <DataGridTextColumn  Width ="100" Header="Oznaka" Binding="{Binding label}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width ="150" Header="Naziv" Binding="{Binding name}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width ="100" Header="Opis" Binding="{Binding description}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Proizvodjač" Binding="{Binding manofacturer}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width ="100" Header="Website" Binding="{Binding website}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+
+                                    <DataGridTextColumn Header="Godina&#x0a;izdavanja" Binding="{Binding yearOfPublishing}"/>
+
+                                    <DataGridTextColumn Header="Operativni&#x0a;sistem" Binding="{Binding os}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+
+                                    <DataGridTextColumn Width="50*" Header="Cena" Binding="{Binding price}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </ScrollViewer>
                 </TabItem>
 
                 <TabItem Header="Predmeti">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="350" />
-                        </Grid.ColumnDefinitions>
+                    <ScrollViewer Margin="0,1,0,-1" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="170"/>
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="300" />
+                            </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0">Odaberite kriterijum za filtriranje:</Label>
-                        <ComboBox Grid.Row="0" Grid.Column="1" Name="filterSubjectsType" ItemsSource="{Binding Path=subjectsChoice}"></ComboBox>
-                        <TextBox Grid.Row="0" Grid.Column="2"  Text="" Name="filterSubjects" TextChanged="subjectsFilter"></TextBox>
+                            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">Odaberite polje za pretragu:</Label>
+                            <ComboBox Grid.Row="0" Name="filterSubjectsType" ItemsSource="{Binding Path=subjectsChoice}" Margin="120,0,34,0" Grid.ColumnSpan="2" Grid.Column="1"/>
+                            <TextBox Grid.Row="0" Grid.Column="3"  Text="" Name="filterSubjects" TextChanged="subjectsFilter" Margin="0,0,39,0"></TextBox>
+                            <Separator Margin="0,10,0,10" Grid.Row="1" Grid.ColumnSpan="4"/>
+                            <Grid Grid.Row="2" Grid.ColumnSpan="4" Margin="0,1,0,10" Grid.RowSpan="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="150" />
+                                </Grid.ColumnDefinitions>
 
-                        <DataGrid Name="predmeti" Grid.Row="1" Grid.ColumnSpan="3" IsReadOnly="True" ItemsSource="{Binding subjects}" CanUserResizeColumns="False" 
-          CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False">
+                                <Label Grid.Row="0" Grid.Column="0">Ima tablu</Label>
+                                <RadioButton Grid.Row="0" GroupName="1" Name="tablaPredmet" Margin="63,5,65,0" RenderTransformOrigin="-1.273,0.545"/>
 
-                            <DataGrid.Columns>
+                                <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="55,0,95,0">Ima pametnu tablu</Label>
+                                <RadioButton Grid.Row="0" Grid.Column="2" GroupName="2" Name="pametnaTablaPredmet" Margin="22,5,95,5"></RadioButton>
 
-                                <DataGridTextColumn Header="Oznaka" Binding="{Binding label}">
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style>
-                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                                <DataGridTextColumn Width="70" Header="Opis" Binding="{Binding description}">
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style>
-                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                                <DataGridTextColumn Width="50" Header="Ime" Binding="{Binding name}">
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style>
-                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
+                                <Label Grid.Row="0" Grid.Column="3">Ima projektor</Label>
+                                <RadioButton Grid.Row="0" Grid.Column="3" GroupName="3" Name="projektorPredmet" Margin="88,5,37,0"/>
 
-                                <DataGridTextColumn Width="50" Header="Smer" Binding="{Binding course.label}">
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style>
-                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
+                                <Label Grid.Row="1" Grid.Column="0">Smer:</Label>
+                                <ComboBox Grid.Row="1" Grid.Column="0" Name="smerPredmet" ItemsSource="{Binding Path=courses.label}" Grid.ColumnSpan="2" Margin="50,0,100,0"></ComboBox>
 
-                                <DataGridTextColumn Header="Velicina&#x0a;grupe" Binding="{Binding groupSize}"/>
+                                <Label Grid.Row="1" Grid.Column="2" Margin="41,0,0,0">Operativni sistem:</Label>
+                                <ComboBox Grid.Row="1" Grid.Column="3" Name="osPredmet" ItemsSource="{Binding Path=os}"></ComboBox>
+                                <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Click="returnSubjects" Content="Filtriraj" Margin="10,5,0,-5"></Button>
+                                <Button Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Click="deleteSubjectsFilter" Content="Poništi filter" Margin="111,5,39,-5"></Button>
+                            </Grid>
+                            <Label Grid.Row="4" Grid.ColumnSpan="2"></Label>
+                            <DataGrid Name="predmeti" Grid.Row="4" Grid.ColumnSpan="4" IsReadOnly="True" ItemsSource="{Binding subjects}" CanUserResizeColumns="False" 
+          CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False" Margin="0,0,29,0">
 
-                                <DataGridTextColumn Header="Broj&#x0a;termina" Binding="{Binding numberOfAppointment}"/>
+                                <DataGrid.Columns>
 
-                                <DataGridTextColumn Header="Casovi&#x0a;po&#x0a;terminu" Binding="{Binding numberOfClasses}"/>
+                                    <DataGridTextColumn Header="Oznaka" Binding="{Binding label}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="70" Header="Opis" Binding="{Binding description}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="50" Header="Ime" Binding="{Binding name}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
 
-                                <DataGridTextColumn Header="Projektor" Binding="{Binding projector}"/>
+                                    <DataGridTextColumn Width="50" Header="Smer" Binding="{Binding course.label}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
 
-                                <DataGridTextColumn Header="Tabla" Binding="{Binding tableExists}"/>
+                                    <DataGridTextColumn Header="Velicina&#x0a;grupe" Binding="{Binding groupSize}"/>
 
-                                <DataGridTextColumn Header="Pametna&#x0a;tabla" Binding="{Binding smartTable}"/>
+                                    <DataGridTextColumn Header="Broj&#x0a;termina" Binding="{Binding numberOfAppointment}"/>
 
-                                <DataGridTextColumn Header="Operativni&#x0a;sistem" Binding="{Binding os}">
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style>
-                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                                <DataGridTextColumn Width="50*" Header="Softver" Binding="{Binding Converter={StaticResource ListToStringConverter}, Path=software}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Grid>
+                                    <DataGridTextColumn Header="Casovi&#x0a;po&#x0a;terminu" Binding="{Binding numberOfClasses}"/>
+
+                                    <DataGridTextColumn Header="Projektor" Binding="{Binding projector}"/>
+
+                                    <DataGridTextColumn Header="Tabla" Binding="{Binding tableExists}"/>
+
+                                    <DataGridTextColumn Header="Pametna&#x0a;tabla" Binding="{Binding smartTable}"/>
+
+                                    <DataGridTextColumn Header="Operativni&#x0a;sistem" Binding="{Binding os}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="50*" Header="Softver" Binding="{Binding Converter={StaticResource ListToStringConverter}, Path=software}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </ScrollViewer>
                 </TabItem>
 
                 <TabItem Header="Smerovi">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="350" />
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0">Odaberite kriterijum za filtriranje:</Label>
-                        <ComboBox Grid.Row="0" Grid.Column="1" Name="filterCoursesType" ItemsSource="{Binding Path=coursesChoice}"></ComboBox>
-                        <TextBox Grid.Row="0" Grid.Column="2"  Text="" Name="filterCourses" TextChanged="coursesFilter"></TextBox>
+                    <ScrollViewer Margin="0,1,0,-1" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="77" />
+                                <ColumnDefinition Width="173"/>
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="300" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">Odaberite polje za pretragu:</Label>
+                            <ComboBox Grid.Row="0" Name="filterCoursesType" ItemsSource="{Binding Path=coursesChoice}" Margin="126,1,31,0" Grid.ColumnSpan="2" Grid.Column="1"/>
+                            <TextBox Grid.Row="0" Grid.Column="3"  Text="" Name="filterCourses" TextChanged="coursesFilter" Margin="0,0,39,0"></TextBox>
+                            <Separator Margin="0,10,0,10" Grid.Row="1" Grid.ColumnSpan="4"/>
 
-                        <DataGrid Name="smerovi" Grid.Row="1" Grid.ColumnSpan="3" IsReadOnly="True" ItemsSource="{Binding courses}" CanUserResizeColumns="False" 
-          CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False">
 
-                            <DataGrid.Columns>
+                            <DataGrid Name="smerovi" Grid.Row="4" Grid.ColumnSpan="4" IsReadOnly="True" ItemsSource="{Binding courses}" CanUserResizeColumns="False" 
+          CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False" Margin="0,1,29,-29">
 
-                                <DataGridTextColumn Width="100" Header="Oznaka" Binding="{Binding label}">
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style>
-                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                                <DataGridTextColumn Width="250" Header="Opis" Binding="{Binding description}">
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style>
-                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                                <DataGridTextColumn Width="100" Header="Naziv" Binding="{Binding name}">
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style>
-                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                                <DataGridTextColumn Width="50*" Header="Godina uvodjenja" Binding="{Binding startingYear}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Grid>
+                                <DataGrid.Columns>
+
+                                    <DataGridTextColumn Width="100" Header="Oznaka" Binding="{Binding label}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="250" Header="Opis" Binding="{Binding description}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="100" Header="Naziv" Binding="{Binding name}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="50*" Header="Godina uvodjenja" Binding="{Binding startingYear}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </ScrollViewer>
                 </TabItem>
             </TabControl>
         </DockPanel>
