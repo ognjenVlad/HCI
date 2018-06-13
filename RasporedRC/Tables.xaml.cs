@@ -404,18 +404,19 @@ namespace RasporedRC
         private void returnSubjects(object sender, RoutedEventArgs e)
         {
             ObservableCollection<Subject> newList = new ObservableCollection<Subject>();
-            foreach (Subject c in subjects)
+            foreach (Subject c in predmeti.ItemsSource)
             {
                 if (c.projector.Equals(projektorPredmet.IsChecked) && c.tableExists.Equals(tablaPredmet.IsChecked) &&
                     c.smartTable.Equals(pametnaTablaPredmet.IsChecked) && c.os.Contains(osPredmet.Text))
                 {
-                    if (mestaUcionica.Text.Equals(""))
+                    if (smerPredmet.Text.Equals(""))
                     {
                         newList.Add(c);
                     }
                     else
                     {
-                        if (c.course.Equals(smerPredmet.Text))
+                        Console.WriteLine(smerPredmet.Text);
+                        if (c.course.label.Equals(smerPredmet.Text))
                         {
                             newList.Add(c);
                         }
@@ -432,7 +433,7 @@ namespace RasporedRC
             {
                 return;
             }
-            foreach (Software c in software)
+            foreach (Software c in softver.ItemsSource)
             {
                 if (c.os.Contains(osSoftver.Text))
                 {
@@ -476,7 +477,7 @@ namespace RasporedRC
         private void returnClassrooms(object sender, RoutedEventArgs e)
         {
             ObservableCollection<Classroom> newList = new ObservableCollection<Classroom>();
-            foreach (Classroom c in classrooms)
+            foreach (Classroom c in ucionice.ItemsSource)
             {
                 if(c.projector.Equals(projektorUcionica.IsChecked) && c.tableExists.Equals(tablaUcionica.IsChecked) &&
                     c.smartTable.Equals(pametnaTablaUcionica.IsChecked) && c.os.Contains(osUcionica.Text))

@@ -51,13 +51,13 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0">Ima tablu</Label>
-                                <RadioButton Grid.Row="0" GroupName="1" Name="tablaUcionica" Margin="63,5,65,0" RenderTransformOrigin="-1.273,0.545"/>
+                                <CheckBox Grid.Row="0" Name="tablaUcionica" Margin="63,5,65,0" RenderTransformOrigin="-1.273,0.545"/>
 
                                 <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="55,0,95,0">Ima pametnu tablu</Label>
-                                <RadioButton Grid.Row="0" Grid.Column="2" GroupName="2" Name="pametnaTablaUcionica" Margin="22,5,95,5"></RadioButton>
+                                <CheckBox Grid.Row="0" Grid.Column="2"  Name="pametnaTablaUcionica" Margin="22,5,95,5"></CheckBox>
 
                                 <Label Grid.Row="0" Grid.Column="3">Ima projektor</Label>
-                                <RadioButton Grid.Row="0" Grid.Column="3" GroupName="3" Name="projektorUcionica" Margin="88,5,37,0"/>
+                                <CheckBox Grid.Row="0" Grid.Column="3" Name="projektorUcionica" Margin="88,5,37,0"/>
 
                                 <Label Grid.Row="1" Grid.Column="0">Broj mesta:</Label>
                                 <TextBox Grid.Row="1" Name="mestaUcionica" Grid.ColumnSpan="2" Margin="74,0,76,0"/>
@@ -67,9 +67,9 @@
                                 <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Click="returnClassrooms" Content="Filtriraj" Margin="10,5,0,-5"></Button>
                                 <Button Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Click="deleteClassroomsFilter" Content="Poništi filter" Margin="111,5,39,-5"></Button>
                             </Grid>
-                            <Label Grid.Row="2"></Label>
+                            <Label Grid.Row="2" Margin="0,0,250,46"></Label>
                             <DataGrid Grid.Row="4" Grid.ColumnSpan="3" Name="ucionice" IsReadOnly="True" ItemsSource="{Binding classrooms}" CanUserResizeColumns="False" 
-          CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False" Margin="0,0,29,0">
+          CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False" Margin="0,0,39,0">
 
                                 <DataGrid.Columns>
 
@@ -95,7 +95,7 @@
 
                                     <DataGridTextColumn Header="Pametna&#x0a;tabla" Binding="{Binding smartTable}"/>
 
-                                    <DataGridTextColumn Header="Operativni&#x0a;sistem" Binding="{Binding os}">
+                                    <DataGridTextColumn Width="65" Header="Operativni&#x0a;sistem" Binding="{Binding os}">
                                         <DataGridTextColumn.ElementStyle>
                                             <Style>
                                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
@@ -160,7 +160,7 @@
                                 <Button Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Click="deleteSoftwaresFilter" Content="Poništi filter" Margin="111,5,39,-5"></Button>
                             </Grid>
                             <DataGrid  Name="softver" Grid.Row="4" Grid.ColumnSpan="4" IsReadOnly="True" ItemsSource="{Binding software}" CanUserResizeColumns="False" 
-          CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False" Margin="10,11,29,-87">
+          CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False" Margin="0,10,39,-86">
 
                                 <DataGrid.Columns>
 
@@ -202,7 +202,7 @@
 
                                     <DataGridTextColumn Header="Godina&#x0a;izdavanja" Binding="{Binding yearOfPublishing}"/>
 
-                                    <DataGridTextColumn Header="Operativni&#x0a;sistem" Binding="{Binding os}">
+                                    <DataGridTextColumn Width="65" Header="Operativni&#x0a;sistem" Binding="{Binding os}">
                                         <DataGridTextColumn.ElementStyle>
                                             <Style>
                                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
@@ -210,7 +210,13 @@
                                         </DataGridTextColumn.ElementStyle>
                                     </DataGridTextColumn>
 
-                                    <DataGridTextColumn Width="50*" Header="Cena" Binding="{Binding price}"/>
+                                    <DataGridTextColumn Width="50*" Header="Cena" Binding="{Binding price}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
@@ -255,16 +261,16 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0">Ima tablu</Label>
-                                <RadioButton Grid.Row="0" GroupName="1" Name="tablaPredmet" Margin="63,5,65,0" RenderTransformOrigin="-1.273,0.545"/>
+                                <CheckBox Grid.Row="0" Name="tablaPredmet" Margin="63,5,65,0" RenderTransformOrigin="-1.273,0.545"/>
 
                                 <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="55,0,95,0">Ima pametnu tablu</Label>
-                                <RadioButton Grid.Row="0" Grid.Column="2" GroupName="2" Name="pametnaTablaPredmet" Margin="22,5,95,5"></RadioButton>
+                                <CheckBox Grid.Row="0" Grid.Column="2" Name="pametnaTablaPredmet" Margin="22,5,95,5"></CheckBox>
 
                                 <Label Grid.Row="0" Grid.Column="3">Ima projektor</Label>
-                                <RadioButton Grid.Row="0" Grid.Column="3" GroupName="3" Name="projektorPredmet" Margin="88,5,37,0"/>
+                                <CheckBox Grid.Row="0" Grid.Column="3" Name="projektorPredmet" Margin="88,5,37,0"/>
 
                                 <Label Grid.Row="1" Grid.Column="0">Smer:</Label>
-                                <ComboBox Grid.Row="1" Grid.Column="0" Name="smerPredmet" ItemsSource="{Binding Path=courses.label}" Grid.ColumnSpan="2" Margin="50,0,100,0"></ComboBox>
+                                <ComboBox Grid.Row="1" Grid.Column="0" Name="smerPredmet" ItemsSource="{Binding Path=courses}" DisplayMemberPath="label" Grid.ColumnSpan="2" Margin="50,0,100,0"></ComboBox>
 
                                 <Label Grid.Row="1" Grid.Column="2" Margin="41,0,0,0">Operativni sistem:</Label>
                                 <ComboBox Grid.Row="1" Grid.Column="3" Name="osPredmet" ItemsSource="{Binding Path=os}"></ComboBox>
@@ -273,7 +279,7 @@
                             </Grid>
                             <Label Grid.Row="4" Grid.ColumnSpan="2"></Label>
                             <DataGrid Name="predmeti" Grid.Row="4" Grid.ColumnSpan="4" IsReadOnly="True" ItemsSource="{Binding subjects}" CanUserResizeColumns="False" 
-          CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False" Margin="0,0,29,0">
+          CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False" Margin="0,0,39,0">
 
                                 <DataGrid.Columns>
 
@@ -319,14 +325,20 @@
 
                                     <DataGridTextColumn Header="Pametna&#x0a;tabla" Binding="{Binding smartTable}"/>
 
-                                    <DataGridTextColumn Header="Operativni&#x0a;sistem" Binding="{Binding os}">
+                                    <DataGridTextColumn Width="65"  Header="Operativni&#x0a;sistem" Binding="{Binding os}">
                                         <DataGridTextColumn.ElementStyle>
                                             <Style>
                                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
                                             </Style>
                                         </DataGridTextColumn.ElementStyle>
                                     </DataGridTextColumn>
-                                    <DataGridTextColumn Width="50*" Header="Softver" Binding="{Binding Converter={StaticResource ListToStringConverter}, Path=software}"/>
+                                    <DataGridTextColumn Width="50*" Header="Softver" Binding="{Binding Converter={StaticResource ListToStringConverter}, Path=software}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style>
+                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
@@ -356,7 +368,7 @@
 
 
                             <DataGrid Name="smerovi" Grid.Row="4" Grid.ColumnSpan="4" IsReadOnly="True" ItemsSource="{Binding courses}" CanUserResizeColumns="False" 
-          CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False" Margin="0,1,29,-29">
+          CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False" Margin="0,1,39,-29">
 
                                 <DataGrid.Columns>
 

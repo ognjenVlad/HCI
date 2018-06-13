@@ -156,16 +156,16 @@ namespace RasporedRC
 
             Software s = new Software();
             s.name = "Ime";
-            s.price = 100;
+            s.price = 1001;
             s.manofacturer = "Man";
             s.label = "Label";
-            s.os = "Windows";
+            s.os = "Windows/Linux";
             s.description = "Opis";
             s.yearOfPublishing = "2000";
             softwares.Add(s);
             Software s1 = new Software();
             s1.name = "Imeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-            s1.price = 100;
+            s1.price = 1000000000000;
             s1.manofacturer = "Man";
             s1.label = "Labedasl";
             s1.os = "Windows";
@@ -180,7 +180,7 @@ namespace RasporedRC
             c.software.Add(s);
 
 
-            Classroom c1 = new Classroom("ucionicadsa1", "opis", 12, true, true, true, "Windows");
+            Classroom c1 = new Classroom("ucionicadsa1", "opis", 12, true, true, true, "Windows/Linux");
             c1.software.Add(s1);
             c1.software.Add(s);
 
@@ -197,14 +197,16 @@ namespace RasporedRC
             Course cc1 = new Course();
             cc1.label = "smer2";
             cc.name = "sw1";
+            cc1.description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
             courses.Add(cc1);
 
             Subject sub = new Subject();
             sub.course = cc1;
 
-            sub.os = "Windows";
+            sub.os = "Windows/Linux";
             sub.description = "opis";
             sub.label = "aaaa";
+            sub.name = "WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAT";
 
             Subject sub1 = new Subject();
             sub1.course = cc1;
