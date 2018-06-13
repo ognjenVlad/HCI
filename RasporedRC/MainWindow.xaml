@@ -38,18 +38,17 @@
                     <DockPanel HorizontalAlignment="Center"></DockPanel>
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="Dodaj" HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
+            <MenuItem Header="Dodavanje" HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
                 <MenuItem Header="Predmet"  FontFamily="Arial" FontSize="16" Click="AddSubject" FontWeight="Bold"></MenuItem>
                 <MenuItem Header="Smer"  FontFamily="Arial" FontSize="16" Click="AddCourse" FontWeight="Bold"></MenuItem>
 
                 <MenuItem Header="Softver"  FontFamily="Arial" FontSize="16" Click="AddSoftware" FontWeight="Bold"></MenuItem>
                 <MenuItem Header="Ucionicu"  FontFamily="Arial" FontSize="16" Click="AddClassroom" FontWeight="Bold"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Pregled"  HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
-                <MenuItem Header="Brisanje/Izmena"  Click ="DeleteSubject" FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
-                <MenuItem Header="Tabelarni prikaz" Click ="Tables" FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
-                <MenuItem Header="Pretraga" FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
+            <MenuItem Header="Brisanje/Izmena"   Click ="DeleteSubject" HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
+                
             </MenuItem>
+            <MenuItem Header="Pregled" Click ="Tables" FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
             <MenuItem Header="Demo mod"  HorizontalAlignment="Center" FontSize="16" FontFamily="Arial" FontWeight="Bold"/>
             <MenuItem Header="Upravljaj"  HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
                 <MenuItem Header="Sacuvaj" ></MenuItem>
