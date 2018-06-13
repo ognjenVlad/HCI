@@ -28,7 +28,7 @@
 
         </Style>
     </Window.Resources>
-    <ScrollViewer >
+    <ScrollViewer  >
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -94,7 +94,7 @@
                 </TextBox.Text>
             </TextBox>
 
-            <Label Grid.Row="3"></Label>
+            <Label Grid.Row="2" Margin="0,0,0,50"></Label>
             <Label Grid.Row="4" Grid.Column="0">Naziv predmeta:</Label>
             <TextBox x:Name="naziv" Grid.Row="4" Grid.Column="1" Margin="5">
                 <TextBox.Text>
@@ -182,7 +182,7 @@
                         <LineBreak />
                         Dodat softver prikazan u tabeli.
                         </TextBlock>
-                        <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />  
+                        <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
                     </StackPanel>
                 </Button.ToolTip>
             </Button>
@@ -190,7 +190,7 @@
 
 
             <Label Grid.Row="21" Grid.Column="0">Dodat software:</Label>
-            <ListView MaxWidth="180" Grid.Row="22" Grid.Column="0" Margin="10,10,54,10"  x:Name ="listView1">
+            <ListView MaxWidth="180" Grid.Row="22" Grid.Column="0" Margin="10,10,54,10"   x:Name ="listView1" Grid.ColumnSpan="2">
                 <ListView.ItemsSource>
                     <Binding Path="SelectedSoftwares" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -202,7 +202,12 @@
 
                     <GridView>
                         <GridViewColumn Width="70" Header="Oznaka"
-                            DisplayMemberBinding="{Binding label}">
+                           >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextWrapping="Wrap" Text="{Binding label}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Width="100" Header="Naziv">
                             <GridViewColumn.CellTemplate>
@@ -216,7 +221,7 @@
                 </ListView.View>
             </ListView>
 
-            <Button Grid.Row="22" Grid.Column="1" x:Name="Delete_classroom" Click="deleteSoftware" Content="Izbrisi oznacene" Height="25">
+            <Button Grid.Row="22" Grid.Column="1" x:Name="Delete_classroom" Click="deleteSoftware" Content="Izbrisi oznacene" Height="25" Grid.ColumnSpan="2" Margin="37,9,0,11">
                 <Button.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Izbrisi softver</TextBlock>

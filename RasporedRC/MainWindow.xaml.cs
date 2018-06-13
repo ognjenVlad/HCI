@@ -158,7 +158,7 @@ namespace RasporedRC
             s.name = "Ime";
             s.price = 1001;
             s.manofacturer = "Man";
-            s.label = "Label";
+            s.label = "Labeaaaaaaaaaaaaaaaaaaaaaaaaal";
             s.os = "Windows/Linux";
             s.description = "Opis";
             s.yearOfPublishing = "2000";
@@ -167,7 +167,7 @@ namespace RasporedRC
             s1.name = "Imeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
             s1.price = 1000000000000;
             s1.manofacturer = "Man";
-            s1.label = "Labedasl";
+            s1.label = "Labsadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaedasl";
             s1.os = "Windows";
             s1.description = "Opis";
 

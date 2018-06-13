@@ -103,7 +103,13 @@
                                         </DataGridTextColumn.ElementStyle>
                                     </DataGridTextColumn>
 
-                                    <DataGridTextColumn Width="50*" Header="Softver" Binding="{Binding Converter={StaticResource ListToStringConverter}, Path=software}"/>
+                                    <DataGridTextColumn Width="50*" Header="Softver" Binding="{Binding Converter={StaticResource ListToStringConverter}, Path=software}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>

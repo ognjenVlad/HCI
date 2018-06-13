@@ -149,7 +149,7 @@
                             DisplayMemberBinding="{Binding label}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock TextWrapping="Wrap" Text="{Binding name}" />
+                                    <TextBlock TextWrapping="Wrap" Text="{Binding label}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

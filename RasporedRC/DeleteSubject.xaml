@@ -6,14 +6,19 @@
         xmlns:local="clr-namespace:RasporedRC"
         xmlns:src="clr-namespace:RasporedRC.Model"
         mc:Ignorable="d"
-        Title="Brisanje" Height="430" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Brisanje" Height="430" Width="680" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
-
+        <Style x:Key="tbstyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+        </Style>
         <local:ListToStringConverter x:Key="ListToStringConverter" />
         <DataTemplate x:Key="subjectsTemplate">
             <Border Name="border" BorderBrush="Black" BorderThickness="0,1,0,1"
           Padding="5" Margin="5">
                 <Grid>
+                    <Grid.Resources>
+                            <Style BasedOn="{StaticResource tbstyle}" TargetType="{x:Type TextBlock}" />
+                    </Grid.Resources>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -31,11 +36,12 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="300" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Oznaka predmeta:"/>
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=label}" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=label}"/>
+
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Ime predmeta:"/>
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=name}"/>
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Opis:"/>
@@ -67,6 +73,9 @@
             <Border Name="border" BorderBrush="Black" BorderThickness="0,1,0,1"
           Padding="5" Margin="5">
                 <Grid>
+                    <Grid.Resources>
+                        <Style BasedOn="{StaticResource tbstyle}" TargetType="{x:Type TextBlock}" />
+                    </Grid.Resources>
                     <Grid.RowDefinitions>
                         
                         <RowDefinition/>
@@ -82,8 +91,8 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="300" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Oznaka učionice:"/>
                     <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=label}" />
@@ -112,6 +121,9 @@
             <Border Name="border" BorderBrush="Black" BorderThickness="0,1,0,1"
           Padding="5" Margin="5">
                 <Grid>
+                    <Grid.Resources>
+                        <Style BasedOn="{StaticResource tbstyle}" TargetType="{x:Type TextBlock}" />
+                    </Grid.Resources>
                     <Grid.RowDefinitions>
 
                         <RowDefinition/>
@@ -127,8 +139,8 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="300" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Oznaka smera:"/>
                     <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=label}" />
@@ -149,6 +161,9 @@
             <Border Name="border" BorderBrush="Black" BorderThickness="0,1,0,1"
           Padding="5" Margin="5">
                 <Grid>
+                    <Grid.Resources>
+                        <Style BasedOn="{StaticResource tbstyle}" TargetType="{x:Type TextBlock}" />
+                    </Grid.Resources>
                     <Grid.RowDefinitions>
 
                         <RowDefinition/>
@@ -164,8 +179,8 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="300" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Oznaka softvera:"/>
                     <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=label}" />
@@ -195,7 +210,7 @@
             
             <TabItem Header="Učionice">
                 <ScrollViewer >
-                    <ListBox Width="550" 
+                    <ListBox Width="640" 
                     ItemsSource="{Binding Path=classrooms}"
                      ItemTemplate="{StaticResource classroomsTemplate}" 
                      HorizontalContentAlignment="Stretch"/>
@@ -203,7 +218,7 @@
                 </TabItem>
             <TabItem Header="Softver">
                 <ScrollViewer >
-                    <ListBox Width="550" 
+                    <ListBox Width="640" 
                     ItemsSource="{Binding Path=softwares}"
                      ItemTemplate="{StaticResource softwareTemplate}" 
                      HorizontalContentAlignment="Stretch"/>
@@ -211,7 +226,7 @@
             </TabItem>
             <TabItem Header="Predmeti">
                 <ScrollViewer >
-                    <ListBox Width="550" 
+                    <ListBox Width="640" 
                     ItemsSource="{Binding Path=subjects}"
                      ItemTemplate="{StaticResource subjectsTemplate}" 
                      HorizontalContentAlignment="Stretch"/>
@@ -219,7 +234,7 @@
             </TabItem>
             <TabItem Header="Smerovi">
                 <ScrollViewer >
-                    <ListBox Width="550" 
+                    <ListBox Width="640" 
                     ItemsSource="{Binding Path=courses}"
                      ItemTemplate="{StaticResource coursesTemplate}" 
                      HorizontalContentAlignment="Stretch"/>

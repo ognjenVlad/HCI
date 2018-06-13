@@ -162,7 +162,7 @@
             <RadioButton x:Name="projektor2" Grid.Row="14" Grid.Column="1" GroupName="Three" IsChecked="{Binding ProjectorCheckedF}" Grid.ColumnSpan="2" Margin="91,0,10,0">Ne</RadioButton>
 
             <Label Grid.Row="15" Grid.Column="0">Potreban operativni sistem:</Label>
-            <ComboBox x:Name="os" Grid.Row="15"  Grid.Column="1" ItemsSource="{Binding Path=OS}" SelectedItem = "{Binding SelectedOS}"></ComboBox>
+            <ComboBox x:Name="os" Grid.Row="15" ItemsSource="{Binding Path=OS}" SelectedItem = "{Binding SelectedOS}" Grid.ColumnSpan="2" Margin="0,0,14,0" Grid.Column="1"/>
 
             <Label Margin="5" Grid.Row="16"></Label>
             <Label Grid.Row="17" Grid.Column="0">Smer predmeta:</Label>
@@ -201,14 +201,21 @@
                 <ListView.View>
 
                     <GridView>
-                        <GridViewColumn Header="     Oznaka     "
-                            DisplayMemberBinding="{Binding label}">
+                        <GridViewColumn Width="70" Header="Oznaka"
+                           >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextWrapping="Wrap" Text="{Binding label}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-
-
-                        <GridViewColumn Header="         Naziv            " DisplayMemberBinding="{Binding name}" ></GridViewColumn>
-
-
+                        <GridViewColumn Width="100" Header="Naziv">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextWrapping="Wrap" Text="{Binding name}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
