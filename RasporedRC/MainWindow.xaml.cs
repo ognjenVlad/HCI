@@ -298,7 +298,7 @@ namespace RasporedRC
             weekDisplay[4] = classroomsWeek[id][4];
             weekDisplay[5] = classroomsWeek[id][5];
 
-            fillSideList(id);
+            //fillSideList(id);
         }
 
         private void fillSideList(string classroomId)
@@ -315,6 +315,52 @@ namespace RasporedRC
 
         private bool checkTermClassroom(Term term,string classroomId)
         {
+            Subject sub = null;
+            Classroom croom = null;
+            foreach(Subject s in subjects)
+            {
+                if(s.label == term.SubjectId)
+                {
+                    sub = s;
+                    break;
+                }
+            }
+            foreach (Classroom cr in classrooms)
+            {
+                if (cr.label == classroomId)
+                {
+                    croom = cr;
+                    break;
+                }
+            }
+
+            if (sub.os != croom.os)
+            {
+                return false;
+            }else if(sub.projector != croom.projector)
+            {
+                return false;
+            }else if(sub.tableExists != croom.tableExists)
+            {
+                return false;
+            }else if(sub.smartTable != croom.smartTable)
+            {
+                return false;
+            }else if (sub.groupSize > croom.slots)
+            {
+                return false;
+            }
+            else
+            {
+                foreach(Software soft in croom.listSoft)
+                {
+                    if (!sub.software.Contains(soft))
+                    {
+                        return false;
+                    }
+                }
+            }
+
             return true;
         }
 
@@ -404,7 +450,7 @@ namespace RasporedRC
                 {
                     sourceIndex = SideList.IndexOf(source);
 
-                    if (target_parent[targetIndex].SubjectId == "" && target_parent[targetIndex + 1].SubjectId == "" && target_parent[targetIndex + 1].SubjectId == "")
+                    if (target_parent[targetIndex].SubjectId == "" && target_parent[targetIndex + 1].SubjectId == "" && target_parent[targetIndex + 2].SubjectId == "")
                     {
                         target_parent.RemoveAt(targetIndex);
                         target_parent.RemoveAt(targetIndex);
@@ -421,7 +467,7 @@ namespace RasporedRC
                         Console.WriteLine("Only Subjcest are allowed to be draged inbetween days");
                     }else
                     {
-                        if (target_parent[targetIndex].SubjectId == "" && target_parent[targetIndex + 1].SubjectId == "" && target_parent[targetIndex + 1].SubjectId == "")
+                        if (target_parent[targetIndex].SubjectId == "" && target_parent[targetIndex + 1].SubjectId == "" && target_parent[targetIndex + 2].SubjectId == "")
                         {
                             target_parent.RemoveAt(targetIndex);
                             target_parent.RemoveAt(targetIndex);

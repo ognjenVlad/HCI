@@ -31,60 +31,62 @@
             </Border>
         </DataTemplate>
     </Window.Resources>
-    <DockPanel>
-        <Menu DockPanel.Dock ="Top" Height="30">
-            <Menu.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <DockPanel HorizontalAlignment="Center"></DockPanel>
-                </ItemsPanelTemplate>
-            </Menu.ItemsPanel>
-            <MenuItem Header="Dodavanje" HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
-                <MenuItem Header="Predmet"  FontFamily="Arial" FontSize="16" Click="AddSubject" FontWeight="Bold"></MenuItem>
-                <MenuItem Header="Smer"  FontFamily="Arial" FontSize="16" Click="AddCourse" FontWeight="Bold"></MenuItem>
+    <TabControl Name="mainTabControl">
+        <TabItem IsEnabled="True"  Header="Glavni prozor">
+            <DockPanel>
+                <Menu DockPanel.Dock ="Top" Height="30">
+                    <Menu.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <DockPanel HorizontalAlignment="Center"></DockPanel>
+                        </ItemsPanelTemplate>
+                    </Menu.ItemsPanel>
+                    <MenuItem Header="Dodavanje" HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
+                        <MenuItem Header="Predmet"  FontFamily="Arial" FontSize="16" Click="AddSubject" FontWeight="Bold"></MenuItem>
+                        <MenuItem Header="Smer"  FontFamily="Arial" FontSize="16" Click="AddCourse" FontWeight="Bold"></MenuItem>
 
-                <MenuItem Header="Softver"  FontFamily="Arial" FontSize="16" Click="AddSoftware" FontWeight="Bold"></MenuItem>
-                <MenuItem Header="Ucionicu"  FontFamily="Arial" FontSize="16" Click="AddClassroom" FontWeight="Bold"></MenuItem>
-            </MenuItem>
-            <MenuItem Header="Brisanje/Izmena"   Click ="DeleteSubject" HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
-                
-            </MenuItem>
-            <MenuItem Header="Pregled" Click ="Tables" FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
-            <MenuItem Header="Demo mod"  HorizontalAlignment="Center" FontSize="16" FontFamily="Arial" FontWeight="Bold"/>
-            <MenuItem Header="Upravljaj"  HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
-                <MenuItem Header="Sacuvaj" ></MenuItem>
-                <MenuItem Header="Otvori"></MenuItem>
-            </MenuItem>
-        </Menu>
-        <ListBox DockPanel.Dock="Top" Width="Auto" Height="30" Padding="55,0,0,0">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="Focusable" Value="false"/>
-                </Style>
-            </ListBox.ItemContainerStyle>
-            <ListBoxItem Width="106" HorizontalContentAlignment="Center">Ponedeljak</ListBoxItem>
-            <ListBoxItem Width="105" HorizontalContentAlignment="Center">Utorak</ListBoxItem>
-            <ListBoxItem Width="106" HorizontalContentAlignment="Center">Sreda</ListBoxItem>
-            <ListBoxItem Width="105" HorizontalContentAlignment="Center">Cetvrtak</ListBoxItem>
-            <ListBoxItem Width="105" HorizontalContentAlignment="Center">Petak</ListBoxItem>
-            <ListBoxItem Width="106" HorizontalContentAlignment="Center">Subota</ListBoxItem>
-            <ListBox.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
-                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-            </ListBox.Resources>
-        </ListBox>
-        <Grid>
-            <Grid Canvas.ZIndex="2" HorizontalAlignment="Right">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <ListBox BorderThickness="1" BorderBrush="Black"
+                        <MenuItem Header="Softver"  FontFamily="Arial" FontSize="16" Click="AddSoftware" FontWeight="Bold"></MenuItem>
+                        <MenuItem Header="Ucionicu"  FontFamily="Arial" FontSize="16" Click="AddClassroom" FontWeight="Bold"></MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="Brisanje/Izmena"   Click ="DeleteSubject" HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
+
+                    </MenuItem>
+                    <MenuItem Header="Pregled" Click ="Tables" FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
+                    <MenuItem Header="Demo mod"  HorizontalAlignment="Center" FontSize="16" FontFamily="Arial" FontWeight="Bold"/>
+                    <MenuItem Header="Upravljaj"  HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
+                        <MenuItem Header="Sacuvaj" ></MenuItem>
+                        <MenuItem Header="Otvori"></MenuItem>
+                    </MenuItem>
+                </Menu>
+                <ListBox DockPanel.Dock="Top" Width="Auto" Height="30" Padding="55,0,0,0">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Focusable" Value="false"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBoxItem Width="106" HorizontalContentAlignment="Center">Ponedeljak</ListBoxItem>
+                    <ListBoxItem Width="105" HorizontalContentAlignment="Center">Utorak</ListBoxItem>
+                    <ListBoxItem Width="106" HorizontalContentAlignment="Center">Sreda</ListBoxItem>
+                    <ListBoxItem Width="105" HorizontalContentAlignment="Center">Cetvrtak</ListBoxItem>
+                    <ListBoxItem Width="105" HorizontalContentAlignment="Center">Petak</ListBoxItem>
+                    <ListBoxItem Width="106" HorizontalContentAlignment="Center">Subota</ListBoxItem>
+                    <ListBox.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                    </ListBox.Resources>
+                </ListBox>
+                <Grid>
+                    <Grid Canvas.ZIndex="2" HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <ListBox BorderThickness="1" BorderBrush="Black"
                     Padding="6,2,2,0"
                     Width="8"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
@@ -100,110 +102,110 @@
                     Drop="SideWindow_Drop" 
                     AllowDrop="True"
                          >
-                    <ListBox.Resources>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-                    </ListBox.Resources>
-                </ListBox>
-            </Grid>
-            
-            <Grid Canvas.ZIndex ="1">
-                <ListBox Margin="0,0,15,0">
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="Focusable" Value="False"></Setter>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                    <ListBoxItem>
-                        <ListBox Height="Auto" Width="50" FontSize="22">
-                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">7:</ListBoxItem>
-                            </Border>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">8:</ListBoxItem>
-                            </Border>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">9:</ListBoxItem>
-                            </Border>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">10:</ListBoxItem>
-                            </Border>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">11:</ListBoxItem>
-                            </Border>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">12:</ListBoxItem>
-                            </Border>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">13:</ListBoxItem>
-                            </Border>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">14:</ListBoxItem>
-                            </Border>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">15:</ListBoxItem>
-                            </Border>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">16:</ListBoxItem>
-                            </Border>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">17:</ListBoxItem>
-                            </Border>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">18:</ListBoxItem>
-                            </Border>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">19:</ListBoxItem>
-                            </Border>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">20:</ListBoxItem>
-                            </Border>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">21:</ListBoxItem>
-                            </Border>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">22:</ListBoxItem>
-                            </Border>
+                            <ListBox.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                            </ListBox.Resources>
                         </ListBox>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <ListBox BorderThickness="0"
+                    </Grid>
+
+                    <Grid Canvas.ZIndex ="1">
+                        <ListBox Margin="0,0,15,0">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Focusable" Value="False"></Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBoxItem>
+                                <ListBox Height="Auto" Width="50" FontSize="22">
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                        <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">7:</ListBoxItem>
+                                    </Border>
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                        <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">8:</ListBoxItem>
+                                    </Border>
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                        <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">9:</ListBoxItem>
+                                    </Border>
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                        <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">10:</ListBoxItem>
+                                    </Border>
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                        <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">11:</ListBoxItem>
+                                    </Border>
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                        <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">12:</ListBoxItem>
+                                    </Border>
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                        <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">13:</ListBoxItem>
+                                    </Border>
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                        <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">14:</ListBoxItem>
+                                    </Border>
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                        <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">15:</ListBoxItem>
+                                    </Border>
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                        <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">16:</ListBoxItem>
+                                    </Border>
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                        <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">17:</ListBoxItem>
+                                    </Border>
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                        <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">18:</ListBoxItem>
+                                    </Border>
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                        <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">19:</ListBoxItem>
+                                    </Border>
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                        <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">20:</ListBoxItem>
+                                    </Border>
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                        <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">21:</ListBoxItem>
+                                    </Border>
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                        <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">22:</ListBoxItem>
+                                    </Border>
+                                </ListBox>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <ListBox BorderThickness="0"
                         ItemTemplate="{StaticResource TermItem}"
                         Width="Auto" Name="LbSchedulePon"
                         ItemsSource="{Binding MainListPon}"
                         MouseMove="MainWindow_MouseMove"
                         DragEnter="MainWindow_DragEnter"                         
                              >
-                        <ListBox.Resources>
-                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
-                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
-                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-                        </ListBox.Resources>
-                    </ListBox>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                    <ListBox BorderThickness="0"
+                                    <ListBox.Resources>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                                    </ListBox.Resources>
+                                </ListBox>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <ListBox BorderThickness="0"
                         ItemTemplate="{StaticResource TermItem}"
                         Width="Auto" Name="LbScheduleUto"
                         ItemsSource="{Binding MainListUto}"
                         MouseMove="MainWindow_MouseMove"
                         DragEnter="MainWindow_DragEnter"
                              >
-                        <ListBox.Resources>
-                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
-                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
-                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-                        </ListBox.Resources>
-                    </ListBox>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                    <ListBox BorderThickness="0"
+                                    <ListBox.Resources>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                                    </ListBox.Resources>
+                                </ListBox>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <ListBox BorderThickness="0"
                         ItemTemplate="{StaticResource TermItem}"
                         Width="Auto" Name="LbScheduleSre"
                         ItemsSource="{Binding MainListSre}"
@@ -211,62 +213,64 @@
                         DragEnter="MainWindow_DragEnter"
                          
                              >
-                        <ListBox.Resources>
-                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
-                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
-                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-                        </ListBox.Resources>
-                    </ListBox>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <ListBox BorderThickness="0"
+                                    <ListBox.Resources>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                                    </ListBox.Resources>
+                                </ListBox>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <ListBox BorderThickness="0"
                         ItemTemplate="{StaticResource TermItem}"
                         Width="Auto" Name="LbScheduleCet"
                         ItemsSource="{Binding MainListCet}"
                         MouseMove="MainWindow_MouseMove"
                         DragEnter="MainWindow_DragEnter"                         
                              >
-                        <ListBox.Resources>
-                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
-                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
-                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-                        </ListBox.Resources>
-                    </ListBox>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <ListBox BorderThickness="0"
+                                    <ListBox.Resources>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                                    </ListBox.Resources>
+                                </ListBox>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <ListBox BorderThickness="0"
                         ItemTemplate="{StaticResource TermItem}"
                         Width="Auto" Name="LbSchedulePet"
                         ItemsSource="{Binding MainListPet}"
                         MouseMove="MainWindow_MouseMove"
                         DragEnter="MainWindow_DragEnter"                         
                              >
-                            <ListBox.Resources>
-                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
-                                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
-                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-                            </ListBox.Resources>
-                        </ListBox>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <ListBox BorderThickness="0"
+                                    <ListBox.Resources>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                                    </ListBox.Resources>
+                                </ListBox>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <ListBox BorderThickness="0"
                         ItemTemplate="{StaticResource TermItem}"
                         Width="Auto" Name="LbScheduleSub"
                         ItemsSource="{Binding MainListSub}"
                         MouseMove="MainWindow_MouseMove"
                         DragEnter="MainWindow_DragEnter"                         
                              >
-                            <ListBox.Resources>
-                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
-                                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
-                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-                            </ListBox.Resources>
+                                    <ListBox.Resources>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                                    </ListBox.Resources>
+                                </ListBox>
+                            </ListBoxItem>
                         </ListBox>
-                    </ListBoxItem>
-                </ListBox>
-            </Grid>
-
-
-        </Grid>
-    </DockPanel>
+                    </Grid>
+                </Grid>
+            </DockPanel>
+        </TabItem>
+        <TabItem Header="Demo tab">
+        </TabItem>
+    </TabControl>
 </Window>
