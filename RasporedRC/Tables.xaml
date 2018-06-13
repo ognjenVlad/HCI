@@ -8,7 +8,7 @@
         Title="Tabelarni prikaz" Height="400" Width="750" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <local:ListToStringConverter x:Key="ListToStringConverter" />
-
+        
     </Window.Resources>
     <Grid>
         <DockPanel>
@@ -17,6 +17,7 @@
                 <TabItem Header="Učionice">
                     <ScrollViewer Margin="0,1,0,-1" >
                         <Grid>
+                            
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
@@ -70,7 +71,7 @@
                             <Label Grid.Row="2" Margin="0,0,250,46"></Label>
                             <DataGrid Grid.Row="4" Grid.ColumnSpan="3" Name="ucionice" IsReadOnly="True" ItemsSource="{Binding classrooms}" CanUserResizeColumns="False" 
           CanUserResizeRows="False" CanUserSortColumns="True" AutoGenerateColumns="False" Margin="0,0,39,0">
-
+                                
                                 <DataGrid.Columns>
 
                                     <DataGridTextColumn Width ="100" Header="Oznaka" Binding="{Binding label}">
@@ -87,7 +88,13 @@
                                             </Style>
                                         </DataGridTextColumn.ElementStyle>
                                     </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Broj&#x0a;mesta" Binding="{Binding slots}"/>
+                                    <DataGridTextColumn Header="Broj&#x0a;mesta" Binding="{Binding slots}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style>
+                                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
 
                                     <DataGridTextColumn Header="Projekotor" Binding="{Binding projector}"/>
 
