@@ -11,14 +11,13 @@ namespace RasporedRC.Model
     public class Term : INotifyPropertyChanged
     {
         private string subjectId;
-        private int termId;
         private string courseId;
+        private string subjectName;
+        private string courseName;
         private string displayText;
         private string toolTipText;
         private int heightOfElem;
         private Brush bgColor;
-        private bool isAllowed;
-        private Brush borderColor;
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
@@ -29,25 +28,25 @@ namespace RasporedRC.Model
             }
         }
 
-        public Term(string subjectId, int termId, string courseId)
+        public Term(string courseId,string courseName,string subjectId,string subjectName)
         {
             this.subjectId = subjectId;
-            this.termId = termId;
+            this.subjectName = subjectName;
             this.courseId = courseId;
+            this.courseName = courseName;
             displayText = "";
 
             updateDisplay();
+            updateTooltip();
 
             if (subjectId.Equals(""))
             {
                 BgColor = new SolidColorBrush(Colors.LightGray);
-                ToolTipText = "15 minuta";
                 HeightOfElem = 10;
             }
             else
             {
                 BgColor = new SolidColorBrush(Colors.White);
-                this.toolTipText = "Smer: " + courseId + "\nPredmet: " + subjectId;
                 HeightOfElem = 32;
             }
 
@@ -58,15 +57,20 @@ namespace RasporedRC.Model
             get { return subjectId; }
             set { subjectId = value; }
         }
-        public int TermId
-        {
-            get { return termId; }
-            set { termId = value; }
-        }
         public string CourseId
         {
             get { return courseId; }
             set { courseId = value; }
+        }
+        public string SubjectName
+        {
+            get { return subjectName; }
+            set { subjectName = value; }
+        }
+        public string CourseName
+        {
+            get { return courseName; }
+            set { courseName = value; }
         }
         public Brush BgColor
         {
@@ -77,26 +81,6 @@ namespace RasporedRC.Model
                 OnPropertyChanged("BgColor");
             }
             
-        }
-        public bool IsAllowed
-        {
-            get { return isAllowed; }
-            set
-            {
-                isAllowed = value;
-                OnPropertyChanged("IsAllowed");
-                if (isAllowed)
-                    BorderColor = new SolidColorBrush(Colors.Green);
-            }
-        }
-        public Brush BorderColor
-        {
-            get { return borderColor; }
-            set
-            {
-                borderColor = value;
-                OnPropertyChanged("BorderColor");
-            }
         }
         public int HeightOfElem
         {
@@ -126,6 +110,12 @@ namespace RasporedRC.Model
             }
         }
 
+        public void update()
+        {
+            this.updateDisplay();
+            this.updateTooltip();
+        }
+
         private void updateDisplay()
         {
             if(courseId == "")
@@ -151,5 +141,17 @@ namespace RasporedRC.Model
             }
         }
 
+        private void updateTooltip()
+        {
+            if (courseId == "")
+            {
+                this.ToolTipText = "15 minuta";
+                return;
+            }
+            else
+            {
+                this.toolTipText = "Smer: " + courseName + "\nPredmet: " + subjectName;
+            }
+        }
     }
 }

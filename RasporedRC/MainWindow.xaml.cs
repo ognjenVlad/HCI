@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace RasporedRC
 {
@@ -110,11 +114,15 @@ namespace RasporedRC
         }
 
         private List<Term> unassignedTerms = new List<Term>();
+        private List<Term> allTerms = new List<Term>();
         private List<ObservableCollection<Term>> weekDisplay = new List<ObservableCollection<Term>>();
         Dictionary<string, List<ObservableCollection<Term>>> classroomsWeek;
 
         public MainWindow()
         {
+            loadData();
+            Closing += WindowClosed;
+
             InitializeComponent();
             this.DataContext = this;
 
@@ -130,12 +138,16 @@ namespace RasporedRC
 
 
 
-            unassignedTerms.Add(new Term("Ovo je jedan jako dobar predmet", 1, "SW"));
-            unassignedTerms.Add(new Term("Predmet2", 2, "SW"));
-            unassignedTerms.Add(new Term("Predmet3", 3, "SW"));
-            unassignedTerms.Add(new Term("Predmet4", 4, "SW"));
-            unassignedTerms.Add(new Term("Predmet5", 5, "SW"));
-            unassignedTerms.Add(new Term("Predmet6", 6, "SW"));
+            unassignedTerms.Add(new Term("SW", "Software Engineering", "MRS", "Modelovanje racunarskog softvera"));
+            unassignedTerms.Add(new Term("SW","Software Engineering","HCI","Human computer interaction"));
+            unassignedTerms.Add(new Term("SW", "Software Engineering", "LPRS", "Necu ovo kucati sve"));
+            unassignedTerms.Add(new Term("SW", "Software Engineering", "WEB", "Web"));
+            unassignedTerms.Add(new Term("SW", "Software Engineering", "PP", "Programski prevodioci"));
+            unassignedTerms.Add(new Term("SW", "Software Engineering", "HCI", "Human computer interaction"));
+
+            Subject subjekat = new Subject("p1", "Predmet", "Opis", new Course(), 15, 3 , 3, true, false, true, "Windows");
+
+
 
             SideList = new ObservableCollection<Term>(unassignedTerms);
 
@@ -269,6 +281,70 @@ namespace RasporedRC
             LbScheduleSub.ItemContainerStyle = styleSchedule;
         }
 
+        private void checkClassrooms()
+        {
+            foreach(var week in classroomsWeek)
+            {
+                foreach(var dayModel in week.Value)
+                {
+                    foreach(Term t in dayModel)
+                    {
+                        if(t.SubjectId != "")
+                        {
+                            if (!checkTermClassroom(t, week.Key))
+                            {
+                                var source = getParentOC(t);
+                                int index = source.IndexOf(t);
+                                source.RemoveAt(index);
+                                source.Insert(index, new Term("", "", "",""));
+                                source.Insert(index, new Term("", "", "", ""));
+                                source.Insert(index, new Term("", "", "", ""));
+                                unassignedTerms.Add(t);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void updateTermBySubject(string old_id,Subject sub)
+        {
+            foreach (var week in classroomsWeek)
+            {
+                foreach (var dayModel in week.Value)
+                {
+                    foreach (Term t in dayModel)
+                    {
+                        if (t.SubjectId == old_id)
+                        {
+                            t.SubjectId = sub.label;
+                            t.SubjectName = sub.name;
+                            t.update();
+                        }
+                    }
+                }
+            }
+        }
+
+        private void updateTermByCourse(string old_id, Subject cour)
+        {
+            foreach (var week in classroomsWeek)
+            {
+                foreach (var dayModel in week.Value)
+                {
+                    foreach (Term t in dayModel)
+                    {
+                        if (t.CourseId == old_id)
+                        {
+                            t.CourseId = cour.label;
+                            t.CourseName = cour.name;
+                            t.update();
+                        }
+                    }
+                }
+            }
+        }
+
         public void DodajUcionicu(Object sender, RoutedEventArgs e)
         {
             addClassroom("UCIONICA2");
@@ -284,12 +360,6 @@ namespace RasporedRC
             MainListPet = classroomsWeek[id][4];
             MainListSub = classroomsWeek[id][5];
 
-            LbSchedulePon.ItemsSource = MainListPon;
-            LbScheduleUto.ItemsSource = MainListUto;
-            LbScheduleSre.ItemsSource = MainListSre;
-            LbScheduleCet.ItemsSource = MainListCet;
-            LbSchedulePet.ItemsSource = MainListPet;
-            LbScheduleSub.ItemsSource = MainListSub;
 
             weekDisplay[0] = classroomsWeek[id][0];
             weekDisplay[1] = classroomsWeek[id][1];
@@ -373,7 +443,7 @@ namespace RasporedRC
 
                 for(int j = 0; j < 64; j++)
                 {
-                    classroomsWeek[id][i].Add(new Term("", 10, ""));
+                    classroomsWeek[id][i].Add(new Term("", "", "", ""));
                 }
             }
         }
@@ -474,9 +544,9 @@ namespace RasporedRC
                             target_parent.RemoveAt(targetIndex);
                             target_parent.Insert(targetIndex, source);
                             source_parent.RemoveAt(sourceIndex);
-                            source_parent.Insert(sourceIndex, new Term("", 10,""));
-                            source_parent.Insert(sourceIndex, new Term("", 10, ""));
-                            source_parent.Insert(sourceIndex, new Term("", 10, ""));
+                            source_parent.Insert(sourceIndex, new Term("", "", "", ""));
+                            source_parent.Insert(sourceIndex, new Term("", "", "", ""));
+                            source_parent.Insert(sourceIndex, new Term("", "", "", ""));
                         }
 
                     }
@@ -486,31 +556,17 @@ namespace RasporedRC
 
         private ObservableCollection<Term> getParentOC(Term to)
         {
-            if (MainListPon.Contains(to))
+            foreach(var week in classroomsWeek)
             {
-                return MainListPon;
-            }else if (MainListUto.Contains(to))
-            {
-                return MainListUto;
-            }else if (MainListSre.Contains(to))
-            {
-                return MainListSre;
+                foreach(var dayModel in week.Value)
+                {
+                    if (dayModel.Contains(to))
+                    {
+                        return dayModel;
+                    }
+                }
             }
-            else if (MainListCet.Contains(to))
-            {
-                return MainListCet;
-            }
-            else if (MainListPet.Contains(to))
-            {
-                return MainListPet;
-            }
-            else if(MainListSub.Contains(to))
-            {
-                return MainListSub;
-            }else
-            {
-                return SideList;
-            }
+            return SideList;
         }
 
         private void SideWindowElem_Drop(object sender, DragEventArgs e)
@@ -535,9 +591,9 @@ namespace RasporedRC
                 {
                     sourceIndex = source_parent.IndexOf(source);
                     source_parent.RemoveAt(sourceIndex);
-                    source_parent.Insert(sourceIndex, new Term("", 0, ""));
-                    source_parent.Insert(sourceIndex, new Term("", 0, ""));
-                    source_parent.Insert(sourceIndex, new Term("", 0, ""));
+                    source_parent.Insert(sourceIndex, new Term("", "", "", ""));
+                    source_parent.Insert(sourceIndex, new Term("", "", "", ""));
+                    source_parent.Insert(sourceIndex, new Term("", "", "", ""));
                     SideList.Insert(targetIndex, source);
                     unassignedTerms.Add(source);
                 }
@@ -566,9 +622,9 @@ namespace RasporedRC
                 int sourceIndex = source_parent.IndexOf(source);
 
                 source_parent.RemoveAt(sourceIndex);
-                source_parent.Insert(sourceIndex, new Term("", 0, ""));
-                source_parent.Insert(sourceIndex, new Term("", 0, ""));
-                source_parent.Insert(sourceIndex, new Term("", 0, ""));
+                source_parent.Insert(sourceIndex, new Term("", "", "", ""));
+                source_parent.Insert(sourceIndex, new Term("", "", "", ""));
+                source_parent.Insert(sourceIndex, new Term("", "", "", ""));
                 SideList.Add(source);
                 unassignedTerms.Add(source);
             }
@@ -594,6 +650,58 @@ namespace RasporedRC
             LbSide.Width = 8;
         }
 
+        private void loadData()
+        {
+            string path = Directory.GetParent(Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString();
+            var serializer = new XmlSerializer(typeof(DataWrapper));
+            var dataWrapper = new DataWrapper();
+            try
+            {
+                using (var reader = XmlReader.Create(path + "\\Files\\dataSet.xml"))
+                {
+                    dataWrapper = (DataWrapper)serializer.Deserialize(reader);
+                }
+
+                subjects = dataWrapper.Subs;
+                courses = dataWrapper.Cours;
+                classrooms = dataWrapper.Classrms;
+                softwares = dataWrapper.Softs;
+                unassignedTerms = dataWrapper.Unassigned;
+
+                classroomsWeek = dataWrapper.Schedule;
+
+            }
+            catch
+            {
+                subjects = new ObservableCollection<Subject>();
+                courses = new ObservableCollection<Course>();
+                classrooms = new ObservableCollection<Classroom>();
+                softwares = new ObservableCollection<Software>();
+                unassignedTerms = new List<Term>();
+
+                classroomsWeek = new Dictionary<string, List<ObservableCollection<Term>>>();
+                return;
+            }
+        }
+        public void WindowClosed(object sender, CancelEventArgs e)
+        {
+            string path = Directory.GetParent(Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString();
+            var serializer = new XmlSerializer(typeof(DataWrapper));
+            var dataWrapper = new DataWrapper();
+
+            dataWrapper.Subs = subjects;
+            dataWrapper.Cours = courses;
+            dataWrapper.Classrms = classrooms;
+            dataWrapper.Softs = softwares;
+            dataWrapper.Unassigned = unassignedTerms;
+
+            dataWrapper.Schedule = classroomsWeek;
+
+            using (var writer = XmlWriter.Create(path + "\\Files\\dataSet.xml"))
+            {
+                serializer.Serialize(writer, dataWrapper);
+            }
+        }
     }
 
 }

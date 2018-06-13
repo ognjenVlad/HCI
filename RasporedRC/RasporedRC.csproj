@@ -73,6 +73,7 @@
     <Compile Include="Helpers\EmptyValidation.cs" />
     <Compile Include="Helpers\ListToStringConverter.cs" />
     <Compile Include="Helpers\ObsevableCollection.cs" />
+    <Compile Include="Model\DataWrapper.cs" />
     <Compile Include="Model\Term.cs" />
     <Compile Include="Tables.xaml.cs">
       <DependentUpon>Tables.xaml</DependentUpon>
