@@ -9,11 +9,37 @@ namespace RasporedRC.Model
 {
     public class Course: INotifyPropertyChanged
     {
-        public String label { get; set; }
+        private String Label;
+        public String label
+        {
+            get { return this.Label; }
+            set
+            {
+                Label = value;
+                OnPropertyChanged("label");
+            }
+        }
 
-        public String description { get; set; }
-
-        public String name { get; set; }
+        private String Description;
+        public String description
+        {
+            get { return this.Description; }
+            set
+            {
+                Description = value;
+                OnPropertyChanged("description");
+            }
+        }
+        private String Name;
+        public String name
+        {
+            get { return this.Name; }
+            set
+            {
+                Name = value;
+                OnPropertyChanged("name");
+            }
+        }
         private String c;
         public String startingYear
         {

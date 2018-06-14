@@ -98,7 +98,7 @@
             <Label Grid.Row="4" Grid.Column="0">Naziv predmeta:</Label>
             <TextBox x:Name="naziv" Grid.Row="4" Grid.Column="1" Margin="5">
                 <TextBox.Text>
-                    <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
 
                         <Binding.ValidationRules>
                             <local:EmptyValidation/>

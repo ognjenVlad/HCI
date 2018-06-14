@@ -63,6 +63,7 @@ namespace RasporedRC
             c.name = this.CourseName;
             c.startingYear = this.Year.Split(null)[0];
             c.description = this.Description;
+            Console.WriteLine(c.name);
             MainWindow.courses.Add(c);
 
             MessageBox.Show("Smer uspešno dodat!", "Dodavanje smera", MessageBoxButton.OK, MessageBoxImage.Information);

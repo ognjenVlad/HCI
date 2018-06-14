@@ -102,6 +102,7 @@ namespace RasporedRC
             
             foreach(Software s in MainWindow.softwares) {
 
+                
                 this.Software.Add(s.label);
             }
              

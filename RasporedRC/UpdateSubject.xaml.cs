@@ -221,6 +221,7 @@ namespace RasporedRC
             this.subjectToUpdate.tableExists = TableCheckedT;
             this.subjectToUpdate.smartTable = SmartTableCheckedT;
             this.subjectToUpdate.projector = ProjectorCheckedT;
+            this.subjectToUpdate.os = this.SelectedOS;
             this.subjectToUpdate.course = findCourse(this.SelectedCourse);
             extractSoftwares();
             MainWindow.checkClassrooms();

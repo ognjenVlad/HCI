@@ -10,11 +10,37 @@ namespace RasporedRC.Model
 {
     public class Subject: INotifyPropertyChanged
     {
-        public String label { get; set; }
+        private String Label;
+        public String label
+        {
+            get { return this.Label; }
+            set
+            {
+                Label = value;
+                OnPropertyChanged("label");
+            }
+        }
 
-        public String description { get; set; }
-
-        public String name { get; set; }
+        private String Description;
+        public String description
+        {
+            get { return this.Description; }
+            set
+            {
+                Description = value;
+                OnPropertyChanged("description");
+            }
+        }
+        private String Name;
+        public String name
+        {
+            get { return this.Name; }
+            set
+            {
+                Name = value;
+                OnPropertyChanged("name");
+            }
+        }
         public Course c;
         public Course course
         {
@@ -25,9 +51,38 @@ namespace RasporedRC.Model
                 OnPropertyChanged("course");
             }
         }
-public int groupSize { get; set; }
-        public int numberOfClasses { get; set; }
-        public int numberOfAppointment { get; set; }
+       
+        private int gs;
+        public int groupSize
+        {
+            get { return this.gs; }
+            set
+            {
+                gs = value;
+                OnPropertyChanged("groupSize");
+            }
+        }
+        private int noc;
+        public int numberOfClasses
+        {
+            get { return this.noc; }
+            set
+            {
+                noc = value;
+                OnPropertyChanged("numberOfClasses");
+            }
+        }
+        private int noa;
+        public int numberOfAppointment
+        {
+            get { return this.noa; }
+            set
+            {
+                noa = value;
+                OnPropertyChanged("numberOfAppointment");
+            }
+        }
+        
         private bool p;
         public bool projector
         {
@@ -58,7 +113,16 @@ public int groupSize { get; set; }
                 OnPropertyChanged("smartTable");
             }
         }
-        public String os { get; set; }
+        private string OS;
+        public string os
+        {
+            get { return this.OS; }
+            set
+            {
+                OS = value;
+                OnPropertyChanged("os");
+            }
+        }
         private List<Software> listSoft;
         public List<Software> software
         {

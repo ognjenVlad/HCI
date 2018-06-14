@@ -120,7 +120,6 @@ namespace RasporedRC
 
         public MainWindow()
         {
-            loadData();
             Closing += WindowClosed;
 
             InitializeComponent();

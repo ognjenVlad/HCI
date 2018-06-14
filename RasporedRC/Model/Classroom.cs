@@ -10,11 +10,33 @@ namespace RasporedRC.Model
 {
     public class Classroom: INotifyPropertyChanged
     {
-        public String label { get; set; }
-
-        public String description { get; set; }
-
-        public int slots { get; set; }
+        private String Label;
+        public String label {
+            get { return this.Label; }
+            set
+            {
+                Label = value;
+                OnPropertyChanged("label");
+            }
+        }
+        private String Description;
+        public String description
+        {
+            get { return this.Description; }
+            set {
+                Description = value;
+                OnPropertyChanged("description");
+            }
+        }
+        private int Slots;
+        public int slots {
+            get { return this.Slots; }
+            set
+            {
+                Slots = value;
+                OnPropertyChanged("slots");
+            }
+        }
         private bool p;
         private bool st;
         public bool projector
@@ -41,7 +63,16 @@ namespace RasporedRC.Model
                 OnPropertyChanged("smartTable");
             }
         }
-        public String os { get; set; }
+        private string OS;
+        public string os
+        {
+            get { return this.OS; }
+            set
+            {
+                OS = value;
+                OnPropertyChanged("os");
+            }
+        }
         public List<Software> listSoft;
         public List<Software> software
         {

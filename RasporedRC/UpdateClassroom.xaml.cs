@@ -173,8 +173,9 @@ namespace RasporedRC
             MainWindow.classroomToUpdate.tableExists = TableCheckedT;
             this.classroomToUpdate.smartTable = SmartTableCheckedT;
             this.classroomToUpdate.projector = ProjectorCheckedT;
+            this.classroomToUpdate.os = this.SelectedOS;
             extractSoftwares();
-            MainWindow.checkClassrooms();
+            //MainWindow.checkClassrooms();
             MessageBox.Show("Učionica uspešno promenjna!", "Izmena učionice", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
         }
