@@ -120,15 +120,14 @@ namespace RasporedRC
 
         public MainWindow()
         {
-            loadData();
-            Closing += WindowClosed;
-
             InitializeComponent();
             this.DataContext = this;
 
             InitStyles();
-
+            loadData();
+            Closing += WindowClosed;
             classroomsWeek = new Dictionary<string, List<ObservableCollection<Term>>>();
+
             weekDisplay.Add(new ObservableCollection<Term>());
             weekDisplay.Add(new ObservableCollection<Term>());
             weekDisplay.Add(new ObservableCollection<Term>());
@@ -144,9 +143,6 @@ namespace RasporedRC
             unassignedTerms.Add(new Term("SW", "Software Engineering", "WEB", "Web"));
             unassignedTerms.Add(new Term("SW", "Software Engineering", "PP", "Programski prevodioci"));
             unassignedTerms.Add(new Term("SW", "Software Engineering", "HCI", "Human computer interaction"));
-
-            Subject subjekat = new Subject("p1", "Predmet", "Opis", new Course(), 15, 3 , 3, true, false, true, "Windows");
-
 
 
             SideList = new ObservableCollection<Term>(unassignedTerms);
@@ -238,6 +234,7 @@ namespace RasporedRC
             sub1.software.Add(s);
             subjects.Add(sub);
             subjects.Add(sub1);
+
             InitializeComponent();
     }
 
@@ -345,6 +342,35 @@ namespace RasporedRC
             }
         }
 
+        private void removeTermBySubject(string sub_id)
+        {
+            foreach (var week in classroomsWeek)
+            {
+                foreach (var dayModel in week.Value)
+                {
+                    foreach (Term t in dayModel)
+                    {
+                        if (t.SubjectId == sub_id)
+                        {
+                            var source = getParentOC(t);
+                            int index = source.IndexOf(t);
+                            source.RemoveAt(index);
+                            source.Insert(index, new Term("", "", "", ""));
+                            source.Insert(index, new Term("", "", "", ""));
+                            source.Insert(index, new Term("", "", "", ""));
+                        }
+                    }
+                }
+            }
+        }
+
+        private void addTermsFromSubject(Subject s)
+        {
+            for (int i = 0; i < s.numberOfClasses; i++)
+            {
+                unassignedTerms.Add(new Term(s.c.label, s.c.name, s.label, s.name));
+            }
+        }
         public void DodajUcionicu(Object sender, RoutedEventArgs e)
         {
             addClassroom("UCIONICA2");
@@ -657,10 +683,11 @@ namespace RasporedRC
             var dataWrapper = new DataWrapper();
             try
             {
-                using (var reader = XmlReader.Create(path + "\\Files\\dataSet.xml"))
+                using (var reader = XmlReader.Create(path + "\\dataSet.xml"))
                 {
                     dataWrapper = (DataWrapper)serializer.Deserialize(reader);
                 }
+
 
                 subjects = dataWrapper.Subs;
                 courses = dataWrapper.Cours;
@@ -668,7 +695,18 @@ namespace RasporedRC
                 softwares = dataWrapper.Softs;
                 unassignedTerms = dataWrapper.Unassigned;
 
-                classroomsWeek = dataWrapper.Schedule;
+                classroomsWeek = dataWrapper.generateScheduleDict();
+
+                foreach(var cr in classroomsWeek)
+                {
+                    foreach(var day in cr.Value)
+                    {
+                        foreach(var term in day)
+                        {
+                            term.updateColor();
+                        }
+                    }
+                }
 
             }
             catch
@@ -690,14 +728,20 @@ namespace RasporedRC
             var dataWrapper = new DataWrapper();
 
             dataWrapper.Subs = subjects;
+
+            Console.WriteLine(dataWrapper.Subs.Count);
             dataWrapper.Cours = courses;
             dataWrapper.Classrms = classrooms;
             dataWrapper.Softs = softwares;
             dataWrapper.Unassigned = unassignedTerms;
 
-            dataWrapper.Schedule = classroomsWeek;
+            dataWrapper.loadDictionary(classroomsWeek);
 
-            using (var writer = XmlWriter.Create(path + "\\Files\\dataSet.xml"))
+
+            StreamWriter sw = new StreamWriter(path + "\\dataSet.xml");
+            sw.Close();
+
+            using (var writer = XmlWriter.Create(path + "\\dataSet.xml"))
             {
                 serializer.Serialize(writer, dataWrapper);
             }
