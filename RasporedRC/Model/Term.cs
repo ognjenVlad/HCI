@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using System.Xml.Serialization;
 
 namespace RasporedRC.Model
 {
+    [Serializable]
     public class Term : INotifyPropertyChanged
     {
         private string subjectId;
@@ -28,6 +30,10 @@ namespace RasporedRC.Model
             }
         }
 
+        public Term()
+        {
+
+        }
         public Term(string courseId,string courseName,string subjectId,string subjectName)
         {
             this.subjectId = subjectId;
@@ -72,6 +78,8 @@ namespace RasporedRC.Model
             get { return courseName; }
             set { courseName = value; }
         }
+
+        [XmlIgnore]
         public Brush BgColor
         {
             get { return bgColor; }
@@ -114,6 +122,18 @@ namespace RasporedRC.Model
         {
             this.updateDisplay();
             this.updateTooltip();
+        }
+
+        public void updateColor()
+        {
+            if(this.subjectId == "")
+            {
+                bgColor = new SolidColorBrush(Colors.LightGray);
+            }
+            else
+            {
+                bgColor = new SolidColorBrush(Colors.White);
+            }
         }
 
         private void updateDisplay()

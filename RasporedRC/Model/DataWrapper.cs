@@ -9,14 +9,41 @@ using System.Xml.Serialization;
 
 namespace RasporedRC.Model
 {
-    class DataWrapper
+    [Serializable]
+    public class DataWrapper
     {
         ObservableCollection<Subject> subs;
         ObservableCollection<Course> cours;
         ObservableCollection<Software> softs;
         ObservableCollection<Classroom> classrms;
         List<Term> unassigned;
-        Dictionary<string, List<ObservableCollection<Term>>> schedule;
+        List<List<ObservableCollection<Term>>> schedule_week;
+        List<string> classroom_ids;
+
+        public DataWrapper()
+        {
+            classroom_ids = new List<string>();
+            schedule_week = new List<List<ObservableCollection<Term>>>();
+        }
+
+        public void loadDictionary(Dictionary<string, List<ObservableCollection<Term>>> schedule)
+        {
+            foreach(var cr_schedule in schedule)
+            {
+                classroom_ids.Add(cr_schedule.Key);
+                schedule_week.Add(cr_schedule.Value);
+            }
+        }
+
+        public Dictionary<string,List<ObservableCollection<Term>>> generateScheduleDict()
+        {
+            Dictionary<string,List<ObservableCollection<Term>>> retVal = new Dictionary<string, List<ObservableCollection<Term>>>();
+            for(int i = 0; i < classroom_ids.Count;i++)
+            {
+                retVal.Add(classroom_ids[i], schedule_week[i]);
+            }
+            return retVal;
+        }
 
         public ObservableCollection<Subject> Subs
         {
@@ -43,10 +70,15 @@ namespace RasporedRC.Model
             get { return unassigned; }
             set { unassigned = value; }
         }
-        public Dictionary<string,List<ObservableCollection<Term>>> Schedule
+        public List<string> Classroom_ids
         {
-            get { return schedule; }
-            set { schedule = value; }
+            get { return classroom_ids; }
+            set { classroom_ids = value; }
+        }
+        public List<List<ObservableCollection<Term>>> Schedule_week
+        {
+            get { return schedule_week; }
+            set { schedule_week = value; }
         }
     }
 
