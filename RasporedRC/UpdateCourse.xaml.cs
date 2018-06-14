@@ -26,6 +26,11 @@ namespace RasporedRC
             get;
             set;
         }
+        public String oldID
+        {
+            get;
+            set;
+        }
         private void _DatePicker_CalendarOpened(object sender, RoutedEventArgs e)
         {
             // Finding the calendar that is child of stadart WPF DatePicker
@@ -38,12 +43,15 @@ namespace RasporedRC
         {
 
             this.courseToUpdate.startingYear = this.courseToUpdate.startingYear.Split(null)[0];
+            MainWindow.updateTermByCourse(this.oldID, this.courseToUpdate);
             MessageBox.Show("Smer uspešno promenjen!", "Izmena smera", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
         }
         public UpdateCourse()
         {
             this.courseToUpdate = MainWindow.courseToUpdate;
+            this.oldID = this.courseToUpdate.label;
+
             this.DataContext = this;
             InitializeComponent();
         }

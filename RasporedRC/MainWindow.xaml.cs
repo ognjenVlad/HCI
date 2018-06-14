@@ -107,16 +107,16 @@ namespace RasporedRC
             set;
         }
 
-        public ObservableCollection<Term> SideList
+        public static ObservableCollection<Term> SideList
         {
             get;
             set;
         }
 
-        private List<Term> unassignedTerms = new List<Term>();
+        private static List<Term> unassignedTerms = new List<Term>();
         private List<Term> allTerms = new List<Term>();
         private List<ObservableCollection<Term>> weekDisplay = new List<ObservableCollection<Term>>();
-        Dictionary<string, List<ObservableCollection<Term>>> classroomsWeek;
+        private static Dictionary<string, List<ObservableCollection<Term>>> classroomsWeek;
 
         public MainWindow()
         {
@@ -281,7 +281,7 @@ namespace RasporedRC
             LbScheduleSub.ItemContainerStyle = styleSchedule;
         }
 
-        private void checkClassrooms()
+        public static void checkClassrooms()
         {
             foreach(var week in classroomsWeek)
             {
@@ -307,7 +307,7 @@ namespace RasporedRC
             }
         }
 
-        private void updateTermBySubject(string old_id,Subject sub)
+        public static void updateTermBySubject(string old_id,Subject sub)
         {
             foreach (var week in classroomsWeek)
             {
@@ -326,7 +326,7 @@ namespace RasporedRC
             }
         }
 
-        private void updateTermByCourse(string old_id, Subject cour)
+        public static void updateTermByCourse(string old_id, Course cour)
         {
             foreach (var week in classroomsWeek)
             {
@@ -383,7 +383,7 @@ namespace RasporedRC
             }
         }
 
-        private bool checkTermClassroom(Term term,string classroomId)
+        private static bool checkTermClassroom(Term term,string classroomId)
         {
             Subject sub = null;
             Classroom croom = null;
@@ -554,7 +554,7 @@ namespace RasporedRC
             }
         }
 
-        private ObservableCollection<Term> getParentOC(Term to)
+        private static ObservableCollection<Term> getParentOC(Term to)
         {
             foreach(var week in classroomsWeek)
             {

@@ -78,6 +78,12 @@ namespace RasporedRC
         {
             get;
             set;
+
+        }
+        public String oldID
+        {
+            get;
+            set;
         }
         public BindingList<Software> SelectedSoftwares
         {
@@ -114,6 +120,7 @@ namespace RasporedRC
                 this.Courses.Add(s.label);
             }
             this.subjectToUpdate = MainWindow.subjectToUpdate;
+            this.oldID = this.subjectToUpdate.label;
             this.DataContext = this;
 
 
@@ -216,7 +223,8 @@ namespace RasporedRC
             this.subjectToUpdate.projector = ProjectorCheckedT;
             this.subjectToUpdate.course = findCourse(this.SelectedCourse);
             extractSoftwares();
-
+            MainWindow.checkClassrooms();
+            MainWindow.updateTermBySubject(this.oldID, this.subjectToUpdate);
             MessageBox.Show("Predmet uspešno promenjnen!", "Izmena učionice", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
 
