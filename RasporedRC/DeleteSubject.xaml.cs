@@ -125,7 +125,7 @@ namespace RasporedRC
                 }
             }
             MainWindow.subjects.Remove(sub);
-            
+            MainWindow.removeTermBySubject(sub.label);
         }
         public void deleteClassroom(object sender, RoutedEventArgs e)
         {
@@ -139,6 +139,7 @@ namespace RasporedRC
                 }
             }
             MainWindow.classrooms.Remove(sub);
+            MainWindow.removeClassroom(sub.label);
 
         }
         public void deleteSoftware(object sender, RoutedEventArgs e)

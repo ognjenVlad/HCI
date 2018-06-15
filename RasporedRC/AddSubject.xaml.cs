@@ -230,6 +230,7 @@ namespace RasporedRC
                 subject.software.Add(s);
             }
             MainWindow.subjects.Add(subject);
+            MainWindow.addTermsFromSubject(subject);
 
             MessageBox.Show("Predmet uspešno dodat!", "Dodavanje predmeta", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();

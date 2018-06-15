@@ -224,8 +224,8 @@ namespace RasporedRC
             this.subjectToUpdate.os = this.SelectedOS;
             this.subjectToUpdate.course = findCourse(this.SelectedCourse);
             extractSoftwares();
-            MainWindow.checkClassrooms();
             MainWindow.updateTermBySubject(this.oldID, this.subjectToUpdate);
+            MainWindow.checkClassrooms();
             MessageBox.Show("Predmet uspešno promenjnen!", "Izmena učionice", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
 

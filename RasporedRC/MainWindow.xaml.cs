@@ -76,32 +76,32 @@ namespace RasporedRC
             dialog.ShowDialog();
         }
 
-        public ObservableCollection<Term> MainListPon
+        public static ObservableCollection<Term> MainListPon
         {
             get;
             set;
         }
-        public ObservableCollection<Term> MainListUto
+        public static ObservableCollection<Term> MainListUto
         {
             get;
             set;
         }
-        public ObservableCollection<Term> MainListSre
+        public static ObservableCollection<Term> MainListSre
         {
             get;
             set;
         }
-        public ObservableCollection<Term> MainListCet
+        public static ObservableCollection<Term> MainListCet
         {
             get;
             set;
         }
-        public ObservableCollection<Term> MainListPet
+        public static ObservableCollection<Term> MainListPet
         {
             get;
             set;
         }
-        public ObservableCollection<Term> MainListSub
+        public static ObservableCollection<Term> MainListSub
         {
             get;
             set;
@@ -113,59 +113,72 @@ namespace RasporedRC
             set;
         }
 
+        public static String SelectedClassroom
+        {
+            get;
+            set;
+        }
+        public static ObservableCollection<string> classrooms_display
+        {
+            get;
+            set;
+        }
+
+        public static string current_classroom;
         private static List<Term> unassignedTerms = new List<Term>();
-        private List<Term> allTerms = new List<Term>();
-        private List<ObservableCollection<Term>> weekDisplay = new List<ObservableCollection<Term>>();
         private static Dictionary<string, List<ObservableCollection<Term>>> classroomsWeek;
 
         public MainWindow()
         {
-<<<<<<< HEAD
-            Closing += WindowClosed;
-
-=======
->>>>>>> master
             InitializeComponent();
             this.DataContext = this;
 
-            InitStyles();
             loadData();
             Closing += WindowClosed;
-            classroomsWeek = new Dictionary<string, List<ObservableCollection<Term>>>();
+            //classroomsWeek = new Dictionary<string, List<ObservableCollection<Term>>>();
+            InitStyles();
 
-            weekDisplay.Add(new ObservableCollection<Term>());
-            weekDisplay.Add(new ObservableCollection<Term>());
-            weekDisplay.Add(new ObservableCollection<Term>());
-            weekDisplay.Add(new ObservableCollection<Term>());
-            weekDisplay.Add(new ObservableCollection<Term>());
-            weekDisplay.Add(new ObservableCollection<Term>());
+            //SideList = new ObservableCollection<Term>(unassignedTerms);
 
+            SideList = new ObservableCollection<Term>();
 
+            classrooms_display = new ObservableCollection<string>();
+            foreach (var cr in classroomsWeek)
+            {
+                classrooms_display.Add(cr.Key);
+            }
 
-            unassignedTerms.Add(new Term("SW", "Software Engineering", "MRS", "Modelovanje racunarskog softvera"));
-            unassignedTerms.Add(new Term("SW","Software Engineering","HCI","Human computer interaction"));
-            unassignedTerms.Add(new Term("SW", "Software Engineering", "LPRS", "Necu ovo kucati sve"));
-            unassignedTerms.Add(new Term("SW", "Software Engineering", "WEB", "Web"));
-            unassignedTerms.Add(new Term("SW", "Software Engineering", "PP", "Programski prevodioci"));
-            unassignedTerms.Add(new Term("SW", "Software Engineering", "HCI", "Human computer interaction"));
-
-
-            SideList = new ObservableCollection<Term>(unassignedTerms);
-
-            addClassroom("myclass");
-            displayClassroom("myclass");
-
-
-            softwares = new ObservableCollection<Software>();
-            classrooms = new ObservableCollection<Classroom>();
-            subjects = new ObservableCollection<Subject>();
-            courses = new ObservableCollection<Course>();
             OS = new ObservableCollection<string>();
 
             OS.Add("Windows");
             OS.Add("Linux");
             OS.Add("Windows/Linux");
 
+            /*
+            classrooms.Add(new Model.Classroom("l1", "desc", 15, true, false, false, "Windows/Linux"));
+            subjects.Add(new Subject("hci", "human computer interaction", "desc", new Course(), 14, 3, 3, false, false, false,"Windows")); //True
+            subjects.Add(new Subject("hci1", "human computer interaction", "desc", new Course(), 14, 3, 3, true, false, false, "Linux")); //True
+            subjects.Add(new Subject("hci2", "human computer interaction", "desc", new Course(), 14, 3, 3, false, true, false, "Windows")); //False
+
+            Console.WriteLine("True -> " + checkTermClassroom(new Term("", "", "hci", ""), "l1"));
+            Console.WriteLine("True -> " + checkTermClassroom(new Term("", "", "hci1", ""), "l1"));
+            Console.WriteLine("False -> " + checkTermClassroom(new Term("", "", "hci2", ""), "l1"));
+
+            classrooms[0].tableExists = true;
+            classrooms[0].os = "Linux";
+
+            subjects.Add(new Subject("hci3", "human computer interaction", "desc", new Course(), 14, 3, 3, false, false, false, "Windows")); //False
+            subjects.Add(new Subject("hci4", "human computer interaction", "desc", new Course(), 14, 3, 3, false, false, true, "Linux")); //False
+            subjects.Add(new Subject("hci5", "human computer interaction", "desc", new Course(), 14, 3, 3, false, true, false, "Linux")); //True
+
+            Console.WriteLine("False -> " + checkTermClassroom(new Term("", "", "hci3", ""), "l1"));
+            Console.WriteLine("False -> " + checkTermClassroom(new Term("", "", "hci4", ""), "l1"));
+            Console.WriteLine("True -> " + checkTermClassroom(new Term("", "", "hci5", ""), "l1"));
+            
+            softwares = new ObservableCollection<Software>();
+            classrooms = new ObservableCollection<Classroom>();
+            subjects = new ObservableCollection<Subject>();
+            courses = new ObservableCollection<Course>();
 
             Software s = new Software();
             s.name = "Ime";
@@ -239,6 +252,7 @@ namespace RasporedRC
             sub1.software.Add(s);
             subjects.Add(sub);
             subjects.Add(sub1);
+            */
 
             InitializeComponent();
     }
@@ -285,32 +299,45 @@ namespace RasporedRC
 
         public static void checkClassrooms()
         {
+            List<int> remove_elements = new List<int>();
             foreach(var week in classroomsWeek)
             {
                 foreach(var dayModel in week.Value)
                 {
+                    remove_elements.Clear();
                     foreach(Term t in dayModel)
                     {
                         if(t.SubjectId != "")
                         {
                             if (!checkTermClassroom(t, week.Key))
                             {
-                                var source = getParentOC(t);
-                                int index = source.IndexOf(t);
-                                source.RemoveAt(index);
-                                source.Insert(index, new Term("", "", "",""));
-                                source.Insert(index, new Term("", "", "", ""));
-                                source.Insert(index, new Term("", "", "", ""));
+                                int index = dayModel.IndexOf(t);
+                                remove_elements.Add(index);
                                 unassignedTerms.Add(t);
                             }
                         }
                     }
+                    for(int i = remove_elements.Count-1;i>-1;i--)
+                    {
+                        dayModel.RemoveAt(remove_elements[i]);
+                        dayModel.Insert(remove_elements[i], new Term("", "", "", ""));
+                        dayModel.Insert(remove_elements[i], new Term("", "", "", ""));
+                        dayModel.Insert(remove_elements[i], new Term("", "", "", ""));
+                    }
                 }
             }
+            fillSideList(current_classroom);
         }
 
         public static void updateTermBySubject(string old_id,Subject sub)
         {
+            int old_noc = countTermsOfSubject(old_id);
+            if(old_noc != sub.numberOfAppointment)
+            {
+                removeTermBySubject(old_id);
+                addTermsFromSubject(sub);
+                return;
+            }
             foreach (var week in classroomsWeek)
             {
                 foreach (var dayModel in week.Value)
@@ -326,6 +353,41 @@ namespace RasporedRC
                     }
                 }
             }
+            foreach (Term t in unassignedTerms)
+            {
+                if (t.SubjectId == old_id)
+                {
+                    t.SubjectId = sub.label;
+                    t.SubjectName = sub.name;
+                    t.update();
+                }
+            }
+        }
+
+        public static int countTermsOfSubject(string sub_id)
+        {
+            int counter = 0;
+            foreach (var week in classroomsWeek)
+            {
+                foreach (var dayModel in week.Value)
+                {
+                    foreach (Term t in dayModel)
+                    {
+                        if (t.SubjectId == sub_id)
+                        {
+                            counter++;
+                        }
+                    }
+                }
+            }
+            foreach (Term t in unassignedTerms)
+            {
+                if (t.SubjectId == sub_id)
+                {
+                    counter++;
+                }
+            }
+            return counter;
         }
 
         public static void updateTermByCourse(string old_id, Course cour)
@@ -345,67 +407,104 @@ namespace RasporedRC
                     }
                 }
             }
-        }
-
-        private void removeTermBySubject(string sub_id)
-        {
-            foreach (var week in classroomsWeek)
+            foreach (Term t in unassignedTerms)
             {
-                foreach (var dayModel in week.Value)
+                if (t.CourseId == old_id)
                 {
-                    foreach (Term t in dayModel)
-                    {
-                        if (t.SubjectId == sub_id)
-                        {
-                            var source = getParentOC(t);
-                            int index = source.IndexOf(t);
-                            source.RemoveAt(index);
-                            source.Insert(index, new Term("", "", "", ""));
-                            source.Insert(index, new Term("", "", "", ""));
-                            source.Insert(index, new Term("", "", "", ""));
-                        }
-                    }
+                    t.CourseId = cour.label;
+                    t.CourseName = cour.name;
+                    t.update();
                 }
             }
         }
 
-        private void addTermsFromSubject(Subject s)
+        public static void removeTermBySubject(string sub_id)
         {
-            for (int i = 0; i < s.numberOfClasses; i++)
+            List<int> remove_elements = new List<int>();
+            foreach (var week in classroomsWeek)
+            {
+                foreach (var dayModel in week.Value)
+                {
+                    remove_elements.Clear();
+                    foreach (Term t in dayModel)
+                    {
+                        if (t.SubjectId == sub_id)
+                        {
+                            int index = dayModel.IndexOf(t);
+                            remove_elements.Add(index);
+                        }
+                    }
+                    for (int i = remove_elements.Count - 1; i > -1; i--)
+                    {
+                        dayModel.RemoveAt(remove_elements[i]);
+                        dayModel.Insert(remove_elements[i], new Term("", "", "", ""));
+                        dayModel.Insert(remove_elements[i], new Term("", "", "", ""));
+                        dayModel.Insert(remove_elements[i], new Term("", "", "", ""));
+                    }
+                }
+            }
+            for (int i = SideList.Count - 1; i > -1; i--)
+            {
+                if (SideList[i].SubjectId == sub_id)
+                {
+                    SideList.RemoveAt(i);
+                }
+            }
+        }
+
+        public static void addTermsFromSubject(Subject s)
+        {
+            for (int i = 0; i < s.numberOfAppointment; i++)
             {
                 unassignedTerms.Add(new Term(s.c.label, s.c.name, s.label, s.name));
             }
-        }
-        public void DodajUcionicu(Object sender, RoutedEventArgs e)
-        {
-            addClassroom("UCIONICA2");
-            displayClassroom("UCIONICA2");
+            if (current_classroom == null)
+            {
+                return;
+            }
+            fillSideList(current_classroom);
         }
 
         private void displayClassroom(string id)
         {
-            MainListPon = classroomsWeek[id][0];
-            MainListUto = classroomsWeek[id][1];
-            MainListSre = classroomsWeek[id][2];
-            MainListCet = classroomsWeek[id][3];
-            MainListPet = classroomsWeek[id][4];
-            MainListSub = classroomsWeek[id][5];
+            if (id == null)
+            {
+                MainListPon = new ObservableCollection<Term>();
+                MainListUto = new ObservableCollection<Term>();
+                MainListSre = new ObservableCollection<Term>();
+                MainListCet = new ObservableCollection<Term>();
+                MainListPet = new ObservableCollection<Term>();
+                MainListSub = new ObservableCollection<Term>();
+            }
+            else
+            {
+                MainListPon = classroomsWeek[id][0];
+                MainListUto = classroomsWeek[id][1];
+                MainListSre = classroomsWeek[id][2];
+                MainListCet = classroomsWeek[id][3];
+                MainListPet = classroomsWeek[id][4];
+                MainListSub = classroomsWeek[id][5];
+            }
 
+            LbSchedulePon.ItemsSource = MainListPon;
+            LbScheduleUto.ItemsSource = MainListUto;
+            LbScheduleSre.ItemsSource = MainListSre;
+            LbScheduleCet.ItemsSource = MainListCet;
+            LbSchedulePet.ItemsSource = MainListPet;
+            LbScheduleSub.ItemsSource = MainListSub;
 
-            weekDisplay[0] = classroomsWeek[id][0];
-            weekDisplay[1] = classroomsWeek[id][1];
-            weekDisplay[2] = classroomsWeek[id][2];
-            weekDisplay[3] = classroomsWeek[id][3];
-            weekDisplay[4] = classroomsWeek[id][4];
-            weekDisplay[5] = classroomsWeek[id][5];
-
-            //fillSideList(id);
+            current_classroom = id;
+            fillSideList(id);
         }
 
-        private void fillSideList(string classroomId)
+        public static void fillSideList(string classroomId)
         {
             SideList.Clear();
-            foreach(var term in unassignedTerms)
+            if (classroomId == null)
+            {
+                return;
+            }
+            foreach (var term in unassignedTerms)
             {
                 if (checkTermClassroom(term, classroomId))
                 {
@@ -435,37 +534,49 @@ namespace RasporedRC
                 }
             }
 
-            if (sub.os != croom.os)
+            if (sub.os != "Windows/Linux" && croom.os != "Windows/Linux")
             {
-                return false;
-            }else if(sub.projector != croom.projector)
-            {
-                return false;
-            }else if(sub.tableExists != croom.tableExists)
-            {
-                return false;
-            }else if(sub.smartTable != croom.smartTable)
-            {
-                return false;
-            }else if (sub.groupSize > croom.slots)
+                if(sub.os != croom.os)
+                    return false;
+            }
+            if (sub.projector == true && croom.projector == false)
             {
                 return false;
             }
-            else
+            if (sub.tableExists == true && croom.tableExists == false)
             {
-                foreach(Software soft in croom.listSoft)
+                return false;
+            }
+            if (sub.smartTable == true && croom.smartTable == false)
+            {
+                return false;
+            }
+            if (sub.groupSize > croom.slots)
+            {
+                return false;
+            }
+
+            bool contains;
+            foreach (Software soft in sub.software)
+            {
+                contains = false;
+                foreach (Software cr_soft in croom.listSoft)
                 {
-                    if (!sub.software.Contains(soft))
+                    if (soft.label == cr_soft.label)
                     {
-                        return false;
+                        contains = true;
                     }
+                }
+                if (!contains)
+                {
+                    return false;
                 }
             }
 
             return true;
         }
 
-        private void addClassroom(string id)
+        public static void addClassroom(string id)
         {
             classroomsWeek.Add(id,new List<ObservableCollection<Term>>());
             for(int i = 0; i < 6; i++)
@@ -477,8 +588,20 @@ namespace RasporedRC
                     classroomsWeek[id][i].Add(new Term("", "", "", ""));
                 }
             }
+            classrooms_display.Add(id);
         }
 
+        public static void removeClassroom(string id)
+        {
+            classroomsWeek.Remove(id);
+            classrooms_display.Remove(id);
+
+            if (current_classroom == id)
+            {
+                current_classroom = null;
+                fillSideList(current_classroom);
+            }
+        }
         private void MainWindow_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             startPoint = e.GetPosition(null);
@@ -551,7 +674,7 @@ namespace RasporedRC
                 {
                     sourceIndex = SideList.IndexOf(source);
 
-                    if (target_parent[targetIndex].SubjectId == "" && target_parent[targetIndex + 1].SubjectId == "" && target_parent[targetIndex + 2].SubjectId == "")
+                    if ((targetIndex = getStartIndex(target_parent, targetIndex)) != -1)
                     {
                         target_parent.RemoveAt(targetIndex);
                         target_parent.RemoveAt(targetIndex);
@@ -568,7 +691,7 @@ namespace RasporedRC
                         Console.WriteLine("Only Subjcest are allowed to be draged inbetween days");
                     }else
                     {
-                        if (target_parent[targetIndex].SubjectId == "" && target_parent[targetIndex + 1].SubjectId == "" && target_parent[targetIndex + 2].SubjectId == "")
+                        if ( (targetIndex = getStartIndex(target_parent,targetIndex)) != -1)
                         {
                             target_parent.RemoveAt(targetIndex);
                             target_parent.RemoveAt(targetIndex);
@@ -583,6 +706,44 @@ namespace RasporedRC
                     }
                 }
             }
+        }
+
+        private int getStartIndex(ObservableCollection<Term> list,int targetIndex)
+        {
+            try
+            {
+                if(list[targetIndex].SubjectId == "" && list[targetIndex + 1].SubjectId == "" && list[targetIndex+2].SubjectId == "")
+                {
+                    return targetIndex;
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Wrong index vol.1");
+            }
+            try
+            {
+                if (list[targetIndex].SubjectId == "" && list[targetIndex + 1].SubjectId == "" && list[targetIndex - 1].SubjectId == "")
+                {
+                    return targetIndex - 1;
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Wrong index vol.2");
+            }
+            try
+            {
+                if (list[targetIndex].SubjectId == "" && list[targetIndex - 2].SubjectId == "" && list[targetIndex - 1].SubjectId == "")
+                {
+                    return targetIndex - 2;
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Wrong index vol.3");
+            }
+            return -1;
         }
 
         private static ObservableCollection<Term> getParentOC(Term to)
@@ -734,7 +895,6 @@ namespace RasporedRC
 
             dataWrapper.Subs = subjects;
 
-            Console.WriteLine(dataWrapper.Subs.Count);
             dataWrapper.Cours = courses;
             dataWrapper.Classrms = classrooms;
             dataWrapper.Softs = softwares;
@@ -750,6 +910,35 @@ namespace RasporedRC
             {
                 serializer.Serialize(writer, dataWrapper);
             }
+        }
+
+        public void clearScreen(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Ovim gubite sve podatke, da li želite da nastavite?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            {
+                return;
+            }
+            else
+            {
+                courses = new ObservableCollection<Course>();
+                subjects = new ObservableCollection<Subject>();
+                classrooms = new ObservableCollection<Classroom>();
+                softwares = new ObservableCollection<Software>();
+
+                current_classroom = null;
+
+                SideList = new ObservableCollection<Term>();
+                unassignedTerms = new List<Term>();
+                classroomsWeek = new Dictionary<string, List<ObservableCollection<Term>>>();
+                classrooms_display.Clear();
+
+                displayClassroom(current_classroom);
+            }
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            displayClassroom(SelectedClassroom);
         }
     }
 

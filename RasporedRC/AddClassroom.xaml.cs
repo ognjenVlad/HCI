@@ -176,7 +176,7 @@ namespace RasporedRC
             Console.WriteLine(classroom.smartTable);
             Console.WriteLine(classroom.label);
             MainWindow.classrooms.Add(classroom);
-
+            MainWindow.addClassroom(classroom.label);
             MessageBox.Show("Učionica uspešno dodata!", "Dodavanje učionice", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
         }

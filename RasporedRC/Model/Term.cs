@@ -61,22 +61,30 @@ namespace RasporedRC.Model
         public string SubjectId
         {
             get { return subjectId; }
-            set { subjectId = value; }
+            set { subjectId = value;
+                OnPropertyChanged("SubjectId");
+            }
         }
         public string CourseId
         {
             get { return courseId; }
-            set { courseId = value; }
+            set { courseId = value;
+                OnPropertyChanged("CourseId");
+            }
         }
         public string SubjectName
         {
             get { return subjectName; }
-            set { subjectName = value; }
+            set { subjectName = value;
+                OnPropertyChanged("SubjectName");
+            }
         }
         public string CourseName
         {
             get { return courseName; }
-            set { courseName = value; }
+            set { courseName = value;
+                OnPropertyChanged("CourseName");
+            }
         }
 
         [XmlIgnore]
@@ -149,7 +157,7 @@ namespace RasporedRC.Model
             }
             else
             {
-                DisplayText += "S: " + courseId + "\n";
+                DisplayText = "S: " + courseId + "\n";
             }
             if (subjectId.Length > 14)
             {
@@ -170,7 +178,7 @@ namespace RasporedRC.Model
             }
             else
             {
-                this.toolTipText = "Smer: " + courseName + "\nPredmet: " + subjectName;
+                this.ToolTipText = "Smer: " + courseName + "\nPredmet: " + subjectName;
             }
         }
     }
