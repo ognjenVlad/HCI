@@ -100,11 +100,6 @@ namespace RasporedRC
             this.Software = new ObservableCollection<string>();
             this.SelectedSoftwares = new BindingList<Model.Software>();
             
-            foreach(Software s in MainWindow.softwares) {
-
-                
-                this.Software.Add(s.label);
-            }
              
             this.DataContext = this;
             InitializeComponent();
@@ -180,7 +175,52 @@ namespace RasporedRC
             MessageBox.Show("Učionica uspešno dodata!", "Dodavanje učionice", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
         }
-        
+
+        private void os_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Software.Clear();
+            if (SelectedOS == "Windows/Linux")
+            {
+                foreach (var soft in MainWindow.softwares)
+                {
+                    Software.Add(soft.label);
+                }
+            }
+            else if (SelectedOS == "Windows")
+            {
+                foreach (var soft in MainWindow.softwares)
+                {
+                    if (soft.os != "Linux")
+                    {
+                        Software.Add(soft.label);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var soft in MainWindow.softwares)
+                {
+                    if (soft.os != "Windows")
+                    {
+                        Software.Add(soft.label);
+                    }
+                }
+            }
+
+            for (int i = Software.Count - 1; i > -1; i--)
+            {
+                foreach (var soft in SelectedSoftwares)
+                {
+                    if (soft.label == Software[i])
+                    {
+                        Software.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
+            SelectedSoftware = null;
+            return;
+        }
     }
     
 }

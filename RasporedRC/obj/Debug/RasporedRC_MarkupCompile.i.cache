@@ -4,32 +4,17 @@
 winexe
 C#
 .cs
-<<<<<<< Updated upstream
 C:\Users\Damir\git\HCI\RasporedRC\obj\Debug\
-=======
-C:\Users\Dell\Documents\HCI\Raspored\RasporedRC\obj\Debug\
->>>>>>> Stashed changes
 RasporedRC
 none
 false
 DEBUG;TRACE
-<<<<<<< Updated upstream
 C:\Users\Damir\git\HCI\RasporedRC\App.xaml
-111340281398
-
-34-1724214488
-13738642453
-AddClassroom.xaml;AddCourse.xaml;AddSoftware.xaml;AddSubject.xaml;DeleteSubject.xaml;MainWindow.xaml;Tables.xaml;UpdateClassroom.xaml;UpdateCourse.xaml;UpdateSoftware.xaml;UpdateSubject.xaml;
-
-True
-=======
-C:\Users\Dell\Documents\HCI\Raspored\RasporedRC\App.xaml
 131450794932
 5-1616948948
-36-1867676747
+361658765310
 13-1142990016
 AddClassroom.xaml;AddCourse.xaml;AddSoftware.xaml;AddSubject.xaml;DeleteSubject.xaml;DemoTab.xaml;HelpTab.xaml;MainWindow.xaml;Tables.xaml;UpdateClassroom.xaml;UpdateCourse.xaml;UpdateSoftware.xaml;UpdateSubject.xaml;
 
 False
->>>>>>> Stashed changes
 

@@ -77,7 +77,7 @@
 
                     </MenuItem>
                     <MenuItem Header="Pregled" Click ="Tables" FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
-                    <MenuItem Header="Demo mod"  HorizontalAlignment="Center" FontSize="16" FontFamily="Arial" FontWeight="Bold"/>
+                    <MenuItem Header="Demo mod"  HorizontalAlignment="Center" FontSize="16" FontFamily="Arial" FontWeight="Bold" Click="RunDemo"/>
                     <MenuItem Header="Nov raspored"  HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold" Click="clearScreen">
                     </MenuItem>
                     <MenuItem Header="Pomoc" Click="ShowHelp" HorizontalAlignment="Center" FontSize="16" FontFamily="Arial" FontWeight="Bold"/>
