@@ -735,13 +735,18 @@ namespace RasporedRC
                         unassignedTerms.RemoveAt(unassignedTerms.IndexOf(source));
                         SideList.RemoveAt(sourceIndex);
                     }
+                    else
+                    {
+                        MessageBox.Show("Moguće je premeštanje samo na 3 spojena polja od 15 minuta!", "Greška", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
                 }
                 else
                 {
                     if(source.SubjectId == "")
                     {
-                        Console.WriteLine("Only Subjcest are allowed to be draged inbetween days");
-                    }else
+                        MessageBox.Show("Premeštanje pauza između dana nije moguce!", "Greška", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
                     {
                         if ( (targetIndex = getStartIndex(target_parent,targetIndex)) != -1)
                         {
