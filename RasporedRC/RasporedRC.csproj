@@ -9,11 +9,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RasporedRC</RootNamespace>
     <AssemblyName>RasporedRC</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -70,9 +71,15 @@
     <Compile Include="DeleteSubject.xaml.cs">
       <DependentUpon>DeleteSubject.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DemoTab.xaml.cs">
+      <DependentUpon>DemoTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\EmptyValidation.cs" />
     <Compile Include="Helpers\ListToStringConverter.cs" />
     <Compile Include="Helpers\ObsevableCollection.cs" />
+    <Compile Include="HelpTab.xaml.cs">
+      <DependentUpon>HelpTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\DataWrapper.cs" />
     <Compile Include="Model\Term.cs" />
     <Compile Include="Tables.xaml.cs">
@@ -109,6 +116,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="DeleteSubject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DemoTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HelpTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -181,6 +196,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Help\dodavanje.htm" />
+    <Content Include="Help\dragndrop.htm" />
+    <Content Include="Help\error.htm" />
+    <Content Include="Help\index.htm" />
+    <Content Include="Help\pregled.htm" />
+    <Resource Include="Images\dodavanje_predmeta2.png" />
+    <Resource Include="Images\dodavanje_predmeta1.png" />
+    <Resource Include="Images\dodavanje_smera.png" />
+    <Resource Include="Images\dodavanje_softvera.png" />
+    <Resource Include="Images\dodavanje_ucionice.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

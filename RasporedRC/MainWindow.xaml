@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:RasporedRC"
         mc:Ignorable="d"
         Title="RC Raspored" Height="430" Width="750" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </Window.CommandBindings>
     <Window.Resources>
         <DataTemplate  x:Key="TermItem">
             <Border BorderBrush="Black" BorderThickness="0,0,0,1" Margin="0,0,0,0"
@@ -41,11 +43,35 @@
                         </ItemsPanelTemplate>
                     </Menu.ItemsPanel>
                     <MenuItem Header="Dodavanje" HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
-                        <MenuItem Header="Predmet"  FontFamily="Arial" FontSize="16" Click="AddSubject" FontWeight="Bold"></MenuItem>
-                        <MenuItem Header="Smer"  FontFamily="Arial" FontSize="16" Click="AddCourse" FontWeight="Bold"></MenuItem>
+                        <MenuItem.ToolTip>
+                            <ToolTip>
+                                Meni koji nudi dodavanje predmeta, smera ili ucionice.
+                            </ToolTip>
+                        </MenuItem.ToolTip>
+                        <MenuItem Header="Predmet"  FontFamily="Arial" FontSize="16" Click="AddSubject" FontWeight="Bold">
+                            <MenuItem.Background>
+                                <ImageBrush/>
+                            </MenuItem.Background>
+                            <MenuItem.ToolTip>
+                                <TextBlock>Dodavanje predmeta</TextBlock>
+                            </MenuItem.ToolTip>
+                        </MenuItem>
+                        <MenuItem Header="Smer"  FontFamily="Arial" FontSize="16" Click="AddCourse" FontWeight="Bold">
+                            <MenuItem.ToolTip>
+                                <TextBlock>Dodavanje smera</TextBlock>
+                            </MenuItem.ToolTip>
+                        </MenuItem>
 
-                        <MenuItem Header="Softver"  FontFamily="Arial" FontSize="16" Click="AddSoftware" FontWeight="Bold"></MenuItem>
-                        <MenuItem Header="Ucionicu"  FontFamily="Arial" FontSize="16" Click="AddClassroom" FontWeight="Bold"></MenuItem>
+                        <MenuItem Header="Softver"  FontFamily="Arial" FontSize="16" Click="AddSoftware" FontWeight="Bold">
+                            <MenuItem.ToolTip>
+                                <TextBlock>Dodavanje softvera</TextBlock>
+                            </MenuItem.ToolTip>
+                        </MenuItem>
+                        <MenuItem Header="Ucionicu"  FontFamily="Arial" FontSize="16" Click="AddClassroom" FontWeight="Bold">
+                            <MenuItem.ToolTip>
+                                <TextBlock>Dodavanje ucinice</TextBlock>
+                            </MenuItem.ToolTip>
+                        </MenuItem>
                     </MenuItem>
                     <MenuItem Header="Brisanje/Izmena"   Click ="DeleteSubject" HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
 
@@ -54,6 +80,7 @@
                     <MenuItem Header="Demo mod"  HorizontalAlignment="Center" FontSize="16" FontFamily="Arial" FontWeight="Bold"/>
                     <MenuItem Header="Nov raspored"  HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold" Click="clearScreen">
                     </MenuItem>
+                    <MenuItem Header="Pomoc" Click="ShowHelp" HorizontalAlignment="Center" FontSize="16" FontFamily="Arial" FontWeight="Bold"/>
                 </Menu>
                     <Grid DockPanel.Dock="Top" Width="Auto" Height="30">
                         <Label Padding="208,6,0,0">
@@ -327,7 +354,12 @@
                 </Grid>
             </DockPanel>
         </TabItem>
-        <TabItem Header="Demo tab">
-        </TabItem>
+        <!--<TabControl.Resources>
+            <DataTemplate>
+                <DemoMode/>
+            </DataTemplate>
+        </TabControl.Resources>-->
+        <!--<TabItem Header="Demo tab">
+        </TabItem>-->
     </TabControl>
 </Window>

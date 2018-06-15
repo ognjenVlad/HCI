@@ -76,7 +76,41 @@ namespace RasporedRC
             dialog.ShowDialog();
         }
 
-        public static ObservableCollection<Term> MainListPon
+        public void RunDemo(object sender, RoutedEventArgs e)
+        {
+            foreach (TabItem item in mainTabControl.Items)
+            {
+                if ((String)item.Header == "Demo")
+                {
+                    return;
+                }
+            }
+            var demoTab = new DemoTab();
+            TabItem dt = new TabItem();
+            dt.Header = "Demo";
+            dt.Content = demoTab;
+            mainTabControl.Items.Add(dt);
+            dt.Focus();
+        }
+
+        public void ShowHelp(object sender, RoutedEventArgs e)
+        {
+            foreach (TabItem item in mainTabControl.Items)
+            {
+                if ((String)item.Header == "Help")
+                {
+                    return;
+                }
+            }
+            var helpTab = new HelpTab("index", this);
+            TabItem ht = new TabItem();
+            ht.Header = "Help";
+            ht.Content = helpTab;
+            mainTabControl.Items.Add(ht);
+            ht.Focus();
+        }
+
+        public ObservableCollection<Term> MainListPon
         {
             get;
             set;
@@ -111,6 +145,24 @@ namespace RasporedRC
         {
             get;
             set;
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+            foreach (TabItem item in mainTabControl.Items)
+            {
+                if ((String)item.Header == "Help")
+                {
+                    return;
+                }
+            }
+            var helpTab = new HelpTab("index", this);
+            TabItem ht = new TabItem();
+            ht.Header = "Help";
+            ht.Content = helpTab;
+            mainTabControl.Items.Add(ht);
+            ht.Focus();
         }
 
         public static String SelectedClassroom

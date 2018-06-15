@@ -358,7 +358,7 @@
                     </ScrollViewer>
                 </TabItem>
 
-                <TabItem Header="Smerovi">
+                <TabItem Name="SmeroviTab" Header="Smerovi">
                     <ScrollViewer Margin="0,1,0,-1" >
                         <Grid>
                             <Grid.RowDefinitions>

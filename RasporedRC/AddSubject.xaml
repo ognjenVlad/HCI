@@ -28,7 +28,7 @@
 
         </Style>
     </Window.Resources>
-    <ScrollViewer  >
+    <ScrollViewer Name="addSubjScroll" >
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -171,7 +171,7 @@
 
             <Label Margin="5" Grid.Row="18"></Label>
             <Label Grid.Row="19" Grid.Column="0">Sofver:</Label>
-            <ComboBox Grid.Row="19" Grid.Column="1" ItemsSource="{Binding Path=Software}" SelectedItem = "{Binding SelectedSoftware}"></ComboBox>
+            <ComboBox Grid.Row="19" Name="soft"  Grid.Column="1" ItemsSource="{Binding Path=Software}" SelectedItem = "{Binding SelectedSoftware}"></ComboBox>
 
             <Button Grid.Row="19" Grid.Column="2" x:Name="Add_Software" Click="AddSoftware" Content="Dodaj" Height="26" Margin="10,0,-10,0">
                 <Button.ToolTip>
