@@ -152,8 +152,6 @@
             </TextBox>
 
             <Label Grid.Row="13"></Label>
-            <Label Grid.Row="14" Grid.Column="0">Operativni sistem:</Label>
-            <ComboBox x:Name="os" Grid.Row="13" ItemsSource="{Binding Path=OS}" SelectedItem = "{Binding softwareToUpdate.os}" Grid.ColumnSpan="2" Margin="5,10,-33,1" Grid.RowSpan="2" Grid.Column="1"/>
             <Label Grid.Row="15"></Label>
             <Button Grid.Row="16" x:Name="add" Click="changeSoftware" Content="Izmeni softver" Margin ="10,10,-64,10" Height="25" Grid.ColumnSpan="3">
 
@@ -172,7 +170,6 @@
                                     <Condition Binding="{Binding ElementName=cena, Path=(Validation.HasError)}" Value="false" />
                                     <Condition Binding="{Binding ElementName=sajt, Path=(Validation.HasError)}" Value="false" />
 
-                                    <Condition Binding="{Binding ElementName=os, Path=Text.Length, Converter={StaticResource EnableButtonConverter}}" Value="false" />
                                     <Condition Binding="{Binding ElementName=opis, Path=Text.Length, Converter={StaticResource EnableButtonConverter}}" Value="false" />
                                     <Condition Binding="{Binding ElementName=oznaka, Path=Text.Length, Converter={StaticResource EnableButtonConverter}}" Value="false" />
                                     <Condition Binding="{Binding ElementName=godina, Path=Text.Length, Converter={StaticResource EnableButtonConverter}}" Value="false" />

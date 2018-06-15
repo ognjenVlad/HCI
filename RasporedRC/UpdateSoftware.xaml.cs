@@ -45,7 +45,7 @@ namespace RasporedRC
 
             InitializeComponent();
 
-            this.os.SelectedValue = MainWindow.softwareToUpdate.os;
+            //this.os.SelectedValue = MainWindow.softwareToUpdate.os;
         }
         private void _DatePicker_CalendarOpened(object sender, RoutedEventArgs e)
         {

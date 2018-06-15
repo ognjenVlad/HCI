@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Dell\Documents\HCI\Raspored\RasporedRC\obj\Debug\
+C:\Users\Ogauzz\git\HCI\RasporedRC\obj\Debug\
 RasporedRC
 none
 false
 DEBUG;TRACE
-C:\Users\Dell\Documents\HCI\Raspored\RasporedRC\App.xaml
+C:\Users\Ogauzz\git\HCI\RasporedRC\App.xaml
 131450794932
 5-1616948948
-32-1957757488
-13-1142990016
+331999990782
+151270957945
 AddClassroom.xaml;AddCourse.xaml;AddSoftware.xaml;AddSubject.xaml;DeleteSubject.xaml;DemoTab.xaml;HelpTab.xaml;MainWindow.xaml;Tables.xaml;UpdateClassroom.xaml;UpdateCourse.xaml;UpdateSoftware.xaml;UpdateSubject.xaml;
 
 False

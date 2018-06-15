@@ -9,6 +9,7 @@
     <Window.Resources>
         <local:EnableButtonConverter x:Key="EnableButtonConverter" />
         <local:ListViewConverter x:Key="ListViewConverter" />
+        <local:ComboBoxEnable x:Key="ComboBoxEnable" />
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
@@ -113,7 +114,25 @@
             <RadioButton x:Name="projektor2" Grid.Row="7" Grid.Column="1" GroupName="Three" IsChecked="{Binding ProjectorCheckedF}" Grid.ColumnSpan="2" Margin="91,0,10,0">Ne</RadioButton>
 
             <Label Grid.Row="8" Grid.Column="0">Operativni sistem:</Label>
-            <ComboBox x:Name="os" Grid.Row="8" ItemsSource="{Binding Path=OS}" SelectedItem = "{Binding SelectedOS}" Grid.ColumnSpan="2" Margin="0,0,7,0" Grid.Column="1"/>
+            <ComboBox x:Name="os" Grid.Row="8" ItemsSource="{Binding Path=OS}" SelectedItem = "{Binding SelectedOS}" Grid.ColumnSpan="2" Margin="0,0,7,0" Grid.Column="1">
+                
+
+
+            <ComboBox.Style>
+                    <Style TargetType="{x:Type ComboBox}">
+                        <Setter Property="IsEnabled" Value="false" />
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding ElementName=listView1 ,Path=Items.Count  , Converter={StaticResource ComboBoxEnable}}" Value="false" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="true" />
+
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.Style>
+            </ComboBox>
 
             <Label Grid.Row="9" Grid.Column="0"></Label>
             <Label Grid.Row="10" Grid.Column="0">Softver:</Label>
@@ -140,6 +159,7 @@
             <ListView  Grid.Row="13" Grid.Column="0" Margin="10"  x:Name ="listView1">
                 <ListView.ItemsSource>
                     <Binding Path="SelectedSoftwares" UpdateSourceTrigger="PropertyChanged">
+
 
                     </Binding>
                 </ListView.ItemsSource>
