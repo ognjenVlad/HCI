@@ -36,8 +36,13 @@ namespace RasporedRC
                     return new ValidationResult(false, "Popunite polje.");
                 }
                 if (double.TryParse(value.ToString(), out i))
+                {
+                    if (i <= 0)
+                    {
+                        return new ValidationResult(false, "Unesite pozitivan broj.");
+                    }
                     return new ValidationResult(true, null);
-
+                }
                 return new ValidationResult(false, "Unesite broj.");
 
             }
@@ -50,7 +55,14 @@ namespace RasporedRC
                     return new ValidationResult(false, "Popunite polje.");
                 }
                 if (int.TryParse(value.ToString(), out i))
+                {
+
+                    if (i <= 0)
+                    {
+                        return new ValidationResult(false, "Unesite pozitivan broj.");
+                    }
                     return new ValidationResult(true, null);
+                }
 
                 return new ValidationResult(false, "Unesite broj.");
 
