@@ -162,7 +162,7 @@
             <RadioButton x:Name="projektor2" Grid.Row="14" Grid.Column="1" GroupName="Three" IsChecked="{Binding ProjectorCheckedF}" Grid.ColumnSpan="2" Margin="91,0,10,0">Ne</RadioButton>
 
             <Label Grid.Row="15" Grid.Column="0">Potreban operativni sistem:</Label>
-            <ComboBox x:Name="os" Grid.Row="15"  Grid.Column="1" ItemsSource="{Binding Path=OS}" SelectedItem = "{Binding SelectedOS}"></ComboBox>
+            <ComboBox x:Name="os" Grid.Row="15"  Grid.Column="1" ItemsSource="{Binding Path=OS}" SelectedItem = "{Binding SelectedOS}" Height="26" VerticalAlignment="Top" SelectionChanged="os_SelectionChanged"></ComboBox>
 
             <Label Margin="5" Grid.Row="16"></Label>
             <Label Grid.Row="17" Grid.Column="0">Smer predmeta:</Label>

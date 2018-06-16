@@ -110,7 +110,7 @@
             <RadioButton x:Name="projektor2" Grid.Row="7" Grid.Column="1" GroupName="Three" IsChecked="{Binding ProjectorCheckedF}" Grid.ColumnSpan="2" Margin="91,0,10,0">Ne</RadioButton>
 
             <Label Grid.Row="8" Grid.Column="0">Operativni sistem:</Label>
-            <ComboBox x:Name="os" Grid.Row="8"  Grid.Column="1" ItemsSource="{Binding Path=OS}" SelectedItem = "{Binding SelectedOS}"></ComboBox>
+            <ComboBox x:Name="os" Grid.Row="8"  Grid.Column="1" ItemsSource="{Binding Path=OS}" SelectedItem = "{Binding SelectedOS}" Height="26" VerticalAlignment="Top" SelectionChanged="os_SelectionChanged"/>
 
             <Label Grid.Row="9" Grid.Column="0"></Label>
             <Label Grid.Row="10" Grid.Column="0">Softver:</Label>
