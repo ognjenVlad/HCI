@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RasporedRC"
         mc:Ignorable="d"
+        Closing="Window_closing"
         Title="RC Raspored" Height="430" Width="750" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
@@ -34,7 +35,7 @@
         </DataTemplate>
     </Window.Resources>
     <TabControl Name="mainTabControl">
-        <TabItem IsEnabled="True"  Header="Glavni prozor">
+        <TabItem IsEnabled="True"  Header="Glavni prozor" Name="glavniTab">
             <DockPanel>
                 <Menu DockPanel.Dock ="Top" Height="30">
                     <Menu.ItemsPanel>
@@ -77,19 +78,19 @@
 
                     </MenuItem>
                     <MenuItem Header="Pregled" Click ="Tables" FontFamily="Arial" FontSize="16" FontWeight="Bold"></MenuItem>
-                    <MenuItem Header="Demo mod"  Click="RunDemo" HorizontalAlignment="Center" FontSize="16" FontFamily="Arial" FontWeight="Bold"/>
+                    <MenuItem Header="Demo mod" Click="RunDemo" HorizontalAlignment="Center" FontSize="16" FontFamily="Arial" FontWeight="Bold"/>
                     <MenuItem Header="Nov raspored"  HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold" Click="clearScreen">
                     </MenuItem>
                     <MenuItem Header="Pomoc" Click="ShowHelp" HorizontalAlignment="Center" FontSize="16" FontFamily="Arial" FontWeight="Bold"/>
                 </Menu>
-                    <Grid DockPanel.Dock="Top" Width="Auto" Height="30">
-                        <Label Padding="208,6,0,0">
-                            Učionica za prikaz:
-                        </Label>
-                        <ComboBox Width="100" Height="20" ItemsSource="{Binding classrooms_display}" SelectedItem="{Binding SelectedClassroom}" SelectionChanged="ComboBox_SelectionChanged">
-                        </ComboBox>
-                    </Grid>
-                    <ListBox DockPanel.Dock="Top" Width="Auto" Height="30" Padding="42,0,0,0">
+                <Grid DockPanel.Dock="Top" Width="Auto" Height="30">
+                    <Label Padding="208,6,0,0">
+                        Ucionica za prikaz:
+                    </Label>
+                    <ComboBox Width="100" Height="20" ItemsSource="{Binding classrooms_display}" SelectedItem="{Binding SelectedClassroom}" SelectionChanged="ComboBox_SelectionChanged">
+                    </ComboBox>
+                </Grid>
+                <ListBox DockPanel.Dock="Top" Width="Auto" Height="30" Padding="42,0,0,0">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
@@ -354,12 +355,25 @@
                 </Grid>
             </DockPanel>
         </TabItem>
-        <!--<TabControl.Resources>
-            <DataTemplate>
-                <DemoMode/>
-            </DataTemplate>
-        </TabControl.Resources>-->
-        <!--<TabItem Header="Demo tab">
-        </TabItem>-->
+        <TabItem Name="demoTab" Visibility="Hidden">
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Demo" Width="45" />
+                    <Button Click="CloseDemo" Height="20" Width="20" >
+                        x
+                    </Button>
+                </StackPanel>
+            </TabItem.Header>
+        </TabItem>
+        <TabItem Name="helpTab" Visibility="Hidden" HorizontalAlignment="Right">
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Help" HorizontalAlignment="Left" Width="30" />
+                    <Button  Click="CloseHelp" Height="20" Width="20" >
+                        x
+                    </Button>
+                </StackPanel>
+            </TabItem.Header>
+        </TabItem>
     </TabControl>
 </Window>

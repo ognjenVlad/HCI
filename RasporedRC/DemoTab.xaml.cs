@@ -26,16 +26,17 @@ namespace RasporedRC
     {
         private int korak;
         private DispatcherTimer timer;
-        //private MainWindow mw;
         private AddCourse add_course;
         private Brush boja;
         private Course kurs;
         private Tables tables;
         private AddSubject add_subj;
         private Subject predmet;
+        private Subject predmet2;
         private Term term;
         private Software software;
         private Classroom classroom;
+        private DeleteSubject del_subj;
 
         public DemoTab()
         {
@@ -48,6 +49,7 @@ namespace RasporedRC
             MainListPetDemo = new ObservableCollection<Term>();
             MainListSubDemo = new ObservableCollection<Term>();
             SideListDemo = new ObservableCollection<Term>();
+            classrooms_display = new ObservableCollection<string>();
 
             fillLists();
 
@@ -75,7 +77,9 @@ namespace RasporedRC
             MainWindow.softwares.Add(software);
             classroom = new Classroom("L4", "Ucionica neka.", 15, true, true, false, "Windows");
             MainWindow.classrooms.Add(classroom);
-            kurs = new Course("HCI", "Pravimo interfejse", "Human computer interaction", "11/11/2016");
+            ucionicaPrikaz.Items.Add(classroom.label);
+            ucionicaPrikaz.Items.Add("L5");
+            kurs = new Course("sw", "Ucimo mlade inzenjere", "Softversko inzenjerstvo i informacione tehnologije", "11/11/2014");
 
 
             tables = new Tables();
@@ -85,10 +89,14 @@ namespace RasporedRC
             add_subj.MouseUp += Grid_MouseUp;
             
             predmet = new Subject("pr1", "Predmet 1", "opis predmeta 1", kurs, 20, 4, 2, true, true, false, "Windows");
-
+            predmet2 = new Subject("pr2", "Predmet 2", "opis predmeta 2", kurs, 12, 3, 3, true, true, false, "Windows");
+            MainWindow.subjects.Add(predmet2);
             term = new Term("HCI", "Human computer interaction", "pr1", "Predmet 1");
             for (int i = 0; i < predmet.numberOfClasses; i++ )
                 SideListDemo.Add(new Term("HCI", "Human computer interaction", "pr1", "Predmet 1"));
+
+            del_subj = new DeleteSubject();
+
             timer.Start();
 
         }
@@ -98,6 +106,7 @@ namespace RasporedRC
             // DEMO DIJALOG DODAVANJE SMERA
             if (korak == 0)
             {
+                this.ucionicaPrikaz.SelectedValue = classroom.label;
                 korak++;
             }
             else if (korak == 1)
@@ -367,6 +376,7 @@ namespace RasporedRC
             {
                 add_subj.Close();
                 add_subj.add.IsHitTestVisible = true;
+                MainWindow.subjects.Add(predmet);
                 korak++;
             }
             // DEMO ZA DRAG N DROP
@@ -382,10 +392,10 @@ namespace RasporedRC
             else if (korak == 48)
             {
 
-                MainListPonDemo.RemoveAt(24);
-                MainListPonDemo.RemoveAt(24);
-                MainListPonDemo.RemoveAt(24);
-                MainListPonDemo.Insert(24,term);
+                MainListPonDemo.RemoveAt(4);
+                MainListPonDemo.RemoveAt(4);
+                MainListPonDemo.RemoveAt(4);
+                MainListPonDemo.Insert(4,term);
                 SideListDemo.RemoveAt(0);
                 korak++;
             }
@@ -396,10 +406,10 @@ namespace RasporedRC
             }
             else if (korak == 50)
             {
-                MainListPonDemo.RemoveAt(24);
-                MainListPonDemo.Insert(24, new Term("", "", "", ""));
-                MainListPonDemo.Insert(24, new Term("", "", "", ""));
-                MainListPonDemo.Insert(24, new Term("", "", "", ""));
+                MainListPonDemo.RemoveAt(4);
+                MainListPonDemo.Insert(4, new Term("", "", "", ""));
+                MainListPonDemo.Insert(4, new Term("", "", "", ""));
+                MainListPonDemo.Insert(4, new Term("", "", "", ""));
                 MainListSreDemo.RemoveAt(12);
                 MainListSreDemo.RemoveAt(12);
                 MainListSreDemo.RemoveAt(12);
@@ -408,75 +418,102 @@ namespace RasporedRC
             }
             else if (korak == 51)
             {
+                this.ucionicaPrikaz.IsDropDownOpen = true;
                 korak++;
             }
             else if (korak == 52)
             {
+                
+                this.ucionicaPrikaz.SelectedValue = "L5";
+                this.ucionicaPrikaz.IsDropDownOpen = false;
+                emptyLists();
+                fillLists();
+                MainListCetDemo.RemoveAt(2);
+                MainListCetDemo.RemoveAt(2);
+                MainListCetDemo.RemoveAt(2);
+                MainListCetDemo.Insert(2, new Term(kurs.label,kurs.name,predmet2.label, predmet2.name));
+                MainListCetDemo.RemoveAt(6);
+                MainListCetDemo.RemoveAt(6);
+                MainListCetDemo.RemoveAt(6);
+                MainListCetDemo.Insert(6, new Term(kurs.label,kurs.name,predmet2.label, predmet2.name));
+                MainListUtoDemo.RemoveAt(17);
+                MainListUtoDemo.RemoveAt(17);
+                MainListUtoDemo.RemoveAt(17);
+                MainListUtoDemo.Insert(17, new Term(kurs.label, kurs.name, predmet2.label, predmet2.name));
                 korak++;
             }
             else if (korak == 53)
             {
+                LbSide.Width = 194;
                 korak++;
             }
             else if (korak == 54)
             {
+                MainListSreDemo.RemoveAt(15);
+                MainListSreDemo.RemoveAt(15);
+                MainListSreDemo.RemoveAt(15);
+                MainListSreDemo.Insert(15, term);
+                SideListDemo.RemoveAt(0);
                 korak++;
             }
             else if (korak == 55)
             {
+                MainListSreDemo.RemoveAt(18);
+                MainListSreDemo.RemoveAt(18);
+                MainListSreDemo.RemoveAt(18);
+                MainListSreDemo.Insert(18, term);
+                SideListDemo.RemoveAt(0);
                 korak++;
             }
             else if (korak == 56)
             {
+                LbSide.Width = 8;
                 korak++;
             }
             else if (korak == 57)
             {
+                boja = brisanje.Background;
+                brisanje.Background = Brushes.Gray;
                 korak++;
             }
             else if (korak == 58)
             {
+                brisanje.Background = boja;
+                del_subj.Show();
                 korak++;
             }
             else if (korak == 59)
             {
+                var test = del_subj.subj_listbox.Items.IndexOf(predmet2);
+                //del_subj.subj_listbox.Template.
                 korak++;
             }
             else if (korak == 60)
             {
+                del_subj.Close();
+                MainListCetDemo.RemoveAt(2);
+                MainListCetDemo.Insert(2, new Term("", "", "", ""));
+                MainListCetDemo.Insert(2, new Term("", "", "", ""));
+                MainListCetDemo.Insert(2, new Term("", "", "", ""));
+                MainListCetDemo.RemoveAt(8);
+                MainListCetDemo.Insert(8, new Term("", "", "", ""));
+                MainListCetDemo.Insert(8, new Term("", "", "", ""));
+                MainListCetDemo.Insert(8, new Term("", "", "", ""));
+                MainListUtoDemo.RemoveAt(17);
+                MainListUtoDemo.Insert(17, new Term("", "", "", ""));
+                MainListUtoDemo.Insert(17, new Term("", "", "", ""));
+                MainListUtoDemo.Insert(17, new Term("", "", "", ""));
                 korak++;
             }
             else if (korak == 61)
             {
-                korak++;
-            }
-            else if (korak == 62)
-            {
-                korak++;
-            }
-            else if (korak == 63)
-            {
-                korak++;
-            }
-            else if (korak == 64)
-            {
-                korak++;
-            }
-            else if (korak == 65)
-            {
-                korak++;
-            }
-            else if (korak == 66)
-            {
-                korak++;
-            }
-            else if (korak == 67)
-            {
+
                 korak++;
             }
             else
             {
                 timer.Stop();
+                deleteUsedEntities();
                 MessageBox.Show("Demo je prekinut ili je završio sa izvršavanjem.");
 
             }
@@ -489,10 +526,19 @@ namespace RasporedRC
             tables.Close();
             add_subj.Close();
             //zce.Close();
+            deleteUsedEntities();
             MessageBox.Show("Demo je prekinut ili je završio sa izvršavanjem.");
             //this.Visibility = System.Windows.Visibility.Collapsed;
         }
 
+        private void deleteUsedEntities()
+        {
+            MainWindow.subjects.Remove(predmet);
+            MainWindow.subjects.Remove(predmet2);
+            MainWindow.courses.Remove(kurs);
+            MainWindow.classrooms.Remove(classroom);
+            MainWindow.softwares.Remove(software);
+        }
         
         private void fillLists()
         {
@@ -506,6 +552,25 @@ namespace RasporedRC
                 MainListSubDemo.Add(new Term("", "", "", ""));
 
             }
+        }
+
+        private void emptyLists()
+        {
+            MainListPonDemo.Clear();
+            MainListUtoDemo.Clear();
+            MainListSreDemo.Clear();
+            MainListCetDemo.Clear();
+            MainListPetDemo.Clear();
+            MainListSubDemo.Clear();
+        }
+
+        public void abortDemo()
+        {
+            timer.Stop();
+            add_course.Close();
+            tables.Close();
+            add_subj.Close();
+            deleteUsedEntities();
         }
 
         public ObservableCollection<Term> MainListPonDemo
@@ -540,6 +605,12 @@ namespace RasporedRC
         }
 
         public static ObservableCollection<Term> SideListDemo
+        {
+            get;
+            set;
+        }
+
+        public static ObservableCollection<string> classrooms_display
         {
             get;
             set;

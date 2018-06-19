@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ﻿
 
 FC:\Users\Ogauzz\git\HCI\RasporedRC\AddClassroom.xaml;;
@@ -11,4 +12,19 @@ FC:\Users\Ogauzz\git\HCI\RasporedRC\UpdateClassroom.xaml;;
 FC:\Users\Ogauzz\git\HCI\RasporedRC\UpdateCourse.xaml;;
 FC:\Users\Ogauzz\git\HCI\RasporedRC\UpdateSoftware.xaml;;
 FC:\Users\Ogauzz\git\HCI\RasporedRC\UpdateSubject.xaml;;
+=======
+﻿C:\Users\Dell\Documents\HCI\Raspored\RasporedRC\obj\Release\GeneratedInternalTypeHelper.g.cs
+
+FC:\Users\Dell\Documents\HCI\Raspored\RasporedRC\AddClassroom.xaml;;
+FC:\Users\Dell\Documents\HCI\Raspored\RasporedRC\AddCourse.xaml;;
+FC:\Users\Dell\Documents\HCI\Raspored\RasporedRC\AddSoftware.xaml;;
+FC:\Users\Dell\Documents\HCI\Raspored\RasporedRC\AddSubject.xaml;;
+FC:\Users\Dell\Documents\HCI\Raspored\RasporedRC\DeleteSubject.xaml;;
+FC:\Users\Dell\Documents\HCI\Raspored\RasporedRC\MainWindow.xaml;;
+FC:\Users\Dell\Documents\HCI\Raspored\RasporedRC\Tables.xaml;;
+FC:\Users\Dell\Documents\HCI\Raspored\RasporedRC\UpdateClassroom.xaml;;
+FC:\Users\Dell\Documents\HCI\Raspored\RasporedRC\UpdateCourse.xaml;;
+FC:\Users\Dell\Documents\HCI\Raspored\RasporedRC\UpdateSoftware.xaml;;
+FC:\Users\Dell\Documents\HCI\Raspored\RasporedRC\UpdateSubject.xaml;;
+>>>>>>> Stashed changes
 

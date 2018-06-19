@@ -78,36 +78,86 @@ namespace RasporedRC
 
         public void RunDemo(object sender, RoutedEventArgs e)
         {
-            foreach (TabItem item in mainTabControl.Items)
+            if (demoTab.Visibility == Visibility.Visible)
             {
-                if ((String)item.Header == "Demo")
+                return;
+            }
+            else
+            {
+                var demoContent = new DemoTab();
+                demoTab.Content = demoContent;
+                if (helpTab.Visibility == Visibility.Hidden && mainTabControl.Items.IndexOf(helpTab) == 1)
                 {
-                    return;
+                    mainTabControl.Items.RemoveAt(2);
+                    mainTabControl.Items.Insert(1, demoTab);
+                }
+                demoTab.Visibility = Visibility.Visible;
+                demoTab.Focus();
+            }
+            
+        }
+
+        public void CloseDemo(object sender, RoutedEventArgs e)
+        {
+            if (demoTab.Visibility == Visibility.Visible)
+            {
+                DemoTab dt = (DemoTab)demoTab.Content;
+                dt.abortDemo();
+                demoTab.Content = null;
+                demoTab.Visibility = Visibility.Hidden;
+                glavniTab.Focus();
+                if (helpTab.Visibility == Visibility.Visible && mainTabControl.Items.IndexOf(helpTab) == 2)
+                {
+                    mainTabControl.Items.RemoveAt(1);
+                    mainTabControl.Items.Insert(2, demoTab);
+                    helpTab.Focus();
                 }
             }
-            var demoTab = new DemoTab();
-            TabItem dt = new TabItem();
-            dt.Header = "Demo";
-            dt.Content = demoTab;
-            mainTabControl.Items.Add(dt);
-            dt.Focus();
+            else
+            {
+                return;
+            }
         }
 
         public void ShowHelp(object sender, RoutedEventArgs e)
         {
-            foreach (TabItem item in mainTabControl.Items)
+            if (helpTab.Visibility == Visibility.Visible)
             {
-                if ((String)item.Header == "Help")
+                return;
+            }
+            else
+            {
+                var helpContent = new HelpTab("index", this);
+                helpTab.Content = helpContent;
+                if (demoTab.Visibility == Visibility.Hidden && mainTabControl.Items.IndexOf(demoTab) == 1)
                 {
-                    return;
+                    mainTabControl.Items.RemoveAt(2);
+                    mainTabControl.Items.Insert(1, helpTab);
+                }
+                helpTab.Visibility = Visibility.Visible;
+                helpTab.Focus();
+            }
+            
+        }
+
+        public void CloseHelp(object sender, RoutedEventArgs e)
+        {
+            if (helpTab.Visibility == Visibility.Visible)
+            {
+                helpTab.Content = null;
+                helpTab.Visibility = Visibility.Hidden;
+                glavniTab.Focus();
+                if (demoTab.Visibility == Visibility.Visible && mainTabControl.Items.IndexOf(demoTab) == 2)
+                {
+                    mainTabControl.Items.RemoveAt(1);
+                    mainTabControl.Items.Insert(2, helpTab);
+                    demoTab.Focus();
                 }
             }
-            var helpTab = new HelpTab("index", this);
-            TabItem ht = new TabItem();
-            ht.Header = "Help";
-            ht.Content = helpTab;
-            mainTabControl.Items.Add(ht);
-            ht.Focus();
+            else
+            {
+                return;
+            }
         }
 
         public ObservableCollection<Term> MainListPon
@@ -150,19 +200,7 @@ namespace RasporedRC
         private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
 
-            foreach (TabItem item in mainTabControl.Items)
-            {
-                if ((String)item.Header == "Help")
-                {
-                    return;
-                }
-            }
-            var helpTab = new HelpTab("index", this);
-            TabItem ht = new TabItem();
-            ht.Header = "Help";
-            ht.Content = helpTab;
-            mainTabControl.Items.Add(ht);
-            ht.Focus();
+            ShowHelp(sender, e);
         }
 
         public static String SelectedClassroom
@@ -184,6 +222,7 @@ namespace RasporedRC
         {
             InitializeComponent();
             this.DataContext = this;
+
 
             loadData();
             Closing += WindowClosed;
@@ -997,6 +1036,18 @@ namespace RasporedRC
         {
             displayClassroom(SelectedClassroom);
         }
+
+        private void Window_closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            DemoTab dt = null;
+            if (demoTab.Content != null)
+            {
+                dt = (DemoTab)demoTab.Content;
+                dt.abortDemo();
+            }
+            
+        }
+
     }
 
 }

@@ -4,12 +4,20 @@
 winexe
 C#
 .cs
+<<<<<<< Updated upstream
 C:\Users\Ogauzz\git\HCI\RasporedRC\obj\Release\
+=======
+C:\Users\Dell\Documents\HCI\Raspored\RasporedRC\obj\Release\
+>>>>>>> Stashed changes
 RasporedRC
 none
 false
 TRACE
+<<<<<<< Updated upstream
 C:\Users\Ogauzz\git\HCI\RasporedRC\App.xaml
+=======
+C:\Users\Dell\Documents\HCI\Raspored\RasporedRC\App.xaml
+>>>>>>> Stashed changes
 131450794932
 5-1616948948
 32-1957757488

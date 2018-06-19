@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RasporedRC"
         mc:Ignorable="d"
-                Title="Dodavanje softvera" Height="430" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+                Title="Izmena softvera" Height="430" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <local:EnableButtonConverter x:Key="EnableButtonConverter" />

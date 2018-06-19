@@ -5,13 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" >
-    <Grid MouseUp="Grid_MouseUp">
+    <Grid>
         <Grid.Resources>
             <DataTemplate  x:Key="TermItem">
                 <Border BorderBrush="Black" BorderThickness="0,0,0,1" Margin="0,0,0,0"
                         CornerRadius="5,5,5,5" Padding="0,0,0,0"
                         >
-                    <DockPanel ToolTip="{Binding ToolTipText}" Background="{Binding BgColor}" Height="{Binding Path=HeightOfElem}" Width="100">
+                    <DockPanel ToolTip="{Binding ToolTipText}" Background="{Binding BgColor}" Height="{Binding Path=HeightOfElem}" Width="95">
                         <TextBlock Text="{Binding Path=DisplayText, StringFormat=N2}" FontSize="12" FontWeight="DemiBold" 
                                    DockPanel.Dock="Bottom" TextWrapping="Wrap" TextAlignment="Center" 
                                    VerticalAlignment="Center"/>
@@ -68,7 +68,7 @@
                         </MenuItem.ToolTip>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Header="Brisanje/Izmena" HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
+                <MenuItem Name="brisanje" Header="Brisanje/Izmena" HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" FontWeight="Bold">
 
                 </MenuItem>
                 <MenuItem Name="PregledOpcija" Header="Pregled" FontFamily="Arial" FontSize="16" FontWeight="Bold">
@@ -85,6 +85,13 @@
                 </MenuItem>
                 <MenuItem Header="Pomoc" HorizontalAlignment="Center" FontSize="16" FontFamily="Arial" FontWeight="Bold"/>
             </Menu>
+            <Grid DockPanel.Dock="Top" Width="Auto" Height="30">
+                <Label Padding="208,6,0,0">
+                    Ucionica za prikaz:
+                </Label>
+                <ComboBox Name="ucionicaPrikaz" Width="100" Height="20">
+                </ComboBox>
+            </Grid>
             <ListBox DockPanel.Dock="Top" Width="Auto" Height="30" Padding="55,0,0,0">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -96,17 +103,12 @@
                         <Setter Property="Focusable" Value="false"/>
                     </Style>
                 </ListBox.ItemContainerStyle>
-                <ListBoxItem Width="106" HorizontalContentAlignment="Center">Ponedeljak</ListBoxItem>
-                <ListBoxItem Width="105" HorizontalContentAlignment="Center">Utorak</ListBoxItem>
-                <ListBoxItem Width="106" HorizontalContentAlignment="Center">Sreda</ListBoxItem>
-                <ListBoxItem Width="105" HorizontalContentAlignment="Center">Cetvrtak</ListBoxItem>
-                <ListBoxItem Width="105" HorizontalContentAlignment="Center">Petak</ListBoxItem>
-                <ListBoxItem Width="106" HorizontalContentAlignment="Center">Subota</ListBoxItem>
-                <ListBox.Resources>
-                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
-                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
-                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-                </ListBox.Resources>
+                <ListBoxItem Width="101" HorizontalContentAlignment="Center">Ponedeljak</ListBoxItem>
+                <ListBoxItem Width="103" HorizontalContentAlignment="Center">Utorak</ListBoxItem>
+                <ListBoxItem Width="103" HorizontalContentAlignment="Center">Sreda</ListBoxItem>
+                <ListBoxItem Width="102" HorizontalContentAlignment="Center">Cetvrtak</ListBoxItem>
+                <ListBoxItem Width="100" HorizontalContentAlignment="Center">Petak</ListBoxItem>
+                <ListBoxItem Width="100" HorizontalContentAlignment="Center">Subota</ListBoxItem>
             </ListBox>
             <Grid>
                 <Grid Canvas.ZIndex="2" HorizontalAlignment="Right">
@@ -123,16 +125,11 @@
                         ItemsSource="{Binding SideListDemo}" HorizontalAlignment="Left" VerticalContentAlignment="Center"
                         VerticalAlignment="Stretch"
                         >
-                        <ListBox.Resources>
-                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
-                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
-                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-                        </ListBox.Resources>
                     </ListBox>
                 </Grid>
 
                 <Grid Canvas.ZIndex ="1">
-                    <ListBox Margin="0,0,15,0">
+                    <ListBox Margin="0,0,9,0">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
@@ -144,97 +141,149 @@
                             </Style>
                         </ListBox.ItemContainerStyle>
                         <ListBoxItem>
-                            <ListBox Height="Auto" Width="50" FontSize="22">
+                            <ListBox Height="Auto" Width="42" FontSize="19">
                                 <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                    <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">7:</ListBoxItem>
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">7:</ListBoxItem>
                                 </Border>
                                 <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                    <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">8:</ListBoxItem>
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">8:</ListBoxItem>
                                 </Border>
                                 <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                    <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">9:</ListBoxItem>
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">9:</ListBoxItem>
                                 </Border>
                                 <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                    <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">10:</ListBoxItem>
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">10:</ListBoxItem>
                                 </Border>
                                 <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                    <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">11:</ListBoxItem>
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">11:</ListBoxItem>
                                 </Border>
                                 <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                    <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">12:</ListBoxItem>
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">12:</ListBoxItem>
                                 </Border>
                                 <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                    <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">13:</ListBoxItem>
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">13:</ListBoxItem>
                                 </Border>
                                 <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                    <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">14:</ListBoxItem>
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">14:</ListBoxItem>
                                 </Border>
                                 <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                    <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">15:</ListBoxItem>
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">15:</ListBoxItem>
                                 </Border>
                                 <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                    <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">16:</ListBoxItem>
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">16:</ListBoxItem>
                                 </Border>
                                 <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                    <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">17:</ListBoxItem>
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">17:</ListBoxItem>
                                 </Border>
                                 <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                    <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">18:</ListBoxItem>
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">18:</ListBoxItem>
                                 </Border>
                                 <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                    <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">19:</ListBoxItem>
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">19:</ListBoxItem>
                                 </Border>
                                 <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                    <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">20:</ListBoxItem>
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">20:</ListBoxItem>
                                 </Border>
                                 <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                    <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">21:</ListBoxItem>
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">21:</ListBoxItem>
                                 </Border>
                                 <Border BorderThickness="0,0,0,1" BorderBrush="Black">
-                                    <ListBoxItem Width="43" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">22:</ListBoxItem>
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">22:</ListBoxItem>
                                 </Border>
                             </ListBox>
                         </ListBoxItem>
                         <ListBoxItem>
                             <ListBox BorderThickness="0"
                                 ItemTemplate="{StaticResource TermItem}"
-                                Width="Auto" Name="LbSchedulePon"
+                                Width="99" Name="LbSchedulePon"
                                 ItemsSource="{Binding MainListPonDemo}">
                             </ListBox>
                         </ListBoxItem>
                         <ListBoxItem>
                             <ListBox BorderThickness="0"
                                 ItemTemplate="{StaticResource TermItem}"
-                                Width="Auto" Name="LbScheduleUto"
+                                Width="99" Name="LbScheduleUto"
                                 ItemsSource="{Binding MainListUtoDemo}">
                             </ListBox>
                         </ListBoxItem>
                         <ListBoxItem>
                             <ListBox BorderThickness="0"
                                 ItemTemplate="{StaticResource TermItem}"
-                                Width="Auto" Name="LbScheduleSre"
+                                Width="99" Name="LbScheduleSre"
                                 ItemsSource="{Binding MainListSreDemo}">
                             </ListBox>
                         </ListBoxItem>
                         <ListBoxItem>
                             <ListBox BorderThickness="0"
                                 ItemTemplate="{StaticResource TermItem}"
-                                Width="Auto" Name="LbScheduleCet"
+                                Width="99" Name="LbScheduleCet"
                                 ItemsSource="{Binding MainListCetDemo}">
                             </ListBox>
                         </ListBoxItem>
                         <ListBoxItem>
                             <ListBox BorderThickness="0"
                                 ItemTemplate="{StaticResource TermItem}"
-                                Width="Auto" Name="LbSchedulePet"
+                                Width="99" Name="LbSchedulePet"
                                 ItemsSource="{Binding MainListPetDemo}">
                             </ListBox>
                         </ListBoxItem>
                         <ListBoxItem>
                             <ListBox BorderThickness="0"
                                 ItemTemplate="{StaticResource TermItem}"
-                                Width="Auto" Name="LbScheduleSub"
+                                Width="99" Name="LbScheduleSub"
                                 ItemsSource="{Binding MainListSubDemo}">
+                            </ListBox>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <ListBox Height="Auto" Width="42" FontSize="19">
+                                <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">7:</ListBoxItem>
+                                </Border>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">8:</ListBoxItem>
+                                </Border>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">9:</ListBoxItem>
+                                </Border>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">10:</ListBoxItem>
+                                </Border>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">11:</ListBoxItem>
+                                </Border>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">12:</ListBoxItem>
+                                </Border>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">13:</ListBoxItem>
+                                </Border>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">14:</ListBoxItem>
+                                </Border>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">15:</ListBoxItem>
+                                </Border>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">16:</ListBoxItem>
+                                </Border>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">17:</ListBoxItem>
+                                </Border>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">18:</ListBoxItem>
+                                </Border>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">19:</ListBoxItem>
+                                </Border>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">20:</ListBoxItem>
+                                </Border>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">21:</ListBoxItem>
+                                </Border>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                                    <ListBoxItem Width="35" Height="43" VerticalContentAlignment="Center" HorizontalContentAlignment="Left">22:</ListBoxItem>
+                                </Border>
                             </ListBox>
                         </ListBoxItem>
                     </ListBox>

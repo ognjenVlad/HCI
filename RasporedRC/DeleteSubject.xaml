@@ -12,10 +12,10 @@
             <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
         </Style>
         <local:ListToStringConverter x:Key="ListToStringConverter" />
-        <DataTemplate x:Key="subjectsTemplate">
+        <DataTemplate x:Key="subjectsTemplate" >
             <Border Name="border" BorderBrush="Black" BorderThickness="0,1,0,1"
           Padding="5" Margin="5">
-                <Grid>
+                <Grid Name="subjectsGrid">
                     <Grid.Resources>
                             <Style BasedOn="{StaticResource tbstyle}" TargetType="{x:Type TextBlock}" />
                     </Grid.Resources>
@@ -47,7 +47,7 @@
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Opis:"/>
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=description}"/>
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="Smer:"/>
-                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=course.label}"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=course.label}" Name="subj_label"/>
                     <TextBlock Grid.Row="4" Grid.Column="0" Text="Veličina grupe:"/>
                     <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Path=groupSize}"/>
                     <TextBlock Grid.Row="5" Grid.Column="0" Text="Broj termina:"/>
@@ -64,7 +64,7 @@
                     <TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding Path=os}"/>
                     <TextBlock Grid.Row="11" Grid.Column="0" Text="Potreban softver"/>
                     <TextBlock Grid.Row="11" Grid.Column="1" Text="{Binding Path=software , Converter={StaticResource ListToStringConverter}}"/>
-                    <Button Grid.Row="12"  Grid.Column="1" Click="deleteSubject">Izbriši</Button>
+                    <Button Grid.Row="12"  Grid.Column="1" Click="deleteSubject" Name="deleteSubj">Izbriši</Button>
                     <Button Grid.Row="12"  Grid.Column="0" Click="updateSubject">Izmeni</Button>
                 </Grid>
             </Border>
@@ -229,7 +229,8 @@
                     <ListBox Width="640" 
                     ItemsSource="{Binding Path=subjects}"
                      ItemTemplate="{StaticResource subjectsTemplate}" 
-                     HorizontalContentAlignment="Stretch"/>
+                     HorizontalContentAlignment="Stretch"
+                     Name="subj_listbox"/>
                 </ScrollViewer >
             </TabItem>
             <TabItem Header="Smerovi">
