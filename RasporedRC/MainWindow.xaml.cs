@@ -1074,10 +1074,11 @@ namespace RasporedRC
                 current_classroom = null;
 
                 SideList = new ObservableCollection<Term>();
+                LbSide.ItemsSource = SideList;
                 unassignedTerms = new List<Term>();
                 classroomsWeek = new Dictionary<string, List<ObservableCollection<Term>>>();
                 classrooms_display.Clear();
-
+                fillSideList(current_classroom);
                 displayClassroom(current_classroom);
             }
         }
