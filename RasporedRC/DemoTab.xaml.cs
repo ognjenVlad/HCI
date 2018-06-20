@@ -87,13 +87,12 @@ namespace RasporedRC
 
             add_subj = new AddSubject();
             add_subj.MouseUp += Grid_MouseUp;
-            
             predmet = new Subject("pr1", "Predmet 1", "opis predmeta 1", kurs, 20, 4, 2, true, true, false, "Windows");
             predmet2 = new Subject("pr2", "Predmet 2", "opis predmeta 2", kurs, 12, 3, 3, true, true, false, "Windows");
             MainWindow.subjects.Add(predmet2);
-            term = new Term("HCI", "Human computer interaction", "pr1", "Predmet 1");
+            term = new Term("HCI", "Human computer interaction", "pr1", "Predmet 1",4);
             for (int i = 0; i < predmet.numberOfClasses; i++ )
-                SideListDemo.Add(new Term("HCI", "Human computer interaction", "pr1", "Predmet 1"));
+                SideListDemo.Add(new Term("HCI", "Human computer interaction", "pr1", "Predmet 1",4));
 
             del_subj = new DeleteSubject();
 
@@ -407,9 +406,9 @@ namespace RasporedRC
             else if (korak == 50)
             {
                 MainListPonDemo.RemoveAt(4);
-                MainListPonDemo.Insert(4, new Term("", "", "", ""));
-                MainListPonDemo.Insert(4, new Term("", "", "", ""));
-                MainListPonDemo.Insert(4, new Term("", "", "", ""));
+                MainListPonDemo.Insert(4, new Term("", "", "", "",0));
+                MainListPonDemo.Insert(4, new Term("", "", "", "",0));
+                MainListPonDemo.Insert(4, new Term("", "", "", "",0));
                 MainListSreDemo.RemoveAt(12);
                 MainListSreDemo.RemoveAt(12);
                 MainListSreDemo.RemoveAt(12);
@@ -431,15 +430,15 @@ namespace RasporedRC
                 MainListCetDemo.RemoveAt(2);
                 MainListCetDemo.RemoveAt(2);
                 MainListCetDemo.RemoveAt(2);
-                MainListCetDemo.Insert(2, new Term(kurs.label,kurs.name,predmet2.label, predmet2.name));
+                MainListCetDemo.Insert(2, new Term(kurs.label,kurs.name,predmet2.label, predmet2.name,predmet2.numberOfClasses));
                 MainListCetDemo.RemoveAt(6);
                 MainListCetDemo.RemoveAt(6);
                 MainListCetDemo.RemoveAt(6);
-                MainListCetDemo.Insert(6, new Term(kurs.label,kurs.name,predmet2.label, predmet2.name));
+                MainListCetDemo.Insert(6, new Term(kurs.label,kurs.name,predmet2.label, predmet2.name, predmet2.numberOfClasses));
                 MainListUtoDemo.RemoveAt(17);
                 MainListUtoDemo.RemoveAt(17);
                 MainListUtoDemo.RemoveAt(17);
-                MainListUtoDemo.Insert(17, new Term(kurs.label, kurs.name, predmet2.label, predmet2.name));
+                MainListUtoDemo.Insert(17, new Term(kurs.label, kurs.name, predmet2.label, predmet2.name, predmet2.numberOfClasses));
                 korak++;
             }
             else if (korak == 53)
@@ -492,17 +491,17 @@ namespace RasporedRC
             {
                 del_subj.Close();
                 MainListCetDemo.RemoveAt(2);
-                MainListCetDemo.Insert(2, new Term("", "", "", ""));
-                MainListCetDemo.Insert(2, new Term("", "", "", ""));
-                MainListCetDemo.Insert(2, new Term("", "", "", ""));
+                MainListCetDemo.Insert(2, new Term("", "", "", "",0));
+                MainListCetDemo.Insert(2, new Term("", "", "", "",0));
+                MainListCetDemo.Insert(2, new Term("", "", "", "",0));
                 MainListCetDemo.RemoveAt(8);
-                MainListCetDemo.Insert(8, new Term("", "", "", ""));
-                MainListCetDemo.Insert(8, new Term("", "", "", ""));
-                MainListCetDemo.Insert(8, new Term("", "", "", ""));
+                MainListCetDemo.Insert(8, new Term("", "", "", "",0));
+                MainListCetDemo.Insert(8, new Term("", "", "", "",0));
+                MainListCetDemo.Insert(8, new Term("", "", "", "",0));
                 MainListUtoDemo.RemoveAt(17);
-                MainListUtoDemo.Insert(17, new Term("", "", "", ""));
-                MainListUtoDemo.Insert(17, new Term("", "", "", ""));
-                MainListUtoDemo.Insert(17, new Term("", "", "", ""));
+                MainListUtoDemo.Insert(17, new Term("", "", "", "",0));
+                MainListUtoDemo.Insert(17, new Term("", "", "", "",0));
+                MainListUtoDemo.Insert(17, new Term("", "", "", "",0));
                 korak++;
             }
             else if (korak == 61)
@@ -544,12 +543,12 @@ namespace RasporedRC
         {
             for (int i = 0; i < 64; i++)
             {
-                MainListPonDemo.Add(new Term("", "", "", ""));
-                MainListUtoDemo.Add(new Term("", "", "", ""));
-                MainListSreDemo.Add(new Term("", "", "", ""));
-                MainListCetDemo.Add(new Term("", "", "", ""));
-                MainListPetDemo.Add(new Term("", "", "", ""));
-                MainListSubDemo.Add(new Term("", "", "", ""));
+                MainListPonDemo.Add(new Term("", "", "", "",0));
+                MainListUtoDemo.Add(new Term("", "", "", "",0));
+                MainListSreDemo.Add(new Term("", "", "", "",0));
+                MainListCetDemo.Add(new Term("", "", "", "",0));
+                MainListPetDemo.Add(new Term("", "", "", "",0));
+                MainListSubDemo.Add(new Term("", "", "", "",0));
 
             }
         }

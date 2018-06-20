@@ -18,6 +18,7 @@ namespace RasporedRC.Model
         private string courseName;
         private string displayText;
         private string toolTipText;
+        private int numberOfClasses;
         private int heightOfElem;
         private Brush bgColor;
 
@@ -34,12 +35,13 @@ namespace RasporedRC.Model
         {
 
         }
-        public Term(string courseId,string courseName,string subjectId,string subjectName)
+        public Term(string courseId,string courseName,string subjectId,string subjectName,int numberOfClasses)
         {
             this.subjectId = subjectId;
             this.subjectName = subjectName;
             this.courseId = courseId;
             this.courseName = courseName;
+            this.numberOfClasses = numberOfClasses;
             displayText = "";
 
             updateDisplay();
@@ -126,6 +128,15 @@ namespace RasporedRC.Model
             }
         }
 
+        public int NumberOfClasses
+        {
+            get { return numberOfClasses; }
+            set
+            {
+                numberOfClasses = value;
+                OnPropertyChanged("NumberOfClasses");
+            }
+        }
         public void update()
         {
             this.updateDisplay();
@@ -178,7 +189,7 @@ namespace RasporedRC.Model
             }
             else
             {
-                this.ToolTipText = "Smer: " + courseName + "\nPredmet: " + subjectName;
+                this.ToolTipText = "Smer: " + courseName + "\nPredmet: " + subjectName + "\nPotrebni casovi za redom: " + numberOfClasses;
             }
         }
     }

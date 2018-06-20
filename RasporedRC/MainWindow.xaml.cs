@@ -229,6 +229,11 @@ namespace RasporedRC
             //classroomsWeek = new Dictionary<string, List<ObservableCollection<Term>>>();
             InitStyles();
 
+            foreach(Classroom cr in classrooms)
+            {
+                Console.WriteLine("ASD -> " + cr.listSoft.Count);
+            }
+
             //SideList = new ObservableCollection<Term>(unassignedTerms);
 
             SideList = new ObservableCollection<Term>();
@@ -411,9 +416,9 @@ namespace RasporedRC
                     for(int i = remove_elements.Count-1;i>-1;i--)
                     {
                         dayModel.RemoveAt(remove_elements[i]);
-                        dayModel.Insert(remove_elements[i], new Term("", "", "", ""));
-                        dayModel.Insert(remove_elements[i], new Term("", "", "", ""));
-                        dayModel.Insert(remove_elements[i], new Term("", "", "", ""));
+                        dayModel.Insert(remove_elements[i], new Term("", "", "", "",0));
+                        dayModel.Insert(remove_elements[i], new Term("", "", "", "", 0));
+                        dayModel.Insert(remove_elements[i], new Term("", "", "", "", 0));
                     }
                 }
             }
@@ -439,6 +444,7 @@ namespace RasporedRC
                         {
                             t.SubjectId = sub.label;
                             t.SubjectName = sub.name;
+                            t.NumberOfClasses = sub.numberOfClasses;
                             t.update();
                         }
                     }
@@ -450,6 +456,7 @@ namespace RasporedRC
                 {
                     t.SubjectId = sub.label;
                     t.SubjectName = sub.name;
+                    t.NumberOfClasses = sub.numberOfClasses;
                     t.update();
                 }
             }
@@ -528,9 +535,9 @@ namespace RasporedRC
                     for (int i = remove_elements.Count - 1; i > -1; i--)
                     {
                         dayModel.RemoveAt(remove_elements[i]);
-                        dayModel.Insert(remove_elements[i], new Term("", "", "", ""));
-                        dayModel.Insert(remove_elements[i], new Term("", "", "", ""));
-                        dayModel.Insert(remove_elements[i], new Term("", "", "", ""));
+                        dayModel.Insert(remove_elements[i], new Term("", "", "", "", 0));
+                        dayModel.Insert(remove_elements[i], new Term("", "", "", "", 0));
+                        dayModel.Insert(remove_elements[i], new Term("", "", "", "", 0));
                     }
                 }
             }
@@ -547,7 +554,7 @@ namespace RasporedRC
         {
             for (int i = 0; i < s.numberOfAppointment; i++)
             {
-                unassignedTerms.Add(new Term(s.c.label, s.c.name, s.label, s.name));
+                unassignedTerms.Add(new Term(s.c.label, s.c.name, s.label, s.name,s.numberOfClasses));
             }
             if (current_classroom == null)
             {
@@ -625,6 +632,11 @@ namespace RasporedRC
                 }
             }
 
+            if(sub == null || croom == null)
+            {
+                return false;
+            }
+
             if (sub.os != "Windows/Linux" && croom.os != "Windows/Linux")
             {
                 if(sub.os != croom.os)
@@ -676,7 +688,7 @@ namespace RasporedRC
 
                 for(int j = 0; j < 64; j++)
                 {
-                    classroomsWeek[id][i].Add(new Term("", "", "", ""));
+                    classroomsWeek[id][i].Add(new Term("", "", "", "", 0));
                 }
             }
             classrooms_display.Add(id);
@@ -794,9 +806,9 @@ namespace RasporedRC
                             target_parent.RemoveAt(targetIndex);
                             target_parent.Insert(targetIndex, source);
                             source_parent.RemoveAt(sourceIndex);
-                            source_parent.Insert(sourceIndex, new Term("", "", "", ""));
-                            source_parent.Insert(sourceIndex, new Term("", "", "", ""));
-                            source_parent.Insert(sourceIndex, new Term("", "", "", ""));
+                            source_parent.Insert(sourceIndex, new Term("", "", "", "", 0));
+                            source_parent.Insert(sourceIndex, new Term("", "", "", "", 0));
+                            source_parent.Insert(sourceIndex, new Term("", "", "", "", 0));
                         }
 
                     }
@@ -879,9 +891,9 @@ namespace RasporedRC
                 {
                     sourceIndex = source_parent.IndexOf(source);
                     source_parent.RemoveAt(sourceIndex);
-                    source_parent.Insert(sourceIndex, new Term("", "", "", ""));
-                    source_parent.Insert(sourceIndex, new Term("", "", "", ""));
-                    source_parent.Insert(sourceIndex, new Term("", "", "", ""));
+                    source_parent.Insert(sourceIndex, new Term("", "", "", "", 0));
+                    source_parent.Insert(sourceIndex, new Term("", "", "", "", 0));
+                    source_parent.Insert(sourceIndex, new Term("", "", "", "", 0));
                     SideList.Insert(targetIndex, source);
                     unassignedTerms.Add(source);
                 }
@@ -910,9 +922,9 @@ namespace RasporedRC
                 int sourceIndex = source_parent.IndexOf(source);
 
                 source_parent.RemoveAt(sourceIndex);
-                source_parent.Insert(sourceIndex, new Term("", "", "", ""));
-                source_parent.Insert(sourceIndex, new Term("", "", "", ""));
-                source_parent.Insert(sourceIndex, new Term("", "", "", ""));
+                source_parent.Insert(sourceIndex, new Term("", "", "", "", 0));
+                source_parent.Insert(sourceIndex, new Term("", "", "", "", 0));
+                source_parent.Insert(sourceIndex, new Term("", "", "", "", 0));
                 SideList.Add(source);
                 unassignedTerms.Add(source);
             }
@@ -970,6 +982,44 @@ namespace RasporedRC
                     }
                 }
 
+                bool soft_in_cr = false;
+                bool soft_in_sub = false;
+                List<Software> new_list = new List<Software>();
+                foreach(var cr in classrooms)
+                {
+                    foreach (var soft in softwares)
+                    {
+                        foreach(var soft2 in cr.listSoft)
+                        {
+                            if(soft.label == soft2.label)
+                            {
+                                new_list.Add(soft);
+                                break;
+                            }
+                        }
+
+                    }
+                    cr.listSoft = new_list;
+                    new_list = new List<Software>();
+                }
+
+                foreach (var cr in subjects)
+                {
+                    foreach (var soft in softwares)
+                    {
+                        foreach (var soft2 in cr.software)
+                        {
+                            if (soft.label == soft2.label)
+                            {
+                                new_list.Add(soft);
+                                break;
+                            }
+                        }
+
+                    }
+                    cr.software = new_list;
+                    new_list = new List<Software>();
+                }
             }
             catch
             {
