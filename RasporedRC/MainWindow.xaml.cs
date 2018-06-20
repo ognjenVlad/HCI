@@ -428,7 +428,7 @@ namespace RasporedRC
         public static void updateTermBySubject(string old_id,Subject sub)
         {
             int old_noc = countTermsOfSubject(old_id);
-            if(old_noc != sub.numberOfAppointment)
+            if(old_noc != sub.numberOfAppointment * sub.numberOfClasses)
             {
                 removeTermBySubject(old_id);
                 addTermsFromSubject(sub);
@@ -552,7 +552,7 @@ namespace RasporedRC
 
         public static void addTermsFromSubject(Subject s)
         {
-            for (int i = 0; i < s.numberOfAppointment; i++)
+            for (int i = 0; i < s.numberOfAppointment * s.numberOfClasses; i++)
             {
                 unassignedTerms.Add(new Term(s.c.label, s.c.name, s.label, s.name,s.numberOfClasses));
             }

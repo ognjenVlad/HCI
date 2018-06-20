@@ -4,15 +4,15 @@
 winexe
 C#
 .cs
-C:\Users\Ogauzz\git\HCI\RasporedRC\obj\Debug\
+C:\Users\Damir\git\HCI\RasporedRC\obj\Debug\
 RasporedRC
 none
 false
 DEBUG;TRACE
-C:\Users\Ogauzz\git\HCI\RasporedRC\App.xaml
+C:\Users\Damir\git\HCI\RasporedRC\App.xaml
 131450794932
 5-1616948948
-372054701784
+371321546284
 151270957945
 AddClassroom.xaml;AddCourse.xaml;AddSoftware.xaml;AddSubject.xaml;DeleteSubject.xaml;DemoTab.xaml;HelpTab.xaml;MainWindow.xaml;Tables.xaml;UpdateClassroom.xaml;UpdateCourse.xaml;UpdateSoftware.xaml;UpdateSubject.xaml;
 
