@@ -91,7 +91,7 @@ namespace RasporedRC
             s.price = this.Price;
             s.label = this.Label;
             s.manofacturer = this.Manofacturer;
-            s.name = this.Name;
+            s.name = this.Namee;
             s.os = this.OS;
             s.yearOfPublishing = this.Year.Split(null)[0];
             s.website = this.Website;

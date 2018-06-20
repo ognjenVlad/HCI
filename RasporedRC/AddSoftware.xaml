@@ -98,7 +98,7 @@
             <Label Grid.Row="6" Grid.Column="0">Naziv softvera:</Label>
             <TextBox x:Name="ime" Grid.Row="6" Grid.Column="1" Margin="5">
                 <TextBox.Text>
-                    <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="Namee" UpdateSourceTrigger="PropertyChanged">
 
                         <Binding.ValidationRules>
                             <local:EmptyValidation/>
